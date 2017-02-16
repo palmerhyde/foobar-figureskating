@@ -25,15 +25,27 @@ class foobarfigureskating extends Component {
     constructor(props) {
         super(props);
 
-        var i = Math.floor((Math.random() * 2) + 1);
+        let i = Math.floor((Math.random() * 3) + 1);
+        let music;
 
-        var music = (i ==1) ? "Warriors.mp3":"Bolero.mp3";
+        switch (i) {
+            case 1:
+                music = 'Glorious.mp3';
+                break;
+            case 2:
+                music = 'Warriors.mp3';
+                break;
+            case 3:
+                music = 'Bolero.mp3';
+                break;
+            default:
+                music = 'Glorious.mp3';
+        }
 
         s = new Sound(music, Sound.MAIN_BUNDLE, (e) => {
             if (e) {
                 console.log('error', e);
             } else {
-                //s.setSpeed(1);
                 console.log('duration', s.getDuration());
             }
         });
