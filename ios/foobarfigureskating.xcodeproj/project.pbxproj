@@ -39,6 +39,7 @@
 		9DB2FCF41E512EB800A7F5BA /* Warriors.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2FCF21E512EB800A7F5BA /* Warriors.mp3 */; };
 		9DB2FCF51E512EB800A7F5BA /* Bolero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2FCF31E512EB800A7F5BA /* Bolero.mp3 */; };
 		9DF990E21E5607AB00372D62 /* Glorious.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DF990E11E5607AB00372D62 /* Glorious.mp3 */; };
+		9DF990FE1E560F0F00372D62 /* Flash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DF990FD1E560F0F00372D62 /* Flash.mp3 */; };
 		ADBC93D15CEF48CBB0EC670F /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37633706DA5241DEB463B5DF /* libRNSound.a */; };
 /* End PBXBuildFile section */
 
@@ -270,6 +271,7 @@
 		9DB2FCF21E512EB800A7F5BA /* Warriors.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Warriors.mp3; path = ../assets/sounds/Warriors.mp3; sourceTree = "<group>"; };
 		9DB2FCF31E512EB800A7F5BA /* Bolero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Bolero.mp3; path = ../assets/sounds/Bolero.mp3; sourceTree = "<group>"; };
 		9DF990E11E5607AB00372D62 /* Glorious.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Glorious.mp3; path = ../assets/sounds/Glorious.mp3; sourceTree = "<group>"; };
+		9DF990FD1E560F0F00372D62 /* Flash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Flash.mp3; path = ../assets/sounds/Flash.mp3; sourceTree = "<group>"; };
 		E2146BA4ED1746D588342883 /* RNSound.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -481,6 +483,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9DF990FD1E560F0F00372D62 /* Flash.mp3 */,
 				9DF990E11E5607AB00372D62 /* Glorious.mp3 */,
 				9DB2FCF21E512EB800A7F5BA /* Warriors.mp3 */,
 				9DB2FCF31E512EB800A7F5BA /* Bolero.mp3 */,
@@ -885,6 +888,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				9DF990FE1E560F0F00372D62 /* Flash.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				9DB2FCF41E512EB800A7F5BA /* Warriors.mp3 in Resources */,
 				9DB2FCF51E512EB800A7F5BA /* Bolero.mp3 in Resources */,

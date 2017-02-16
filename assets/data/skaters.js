@@ -8,7 +8,7 @@ let skaters = [
         'presentation' : Math.floor((Math.random() * 99) + 1),
         'photo' : 'https://s-media-cache-ak0.pinimg.com/originals/7b/46/1f/7b461f98ebea4a4e1b9a781b39e28b85.jpg',
         'skill' : {
-            'name' : 'Flaming Lotus',
+            'name' : 'Iron Lotus',
             'value' : Math.floor((Math.random() * 99) + 1)
         }
     },
@@ -87,6 +87,19 @@ let skaters = [
         'photo' : 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQUThSDr0Q6Gj1yAXatUKg0cMqKq7LSV1EzT9c8Oyz5HPFE4gm1',
         'skill' : {
             'name' : 'Spiral',
+            'value' : Math.floor((Math.random() * 99) + 1)
+        }
+    },
+    {
+        'id' : 8,
+        'name' : 'Jimmy MacElroy',
+        'edges' : Math.floor((Math.random() * 99) + 1),
+        'jumps' : Math.floor((Math.random() * 99) + 1),
+        'form' : Math.floor((Math.random() * 99) + 1),
+        'presentation' : Math.floor((Math.random() * 99) + 1),
+        'photo' : 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQDJ1Fszrt6OfaEwbOfqUP9KGoVpNkAL-6wQSXfeUDXxehtp3Ow',
+        'skill' : {
+            'name' : 'Iron Lotus',
             'value' : Math.floor((Math.random() * 99) + 1)
         }
     }
