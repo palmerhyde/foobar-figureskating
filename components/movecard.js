@@ -11,7 +11,7 @@ import {
     AppRegistry
 } from 'react-native';
 
-class SkaterCard extends Component {
+class MoveCard extends Component {
 
     constructor(props) {
         super(props);
@@ -20,18 +20,11 @@ class SkaterCard extends Component {
     render() {
         console.log(this.props);
         return <View style={styles.container2}>
-                <Text style={styles.title}>{this.props.skater.name}</Text>
-                <Image
-                    source={{uri: this.props.skater.photo}}
-                    style={{width: 190, height: 150}}
-                />
-                <Text>Edges - {this.props.skater.edges}</Text>
-                <Text>Jumps - {this.props.skater.jumps}</Text>
-                <Text>Form - {this.props.skater.form}</Text>
-                <Text>Presentation - {this.props.skater.presentation}</Text>
-                <Text>{this.props.skater.skill.name} - {this.props.skater.skill.value}</Text>
-                <Text>Level - {this.props.skater.level}</Text>
-            </View>
+            <Text style={styles.title}>{this.props.move.name}</Text>
+            <Text>{this.props.move.skater1Attribute}</Text>
+            <Text>VS</Text>
+            <Text>{this.props.move.skater2Attribute}</Text>
+        </View>
 
     }
 }
@@ -43,6 +36,7 @@ const styles = StyleSheet.create({
         marginBottom: 60
     },
     title: {
+        marginTop: 10,
         fontSize: 16,
         backgroundColor: 'transparent'
     },
@@ -64,7 +58,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         width: 200,
-        height: 300,
+        height: 100,
         borderWidth: 3,
         marginLeft: 60,
         marginTop: 10,
@@ -74,5 +68,5 @@ const styles = StyleSheet.create({
 });
 
 export {
-    SkaterCard
+    MoveCard
 }

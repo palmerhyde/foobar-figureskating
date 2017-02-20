@@ -10,7 +10,8 @@ let skaters = [
         'skill' : {
             'name' : 'Iron Lotus',
             'value' : Math.floor((Math.random() * 99) + 1)
-        }
+        },
+        'level' : 1
     },
     {
         'id' : 2,
@@ -23,7 +24,8 @@ let skaters = [
         'skill' : {
             'name' : 'Triple Axel',
             'value' : Math.floor((Math.random() * 99) + 1)
-        }
+        },
+        'level' : 1
     },
     {
         'id': 3,
@@ -36,7 +38,8 @@ let skaters = [
         'skill': {
             'name': 'Quad Axel',
             'value': Math.floor((Math.random() * 99) + 1)
-        }
+        },
+        'level' : 1
     },
     {
         'id' : 4,
@@ -49,7 +52,8 @@ let skaters = [
         'skill' : {
             'name' : 'Forward Scratch Spin',
             'value' : Math.floor((Math.random() * 99) + 1)
-        }
+        },
+        'level' : 1
     },
     {
         'id' : 5,
@@ -62,7 +66,8 @@ let skaters = [
         'skill' : {
             'name' : 'Spiral',
             'value' : Math.floor((Math.random() * 99) + 1)
-        }
+        },
+        'level' : 1
     },
     {
         'id' : 6,
@@ -75,7 +80,8 @@ let skaters = [
         'skill' : {
             'name' : 'Spiral',
             'value' : Math.floor((Math.random() * 99) + 1)
-        }
+        },
+        'level' : 1
     },
     {
         'id' : 7,
@@ -88,7 +94,8 @@ let skaters = [
         'skill' : {
             'name' : 'Spiral',
             'value' : Math.floor((Math.random() * 99) + 1)
-        }
+        },
+        'level' : 1
     },
     {
         'id' : 8,
@@ -101,7 +108,8 @@ let skaters = [
         'skill' : {
             'name' : 'Iron Lotus',
             'value' : Math.floor((Math.random() * 99) + 1)
-        }
+        },
+        'level' : 1
     }
 ];
 
