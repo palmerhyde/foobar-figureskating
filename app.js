@@ -28,16 +28,16 @@ class App extends Component {
     }
 
     render() {
-        return <ScrollView>
+        return <ScrollView keyboardShouldPersistTaps={'always'}>
             <JukeBox/>
             <MoveCard key={Moves[0].id} move={Moves[0]}/>
 
             {
                 Skaters.map(function(skater) {
-                    return <TouchableOpacity>
+                    return <TouchableOpacity onPress={ () => this.playCard(skater) }>
                         <SkaterCard key={skater.id} skater={skater} />
                     </TouchableOpacity>
-                })
+                }, this)
             }
 
         </ScrollView>;

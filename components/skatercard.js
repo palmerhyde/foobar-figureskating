@@ -18,7 +18,6 @@ class SkaterCard extends Component {
     }
 
     render() {
-        console.log(this.props);
         return <View style={styles.container2}>
                 <Text style={styles.title}>{this.props.skater.name}</Text>
                 <Image

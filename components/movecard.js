@@ -18,7 +18,6 @@ class MoveCard extends Component {
     }
 
     render() {
-        console.log(this.props);
         return <View style={styles.container2}>
             <Text style={styles.title}>{this.props.move.name}</Text>
             <Text>{this.props.move.skater1Attribute}</Text>
