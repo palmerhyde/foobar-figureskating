@@ -1,0 +1,2 @@
+export const LOAD_SKATER_CARDS = 'LOAD_SKATER_CARDS';
+export const LOAD_MOVE_CARDS = 'LOAD_MOVE_CARDS';

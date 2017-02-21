@@ -4,15 +4,6 @@ import {
     AppRegistry
 } from 'react-native';
 
-import {App} from './app'
+import App from './app';
 
-class foobarfigureskating extends Component {
-
-    render() {
-        return <App/>
-    }
-}
-
-export default foobarfigureskating;
-
-AppRegistry.registerComponent('foobarfigureskating', () => foobarfigureskating);
+AppRegistry.registerComponent('foobarfigureskating', () => App);
