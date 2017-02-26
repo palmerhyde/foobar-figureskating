@@ -1,4 +1,4 @@
-import {LOAD_SKATER_CARDS, LOAD_MOVE_CARDS} from './actionTypes';
+import {LOAD_SKATER_CARDS, LOAD_MOVE_CARDS, LOAD_OPPONENT_SKATER_CARD, SELECT_SKATER_CARD} from './actionTypes';
 import skaters from '../assets/data/skaters';
 import moves from '../assets/data/moves';
 
@@ -7,7 +7,41 @@ export const loadSkaterCards = () => ({
     payload: skaters
 });
 
-export const loadMoveCards = () => ({
+export const loadMoveCards = (move) => ({
     type: LOAD_MOVE_CARDS,
-    payload: moves
+    payload: move
 });
+
+export const loadOpponentSkaterCard = (skater) => ({
+    type: LOAD_OPPONENT_SKATER_CARD,
+    payload: skater
+});
+
+export const selectSkaterCard = (skater) => ({
+    type: SELECT_SKATER_CARD,
+    payload: skater
+});
+
+export function waitForOpponentSkater() {
+    return dispatch => {
+        let skater = skaters[Math.floor((Math.random() * skaters.length) + 1)];
+        if (!skater) {
+            dispatch(waitForOpponentSkater());
+        }
+        else {
+            dispatch(loadOpponentSkaterCard(skater));
+        }
+    };
+}
+
+export function waitForMoves() {
+    return dispatch => {
+        let index = Math.floor((Math.random() * moves.length) + 1);
+        if (!moves[index]) {
+            dispatch(waitForMoves());
+        }
+        else {
+            dispatch(loadMoveCards(moves[index]));
+        }
+    };
+}
