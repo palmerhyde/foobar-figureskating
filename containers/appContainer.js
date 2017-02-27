@@ -6,7 +6,8 @@ import { HomeScreen } from '../HomeScreen';
 const mapStateToProps = state => ({
     skaters: state.skaters,
     move: state.move,
-    opponentSkaterCard: state.opponentSkaterCard
+    opponentSkaterCard: state.opponentSkaterCard,
+    selectedSkaterCard: state.selectedSkaterCard
 });
 
 const mapDispatchToProps = dispatch => (

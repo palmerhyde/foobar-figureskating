@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     card: {
-        flex: 1,
         alignItems: 'center',
         width: 200,
         height: 50,
         borderWidth: 3,
-        marginLeft: 60,
+        marginLeft: 10,
+        marginRight: 10,
         marginTop: 10,
         marginBottom: 10,
         borderRadius: 6

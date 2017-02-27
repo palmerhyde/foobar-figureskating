@@ -17,10 +17,17 @@ export const loadOpponentSkaterCard = (skater) => ({
     payload: skater
 });
 
-export const selectSkaterCard = (skater) => ({
+export const selectSkaterCard2 = (skater) => ({
     type: SELECT_SKATER_CARD,
     payload: skater
 });
+
+export function selectSkaterCard(skater) {
+    return dispatch => {
+        dispatch(waitForOpponentSkater());
+        dispatch(selectSkaterCard2(skater));
+    };
+}
 
 export function waitForOpponentSkater() {
     return dispatch => {
@@ -36,6 +43,7 @@ export function waitForOpponentSkater() {
 
 export function waitForMoves() {
     return dispatch => {
+        dispatch({type: 'LOAD_MOVE_CARDS_START'});
         let index = Math.floor((Math.random() * moves.length) + 1);
         if (!moves[index]) {
             dispatch(waitForMoves());

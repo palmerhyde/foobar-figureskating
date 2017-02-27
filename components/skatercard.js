@@ -22,52 +22,30 @@ class SkaterCard extends Component {
                 <Text style={styles.title}>{this.props.skater.name}</Text>
                 <Image
                     source={{uri: this.props.skater.photo}}
-                    style={{width: 190, height: 150}}
+                    style={{width: 95, height: 75}}
                 />
-                <Text>Edges - {this.props.skater.edges}</Text>
-                <Text>Jumps - {this.props.skater.jumps}</Text>
-                <Text>Form - {this.props.skater.form}</Text>
-                <Text>Presentation - {this.props.skater.presentation}</Text>
-                <Text>{this.props.skater.skill.name} - {this.props.skater.skill.value}</Text>
-                <Text>Level - {this.props.skater.level}</Text>
+                <Text style={{fontSize: 8}}>Edges - {this.props.skater.edges}</Text>
+                <Text style={{fontSize: 8}}>Jumps - {this.props.skater.jumps}</Text>
+                <Text style={{fontSize: 8}}>Form - {this.props.skater.form}</Text>
+                <Text style={{fontSize: 8}}>Presentation - {this.props.skater.presentation}</Text>
             </View>
 
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: 60,
-        marginBottom: 60
-    },
     title: {
-        fontSize: 16,
+        fontSize: 9,
         backgroundColor: 'transparent'
     },
-    button: {
-        marginRight: 10
-    },
-    card: {
-        width: 300
-    },
-    imageContainer: {
-        flex: 1,
-        width: undefined,
-        height: undefined,
-        backgroundColor:'transparent',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     container2: {
-        flex: 1,
         alignItems: 'center',
-        width: 200,
-        height: 300,
+        width: 100,
+        height: 150,
         borderWidth: 3,
-        marginLeft: 60,
-        marginTop: 10,
-        marginBottom: 10,
+        marginLeft: 5,
+        marginTop: 5,
+        marginBottom: 5,
         borderRadius: 6
     },
 });

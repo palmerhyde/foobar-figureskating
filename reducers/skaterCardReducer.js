@@ -1,9 +1,12 @@
-import {LOAD_SKATER_CARDS} from '../actions/actionTypes';
+import {LOAD_SKATER_CARDS, SELECT_SKATER_CARD} from '../actions/actionTypes';
 
 export default (state = [], action = {}) => {
     switch (action.type) {
         case LOAD_SKATER_CARDS:
             return action.payload || [];
+        case SELECT_SKATER_CARD:
+            // remove the skater
+            return state.filter(element => element !== action.payload);
         default:
             return state;
     }
