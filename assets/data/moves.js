@@ -1,19 +1,19 @@
 let moves = [
     {
         'id' : 1,
-        'attribute' : 'Edges'
+        'attribute' : 'edges'
     },
     {
         'id' : 1,
-        'attribute' : 'Jumps',
+        'attribute' : 'jumps',
     },
     {
         'id' : 3,
-        'attribute' : 'Form'
+        'attribute' : 'form'
     },
     {
         'id' : 4,
-        'attribute' : 'Presentation'
+        'attribute' : 'presentation'
     },
 ];
 

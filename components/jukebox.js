@@ -50,13 +50,13 @@ class JukeBox extends Component {
 
     render() {
         console.log(this.props);
-        return <View>
+        return <View style={{flexDirection: 'row'}}>
             <Button
-                title="play"
+                title="p"
                 onPress={this.playSound}
             />
             <Button
-                title="stop"
+                title="s"
                 onPress={this.stopSound}
             />
         </View>
@@ -74,7 +74,7 @@ class JukeBox extends Component {
 
 const styles = StyleSheet.create({
     button: {
-        marginRight: 10
+        marginRight: 5
     }
 });
 

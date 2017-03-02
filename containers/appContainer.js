@@ -1,13 +1,23 @@
 import { connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
-import { loadSkaterCards, selectSkaterCard, waitForMoves, waitForOpponentSkater } from '../actions/cardActions';
+import {
+    loadSkaterCards,
+    selectSkaterCard,
+    waitForMoves,
+    waitForOpponentSkater,
+    setTurnInProgress,
+    resetSelectedSkaterCard,
+    resetOpponentSkaterCard} from '../actions/cardActions';
+
 import { HomeScreen } from '../HomeScreen';
 
 const mapStateToProps = state => ({
     skaters: state.skaters,
     move: state.move,
     opponentSkaterCard: state.opponentSkaterCard,
-    selectedSkaterCard: state.selectedSkaterCard
+    selectedSkaterCard: state.selectedSkaterCard,
+    score: state.score,
+    gameState: state.gameState
 });
 
 const mapDispatchToProps = dispatch => (
@@ -15,7 +25,10 @@ const mapDispatchToProps = dispatch => (
         loadSkaterCards,
         selectSkaterCard,
         waitForMoves,
-        waitForOpponentSkater
+        waitForOpponentSkater,
+        setTurnInProgress,
+        resetSelectedSkaterCard,
+        resetOpponentSkaterCard
     }, dispatch)
 );
 
