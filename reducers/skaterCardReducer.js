@@ -5,7 +5,6 @@ export default (state = [], action = {}) => {
         case LOAD_SKATER_CARDS:
             return action.payload || [];
         case SELECT_SKATER_CARD:
-            // remove the skater
             return state.filter(element => element !== action.payload);
         default:
             return state;
