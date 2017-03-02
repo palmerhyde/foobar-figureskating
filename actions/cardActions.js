@@ -7,7 +7,8 @@ import {
     INCREMENT_OPPONENT_SCORE,
     SET_TURN_IN_PROGRESS,
     RESET_SELECTED_SKATER_CARD,
-    RESET_OPPONENT_SKATER_CARD
+    RESET_OPPONENT_SKATER_CARD,
+    SET_GAME_OVER
 } from './actionTypes';
 
 import skaters from '../assets/data/skaters';
@@ -73,14 +74,21 @@ export const incrementOpponentScore = () => ({
     type: INCREMENT_OPPONENT_SCORE,
 });
 
+export const setGameOver = (isGameOver) => ({
+    type: SET_GAME_OVER,
+    payload: isGameOver
+});
+
 export function selectSkaterCard(skater) {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(selectSkaterCard2(skater));
         dispatch(waitForOpponentSkater());
+        var local = getState();
+        if (local.skaters.length == 0) {
+            dispatch(setGameOver(true));
+        }
     };
 }
-
-
 
 export function waitForOpponentSkater() {
     return dispatch => {

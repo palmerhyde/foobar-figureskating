@@ -17,7 +17,8 @@ let initalState = {
     selectedSkaterCard: {},
     score: {'y' : 0, 'o' : 0},
     gameState: {
-        'turnInProgress': false
+        'turnInProgress': false,
+        'gameOver': false
     }
 };
 
