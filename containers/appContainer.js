@@ -7,7 +7,8 @@ import {
     waitForOpponentSkater,
     setTurnInProgress,
     resetSelectedSkaterCard,
-    resetOpponentSkaterCard} from '../actions/cardActions';
+    resetOpponentSkaterCard,
+    resetGameScore} from '../actions/cardActions';
 
 import { HomeScreen } from '../HomeScreen';
 
@@ -28,7 +29,8 @@ const mapDispatchToProps = dispatch => (
         waitForOpponentSkater,
         setTurnInProgress,
         resetSelectedSkaterCard,
-        resetOpponentSkaterCard
+        resetOpponentSkaterCard,
+        resetGameScore
     }, dispatch)
 );
 

@@ -35,6 +35,10 @@ class HomeScreen extends Component {
         if (this.props.waitForMoves) {
             this.props.waitForMoves();
         }
+
+        if (this.props.resetGameScore) {
+            this.props.resetGameScore();
+        }
     }
 
     selectSkaterCard(skater) {
@@ -51,9 +55,9 @@ class HomeScreen extends Component {
         this.flip()
     }
 
-    flip = () => {
+    flip()  {
         this.setState({isFlipped: !this.state.isFlipped});
-    };
+    }
 
     render() {
         console.log('gameover:' + this.props.gameState.gameOver);
@@ -61,9 +65,9 @@ class HomeScreen extends Component {
                 <View style={{flex: 0.1}}>
                     <View style={{flex: 1, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
                         <JukeBox/>
-                        <Text style={{fontSize: 16, fontWeight: 'bold'}}>{this.props.score.y}</Text>
+                        <Text style={{fontSize: 16, fontWeight: 'bold'}}>{this.props.gameState.y}</Text>
                         <MoveCard key={this.props.move.id} move={this.props.move}/>
-                        <Text style={{fontSize: 16, fontWeight: 'bold'}}>{this.props.score.o}</Text>
+                        <Text style={{fontSize: 16, fontWeight: 'bold'}}>{this.props.gameState.o}</Text>
                     </View>
                 </View>
                 <View style={{flex: 0.25, flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center'}}>
@@ -87,10 +91,14 @@ class HomeScreen extends Component {
                     </View>
                 </View>
                 :
-                <Button title='Next turn' onPress={ () => this.nextTurn() }/>
+                    !this.props.gameState.gameOver && <Button title='Next turn' onPress={ () => this.nextTurn() }/>
             }
             {
-                this.props.gameState.gameOver && <Text>GAME OVER - Display winner or loser screen then reset game</Text>
+                this.props.gameState.gameOver && <Button title='Game Over - Continue' onPress={ () => {
+                    this.refresh();
+                    this.nextTurn();
+
+                } }/>
             }
             </View>;
     }

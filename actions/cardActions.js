@@ -8,7 +8,8 @@ import {
     SET_TURN_IN_PROGRESS,
     RESET_SELECTED_SKATER_CARD,
     RESET_OPPONENT_SKATER_CARD,
-    SET_GAME_OVER
+    SET_GAME_OVER,
+    RESET_GAME_SCORE
 } from './actionTypes';
 
 import skaters from '../assets/data/skaters';
@@ -89,6 +90,10 @@ export function selectSkaterCard(skater) {
         }
     };
 }
+
+export const resetGameScore = () => ({
+    type: RESET_GAME_SCORE
+});
 
 export function waitForOpponentSkater() {
     return dispatch => {
