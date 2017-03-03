@@ -1,3 +1,5 @@
+// TODO: rename HomeScreen -> GameScreen
+
 import React, {Component} from 'react';
 
 import {
@@ -9,6 +11,13 @@ import {
     View,
     AppRegistry
 } from 'react-native';
+
+import {
+    MENS_SINGLES,
+    LADIES_SINGLES,
+    PAIRS,
+    ICE_DANCING
+} from './util/disciplines';
 
 import {SkaterCard} from './components/skatercard';
 import {MoveCard} from './components/movecard';
@@ -75,6 +84,19 @@ class HomeScreen extends Component {
         return 1;
     }
 
+    // TODO: Move to util.
+    isPlayable(skater, move) {
+        if (move.discipline == MENS_SINGLES && skater.gender == 'F') {
+            return false;
+        }
+
+        if (move.discipline == LADIES_SINGLES && skater.gender == 'M') {
+            return false;
+        }
+
+        return true;
+    }
+
     render() {
         return <View style={{flex: 1}}>
                 <View style={{flex: 0.1}}>
@@ -94,12 +116,11 @@ class HomeScreen extends Component {
                     <View style={styles.container2}>
                         {
                             this.props.skaters.map(function (skater) {
-                                return <TouchableOpacity key={'y:' + skater.id}
-                                                         onPress={ () => this.selectSkaterCard(skater) }>
-                                    <View>
-                                        <SkaterCard skater={skater}/>
-                                    </View>
-                                </TouchableOpacity>
+                                return <View key={'y:' + skater.id} pointerEvents={this.isPlayable(skater, this.props.move) ? 'auto' : 'none' }>
+                                    <TouchableOpacity onPress={ () => this.selectSkaterCard(skater) }>
+                                            <SkaterCard skater={skater} move={this.props.move} isPlayable={this.isPlayable(skater, this.props.move)}/>
+                                    </TouchableOpacity>
+                                </View>
                             }, this)
                         }
                     </View>

@@ -1,3 +1,10 @@
+import {
+    MENS_SINGLES,
+    LADIES_SINGLES,
+    PAIRS,
+    ICE_DANCING
+} from '../../util/disciplines';
+
 let skaters = [
     {
         'id' : 1,
@@ -11,7 +18,9 @@ let skaters = [
             'name' : 'Iron Lotus',
             'value' : randomRange(70, 80)
         },
-        'level' : 1
+        'level' : 1,
+        'discipline' : PAIRS,
+        'gender' : 'M'
     },
     {
         'id' : 2,
@@ -25,7 +34,9 @@ let skaters = [
             'name' : 'Triple Axel',
             'value' : randomRange(70, 80)
         },
-        'level' : 1
+        'level' : 1,
+        'discipline': LADIES_SINGLES,
+        'gender' : 'F'
     },
     {
         'id': 3,
@@ -39,7 +50,9 @@ let skaters = [
             'name': 'Quad Axel',
             'value': randomRange(70, 80)
         },
-        'level' : 1
+        'level' : 1,
+        'discipline' : MENS_SINGLES,
+        'gender' : 'M'
     },
     {
         'id' : 4,
@@ -53,7 +66,9 @@ let skaters = [
             'name' : 'Forward Scratch Spin',
             'value' : randomRange(70, 80)
         },
-        'level' : 1
+        'level' : 1,
+        'discipline' : MENS_SINGLES,
+        'gender' : 'M'
     },
     {
         'id' : 5,
@@ -67,7 +82,9 @@ let skaters = [
             'name' : 'Spiral',
             'value' : randomRange(70, 80)
         },
-        'level' : 1
+        'level' : 1,
+        'discipline' : LADIES_SINGLES,
+        'gender' : 'F'
     },
     {
         'id' : 6,
@@ -81,7 +98,9 @@ let skaters = [
             'name' : 'Spiral',
             'value' : randomRange(70, 80)
         },
-        'level' : 1
+        'level' : 1,
+        'discipline' : ICE_DANCING,
+        'gender' : 'F'
     },
     {
         'id' : 7,
@@ -95,7 +114,9 @@ let skaters = [
             'name' : 'Spiral',
             'value' : randomRange(70, 80)
         },
-        'level' : 1
+        'level' : 1,
+        'discipline' : ICE_DANCING,
+        'gender' : 'M'
     },
     {
         'id' : 8,
@@ -109,7 +130,9 @@ let skaters = [
             'name' : 'Iron Lotus',
             'value' : randomRange(70, 80)
         },
-        'level' : 1
+        'level' : 1,
+        'discipline' : PAIRS,
+        'gender' : 'M'
     }
 ];
 

@@ -14,6 +14,7 @@ class MoveCard extends Component {
 
     render() {
         return <View style={styles.card}>
+            <Text style={styles.discipline}>{this.props.move.discipline}</Text>
             <Text style={styles.title}>{this.props.move.attribute}</Text>
         </View>
 
@@ -21,20 +22,26 @@ class MoveCard extends Component {
 }
 
 const styles = StyleSheet.create({
+    discipline: {
+        marginTop: 10,
+        fontSize: 14,
+        fontWeight: 'bold',
+        backgroundColor: 'transparent'
+    },
     title: {
         marginTop: 10,
-        fontSize: 16,
+        fontSize: 12,
         backgroundColor: 'transparent'
     },
     card: {
         alignItems: 'center',
         width: 200,
-        height: 50,
+        height: 60,
         borderWidth: 3,
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 10,
-        marginBottom: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 5,
+        marginBottom: 5,
         borderRadius: 6
     }
 });

@@ -11,9 +11,11 @@ const logger = createLogger();
 
 let initalState = {
     skaters: [],
-    move: {},
-    opponentSkaterCard: {},
+    //skaterDeck: [],
     selectedSkaterCard: {},
+    //opponentDeck: [],
+    opponentSkaterCard: {},
+    move: {},
     gameState: {
         'turnInProgress': false,
         'gameOver': false,
@@ -30,6 +32,8 @@ export default (initialState = initalState) => (
             opponentSkaterCard: opponentSkaterCardReducer,
             selectedSkaterCard: selectedSkaterCardReducer,
             gameState: gameStateReducer
+            //opponentDeck: [],
+            //skaterDeck: [],
         }),
         initialState,
         applyMiddleware(thunk, logger)
