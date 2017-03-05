@@ -59,6 +59,8 @@ class GameScreen extends Component {
     nextTurn() {
         this.props.setTurnInProgress(false);
         this.props.resetSelectedSkaterCard();
+        // TODO: refactor opponent card to always come from the deck.
+        this.props.removeOpponentSkaterCardFromDeck(this.props.opponentSkaterCard);
         this.props.resetOpponentSkaterCard();
         this.props.incrementTurn();
         this.flip()

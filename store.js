@@ -7,6 +7,7 @@ import opponentSkaterCardReducer from './reducers/opponentSkaterCardReducer';
 import selectedSkaterCardReducer from './reducers/selectedSkaterCardReducer';
 import gameStateReducer from './reducers/gameStateReducer';
 import skaterDeckReducer from './reducers/skaterDeckReducer';
+import opponentSkaterDeckReducer from './reducers/opponentSkaterDeckReducer';
 
 const logger = createLogger();
 
@@ -14,7 +15,7 @@ let initalState = {
     skaters: [],
     skaterDeck: [],
     selectedSkaterCard: {},
-    //opponentDeck: [],
+    opponentDeck: [],
     opponentSkaterCard: {},
     moves: [],
     gameState: {
@@ -34,7 +35,7 @@ export default (initialState = initalState) => (
             opponentSkaterCard: opponentSkaterCardReducer,
             selectedSkaterCard: selectedSkaterCardReducer,
             gameState: gameStateReducer,
-            //opponentDeck: [],
+            opponentDeck: opponentSkaterDeckReducer,
             skaterDeck: skaterDeckReducer
         }),
         initialState,

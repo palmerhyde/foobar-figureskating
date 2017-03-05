@@ -10,7 +10,8 @@ import {
     resetOpponentSkaterCard,
     resetGameScore,
     loadSkaterDeck,
-    incrementTurn} from '../actions/cardActions';
+    incrementTurn,
+    removeOpponentSkaterCardFromDeck} from '../actions/cardActions';
 
 import { GameScreen } from '../GameScreen';
 
@@ -21,7 +22,8 @@ const mapStateToProps = state => ({
     selectedSkaterCard: state.selectedSkaterCard,
     score: state.score,
     gameState: state.gameState,
-    skaterDeck: state.skaterDeck
+    skaterDeck: state.skaterDeck,
+    opponentDeck: state.opponentDeck
 });
 
 const mapDispatchToProps = dispatch => (
@@ -35,7 +37,8 @@ const mapDispatchToProps = dispatch => (
         resetOpponentSkaterCard,
         resetGameScore,
         loadSkaterDeck,
-        incrementTurn
+        incrementTurn,
+        removeOpponentSkaterCardFromDeck
     }, dispatch)
 );
 

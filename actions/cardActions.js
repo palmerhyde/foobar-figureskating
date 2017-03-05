@@ -12,11 +12,14 @@ import {
     RESET_GAME_SCORE,
     LOAD_SKATER_DECK,
     LOAD_OPPONENT_SKATER_DECK,
-    INCREMENT_TURN
+    INCREMENT_TURN,
+    REMOVE_OPPONENT_SKATER_FROM_DECK
 } from './actionTypes';
 
 import skaters from '../assets/data/skaters';
 import {calculateWinner, generateMoves} from '../util/gamehelper';
+
+import {MENS_SINGLES, LADIES_SINGLES} from '../util/disciplines';
 
 export const loadSkaterCards = () => ({
     type: LOAD_SKATER_CARDS,
@@ -41,6 +44,11 @@ export const resetOpponentSkaterCard = () => ({
     type: RESET_OPPONENT_SKATER_CARD
 });
 
+export const removeOpponentSkaterCardFromDeck = (skater) => ({
+    type: REMOVE_OPPONENT_SKATER_FROM_DECK,
+    payload: skater
+});
+
 export function loadOpponentSkaterCard(skater) {
     return dispatch => {
         dispatch({type: 'LOAD_OPPONENT_SKATER_CARD',  payload: skater});
@@ -52,7 +60,7 @@ export function calculateScores() {
     return (dispatch, getState) => {
         dispatch({type: 'CALCULATE_SCORES'});
         let local = getState();
-        let winner = calculateWinner(local.selectedSkaterCard, local.opponentSkaterCard, local.moves[0]);
+        let winner = calculateWinner(local.selectedSkaterCard, local.opponentSkaterCard, local.moves[local.gameState.turn]);
 
         switch (winner) {
             case 1:
@@ -90,6 +98,7 @@ export function selectSkaterCard(skater) {
     return (dispatch, getState) => {
         dispatch(selectSkaterCard2(skater));
         dispatch(waitForOpponentSkater());
+
         var local = getState();
         if (local.gameState.turn == 5) {
             dispatch(setGameOver(true));
@@ -101,15 +110,26 @@ export const resetGameScore = () => ({
     type: RESET_GAME_SCORE
 });
 
+// TODO: rename me / refactor me
 export function waitForOpponentSkater() {
-    return dispatch => {
+    return (dispatch, getState) => {
+        let state = getState();
+
         let skater = skaters[Math.floor((Math.random() * skaters.length) + 1)];
-        if (!skater) {
-            dispatch(waitForOpponentSkater());
+        let move = state.moves[state.gameState.turn];
+        let gender = 'M';
+        switch (move.discipline) {
+            case MENS_SINGLES:
+                gender = 'M';
+                break;
+            case LADIES_SINGLES:
+                gender = 'F';
+                break;
         }
-        else {
-            dispatch(loadOpponentSkaterCard(skater));
-        }
+
+        // TODO: improve opponent AI and move to helpers so we can test!
+        skater = state.opponentDeck.filter(element => element.gender == gender)[0];
+        dispatch(loadOpponentSkaterCard(skater));
     };
 }
 
@@ -119,6 +139,11 @@ export function waitForMoves() {
         dispatch(loadMoveCards(moves));
     };
 }
+
+export const setOpponentDeck = (deck) => ({
+    type: LOAD_OPPONENT_SKATER_DECK,
+    payload: deck
+});
 
 export const setSkaterDeck = (deck) => ({
     type: LOAD_SKATER_DECK,
@@ -131,6 +156,7 @@ export function loadSkaterDeck() {
             dispatch(loadSkaterDeck());
         }
         else {
+            // skater deck
             let deck = [];
 
             // 3 male skaters
@@ -144,6 +170,21 @@ export function loadSkaterDeck() {
             deck.push(skaters[5]);
 
             dispatch(setSkaterDeck(deck));
+
+            // opponent skater deck
+            let opponentDeck = [];
+            let femaleSkaters = skaters.filter(element => element.gender == 'F');
+            let maleSkaters = skaters.filter(element => element.gender == 'M');
+
+            // Improve oppenent deck logic - more skaters.
+            opponentDeck.push(femaleSkaters[0]);
+            opponentDeck.push(femaleSkaters[1]);
+            opponentDeck.push(femaleSkaters[2]);
+            opponentDeck.push(maleSkaters[0]);
+            opponentDeck.push(maleSkaters[1]);
+            opponentDeck.push(maleSkaters[2]);
+
+            dispatch(setOpponentDeck(opponentDeck));
         }
     };
 }
