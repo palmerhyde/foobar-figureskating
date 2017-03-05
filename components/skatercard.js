@@ -21,7 +21,7 @@ class SkaterCard extends Component {
     isPlayable() {
         if (!this.props.isPlayable) {
             return {
-                opacity: 0.2,
+                opacity: 0.4,
             };
         }
 
@@ -34,7 +34,7 @@ class SkaterCard extends Component {
     attributeStyle(a) {
         let bgc = 'black';
         if (a == this.props.move.attribute) {
-            bgc = 'green';
+            bgc = 'orange';
         }
 
         var style = {
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
         borderRadius: 6,
+        backgroundColor: 'white'
     },
 });
 

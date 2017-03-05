@@ -13,9 +13,16 @@ class MoveCard extends Component {
     }
 
     render() {
-        return <View style={styles.card}>
-            <Text style={styles.discipline}>{this.props.move.discipline}</Text>
-            <Text style={styles.title}>{this.props.move.attribute}</Text>
+        console.log('race');
+        return <View>
+            {this.props.move ?
+            <View  style={styles.card}>
+                <Text style={styles.discipline}>{this.props.move.discipline}</Text>
+                <Text style={styles.title}>{this.props.move.attribute}</Text>
+            </View>
+            :
+                <Text style={styles.title}>Loading</Text>
+            }
         </View>
 
     }
@@ -42,7 +49,8 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginTop: 5,
         marginBottom: 5,
-        borderRadius: 6
+        borderRadius: 6,
+        backgroundColor: 'white'
     }
 });
 

@@ -9,12 +9,14 @@ import {
     RESET_SELECTED_SKATER_CARD,
     RESET_OPPONENT_SKATER_CARD,
     SET_GAME_OVER,
-    RESET_GAME_SCORE
+    RESET_GAME_SCORE,
+    LOAD_SKATER_DECK,
+    LOAD_OPPONENT_SKATER_DECK,
+    INCREMENT_TURN
 } from './actionTypes';
 
 import skaters from '../assets/data/skaters';
-import moves from '../assets/data/moves';
-import {calculateWinner} from '../util/gamehelper';
+import {calculateWinner, generateMoves} from '../util/gamehelper';
 
 export const loadSkaterCards = () => ({
     type: LOAD_SKATER_CARDS,
@@ -50,7 +52,7 @@ export function calculateScores() {
     return (dispatch, getState) => {
         dispatch({type: 'CALCULATE_SCORES'});
         let local = getState();
-        let winner = calculateWinner(local.selectedSkaterCard, local.opponentSkaterCard, local.move);
+        let winner = calculateWinner(local.selectedSkaterCard, local.opponentSkaterCard, local.moves[0]);
 
         switch (winner) {
             case 1:
@@ -65,6 +67,10 @@ export function calculateScores() {
 export const selectSkaterCard2 = (skater) => ({
     type: SELECT_SKATER_CARD,
     payload: skater
+});
+
+export const incrementTurn = () => ({
+    type: INCREMENT_TURN,
 });
 
 export const incrementYourScore = () => ({
@@ -85,7 +91,7 @@ export function selectSkaterCard(skater) {
         dispatch(selectSkaterCard2(skater));
         dispatch(waitForOpponentSkater());
         var local = getState();
-        if (local.skaters.length == 0) {
+        if (local.gameState.turn == 5) {
             dispatch(setGameOver(true));
         }
     };
@@ -109,13 +115,35 @@ export function waitForOpponentSkater() {
 
 export function waitForMoves() {
     return dispatch => {
-        dispatch({type: 'LOAD_MOVE_CARDS_START'});
-        let index = Math.floor((Math.random() * moves.length) + 1);
-        if (!moves[index]) {
-            dispatch(waitForMoves());
+        var moves = generateMoves();
+        dispatch(loadMoveCards(moves));
+    };
+}
+
+export const setSkaterDeck = (deck) => ({
+    type: LOAD_SKATER_DECK,
+    payload: deck
+});
+
+export function loadSkaterDeck() {
+    return (dispatch) => {
+        if (!skaters || skaters.length == 0) {
+            dispatch(loadSkaterDeck());
         }
         else {
-            dispatch(loadMoveCards(moves[index]));
+            let deck = [];
+
+            // 3 male skaters
+            deck.push(skaters[0]);
+            deck.push(skaters[2]);
+            deck.push(skaters[3]);
+
+            // 3 female skaters
+            deck.push(skaters[1]);
+            deck.push(skaters[4]);
+            deck.push(skaters[5]);
+
+            dispatch(setSkaterDeck(deck));
         }
     };
 }
