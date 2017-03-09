@@ -32,12 +32,13 @@ class FlipSkaterCard extends Component {
     _renderBack = () => {
         return <View style={styles.container2}>
             {this.props.skater.name ?
-                <View style={styles.container2}>
+                <View style={{justifyContent: 'center', alignItems: 'center', flex:1}}>
                     <Text style={styles.title}>{this.props.skater.name}</Text>
                     <Image
                         source={{uri: this.props.skater.photo}}
-                        style={{width: 142, height: 110}}
+                        style={{width: 170, height: null, flex:1}}
                     />
+
                     <Text style={styles.cardtext}>Edges - {this.props.skater.edges}</Text>
                     <Text style={styles.cardtext}>Jumps - {this.props.skater.jumps}</Text>
                     <Text style={styles.cardtext}>Form - {this.props.skater.form}</Text>
@@ -82,13 +83,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        width: 150,
-        height: 225,
+        flex: 1,
         borderWidth: 3,
-        marginLeft: 3,
-        marginRight: 3,
-        marginTop: 5,
-        marginBottom: 5,
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 0,
+        marginBottom: 0,
         borderRadius: 6
     },
 });

@@ -41,10 +41,31 @@ state 1
     }
 }
 
-State 1 Actions
-Actions.SELECT_BUFF_CARD (set buff card, disable other buff cards)
-Actions.SELECT_SKATER_CARD (set/push skater card)
 
-Can actions be fired by other actions?
 
-game
+Leveling formula
+
+* How many common cards should it take to level a  common card up to 10?
+* How many x      cards should it take to level an y      card up to z?
+
+What is the spread between level 0 and level 10?
+27%
+
+Is this increase the same for all card levels?
+
+
+
+level * 15
+
+1 = 15
+2 = 30
+3 = 45
+4 = 60
+5 = 75
+6 = 90
+7 = 105
+8 = 120
+9 = 135
+10= 150
+
+Total xp required 825.

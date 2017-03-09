@@ -133,6 +133,22 @@ let skaters = [
         'level' : 1,
         'discipline' : PAIRS,
         'gender' : 'M'
+    },
+    {
+        'id' : 9,
+        'name' : 'Nancy Kerrigan',
+        'edges' : randomRange(70, 80),
+        'jumps' : randomRange(70, 80),
+        'form' : randomRange(70, 80),
+        'presentation' : randomRange(70, 80),
+        'photo' : 'https://cdn5.thr.com/sites/default/files/imagecache/scale_crop_768_433/2013/07/135289763.jpg',
+        'skill' : {
+            'name' : 'Edge',
+            'value' : randomRange(70, 80)
+        },
+        'level' : 1,
+        'discipline' : LADIES_SINGLES,
+        'gender' : 'F'
     }
 ];
 

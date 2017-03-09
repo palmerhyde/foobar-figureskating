@@ -10,6 +10,7 @@
     "lodash": "^4.17.4",
     "react": "15.4.2",
     "react-native": "0.41.2",
+    "react-native-fit-image": "^1.4.7",
     "react-native-flip-view": "^1.0.5",
     "react-native-router-flux": "^3.38.0",
     "react-native-sound": "^0.8.3",

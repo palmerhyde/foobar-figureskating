@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
 import {SplashScreen} from './components/splash';
+import SkatersContainer from './containers/skatersContainer';
 import AppContainer from './containers/appContainer'
 import createStore from './store';
-import {Scene, Router, Animations} from 'react-native-router-flux';
+import {Scene, Router, Animations, ActionConst} from 'react-native-router-flux';
 
 const store = createStore();
 
@@ -11,8 +12,9 @@ export default () => (
     <Provider store={store}>
         <Router hideNavBar={true}>
             <Scene key="root">
-                <Scene key="splash" component={SplashScreen} title="FooBar Figure Skating" initial={true} />
-                <Scene key="game" duration={800} direction="vertical" component={AppContainer} title="Game" />
+                <Scene key="splash" duration={800} direction="vertical" component={SplashScreen} title="FooBar Figure Skating" type={ActionConst.RESET} initial />
+                <Scene key="game" duration={800} direction="vertical" component={AppContainer} title="Game" type={ActionConst.RESET} />
+                <Scene key="skaters" duration={800} direction="vertical" component={SkatersContainer} title="Skaters" type={ActionConst.RESET} />
             </Scene>
         </Router>
   </Provider>

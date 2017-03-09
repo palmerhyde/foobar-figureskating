@@ -27,7 +27,7 @@ export default (state = {
             return Object.assign(state, { turn: state.turn +1 });
         case RESET_GAME_SCORE:
             // TODO: rename reset game
-            return Object.assign(state, { y:0, o: 0, 'gameOver':false, turn: 0 });
+            return Object.assign(state, { y:0, o: 0, 'gameOver':false, turn: 0, turnInProgress: false });
         default:
             return state;
     }

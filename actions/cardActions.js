@@ -13,7 +13,8 @@ import {
     LOAD_SKATER_DECK,
     LOAD_OPPONENT_SKATER_DECK,
     INCREMENT_TURN,
-    REMOVE_OPPONENT_SKATER_FROM_DECK
+    REMOVE_OPPONENT_SKATER_FROM_DECK,
+    SELECT_MYCARDS_SKATER
 } from './actionTypes';
 
 import skaters from '../assets/data/skaters';
@@ -165,7 +166,7 @@ export function loadSkaterDeck() {
             deck.push(skaters[3]);
 
             // 3 female skaters
-            deck.push(skaters[1]);
+            deck.push(skaters[8]);
             deck.push(skaters[4]);
             deck.push(skaters[5]);
 
@@ -188,3 +189,9 @@ export function loadSkaterDeck() {
         }
     };
 }
+
+//MYCARDS SCREEN
+export const selectMyCardsSkater = (skater) => ({
+    type: SELECT_MYCARDS_SKATER,
+    payload: skater
+});

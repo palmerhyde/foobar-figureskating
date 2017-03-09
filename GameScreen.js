@@ -13,6 +13,8 @@ import {
     AppRegistry
 } from 'react-native';
 
+import { Actions } from 'react-native-router-flux';
+
 import {
     MENS_SINGLES,
     LADIES_SINGLES,
@@ -33,6 +35,7 @@ class GameScreen extends Component {
     }
 
     componentWillMount() {
+        console.log('componentWillMount');
         this.refresh();
     }
 
@@ -138,9 +141,7 @@ class GameScreen extends Component {
 
             {
                 this.props.gameState.gameOver && <Button title='Game Over - Continue' onPress={ () => {
-                    this.refresh();
-                    this.nextTurn();
-
+                    Actions.splash();
                 } }/>
             }
         </Image>;
