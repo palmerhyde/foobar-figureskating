@@ -18,6 +18,7 @@ import {
 import { Skaters } from '../components/skaters';
 
 const mapStateToProps = state => ({
+    skaters: state.skaters,
     skaterDeck: state.skaterDeck,
     selectedSkater: state.selectedMyCardsSkaterCard
 });

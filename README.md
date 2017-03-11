@@ -54,7 +54,6 @@ What is the spread between level 0 and level 10?
 Is this increase the same for all card levels?
 
 
-
 level * 15
 
 1 = 15
@@ -69,3 +68,4 @@ level * 15
 10= 150
 
 Total xp required 825.
+825 / 21 = 40 cards (39.28)

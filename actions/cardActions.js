@@ -166,7 +166,7 @@ export function loadSkaterDeck() {
             deck.push(skaters[3]);
 
             // 3 female skaters
-            deck.push(skaters[8]);
+            deck.push(skaters[1]);
             deck.push(skaters[4]);
             deck.push(skaters[5]);
 

@@ -36,6 +36,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* foobarfigureskatingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* foobarfigureskatingTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		9D1399D01E71FB5500B4D46C /* skaters.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D1399CF1E71FB5500B4D46C /* skaters.ttf */; };
+		9D1399EC1E7263AF00B4D46C /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D1399EB1E7263AF00B4D46C /* roboto.ttf */; };
 		9DB2FCF41E512EB800A7F5BA /* Warriors.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2FCF21E512EB800A7F5BA /* Warriors.mp3 */; };
 		9DB2FCF51E512EB800A7F5BA /* Bolero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2FCF31E512EB800A7F5BA /* Bolero.mp3 */; };
 		9DF990E21E5607AB00372D62 /* Glorious.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DF990E11E5607AB00372D62 /* Glorious.mp3 */; };
@@ -268,6 +270,8 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9D1399CF1E71FB5500B4D46C /* skaters.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = skaters.ttf; path = ../assets/fonts/skaters.ttf; sourceTree = "<group>"; };
+		9D1399EB1E7263AF00B4D46C /* roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = roboto.ttf; path = ../assets/fonts/roboto.ttf; sourceTree = "<group>"; };
 		9DB2FCF21E512EB800A7F5BA /* Warriors.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Warriors.mp3; path = ../assets/sounds/Warriors.mp3; sourceTree = "<group>"; };
 		9DB2FCF31E512EB800A7F5BA /* Bolero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Bolero.mp3; path = ../assets/sounds/Bolero.mp3; sourceTree = "<group>"; };
 		9DF990E11E5607AB00372D62 /* Glorious.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Glorious.mp3; path = ../assets/sounds/Glorious.mp3; sourceTree = "<group>"; };
@@ -483,6 +487,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9D1399EB1E7263AF00B4D46C /* roboto.ttf */,
+				9D1399CF1E71FB5500B4D46C /* skaters.ttf */,
 				9DF990FD1E560F0F00372D62 /* Flash.mp3 */,
 				9DF990E11E5607AB00372D62 /* Glorious.mp3 */,
 				9DB2FCF21E512EB800A7F5BA /* Warriors.mp3 */,
@@ -890,7 +896,9 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				9DF990FE1E560F0F00372D62 /* Flash.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				9D1399EC1E7263AF00B4D46C /* roboto.ttf in Resources */,
 				9DB2FCF41E512EB800A7F5BA /* Warriors.mp3 in Resources */,
+				9D1399D01E71FB5500B4D46C /* skaters.ttf in Resources */,
 				9DB2FCF51E512EB800A7F5BA /* Bolero.mp3 in Resources */,
 				9DF990E21E5607AB00372D62 /* Glorious.mp3 in Resources */,
 			);
