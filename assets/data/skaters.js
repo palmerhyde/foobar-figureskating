@@ -10,7 +10,7 @@ import {
 let skaters = [
     {
         'id' : 1,
-        'name' : 'Chazz Michael Michaels'.toUpperCase(),
+        'name' : 'Chazz Michael Michaels',
         'edges' : randomRange(70, 80),
         'jumps' : randomRange(70, 80),
         'form' : randomRange(70, 80),
@@ -28,7 +28,7 @@ let skaters = [
     },
     {
         'id' : 2,
-        'name' : 'Tonya Harding'.toUpperCase(),
+        'name' : 'Tonya Harding',
         'edges' : randomRange(70, 80),
         'jumps' : randomRange(70, 80),
         'form' : randomRange(70, 80),
@@ -44,7 +44,7 @@ let skaters = [
     },
     {
         'id': 3,
-        'name': 'Johnny Weir'.toUpperCase(),
+        'name': 'Johnny Weir',
         'edges': randomRange(70, 80),
         'jumps': randomRange(70, 80),
         'form': randomRange(70, 80),
@@ -60,7 +60,7 @@ let skaters = [
     },
     {
         'id' : 4,
-        'name' : 'Scott Hamilton'.toUpperCase(),
+        'name' : 'Scott Hamilton',
         'edges' : randomRange(70, 80),
         'jumps' : randomRange(70, 80),
         'form' : randomRange(70, 80),
@@ -76,7 +76,7 @@ let skaters = [
     },
     {
         'id' : 5,
-        'name' : 'kristi Yamaguchi'.toUpperCase(),
+        'name' : 'kristi Yamaguchi',
         'edges' : randomRange(70, 80),
         'jumps' : randomRange(70, 80),
         'form' : randomRange(70, 80),
@@ -92,7 +92,7 @@ let skaters = [
     },
     {
         'id' : 6,
-        'name' : 'Jayne Torvill'.toUpperCase(),
+        'name' : 'Jayne Torvill',
         'edges' : randomRange(70, 80),
         'jumps' : randomRange(70, 80),
         'form' : randomRange(70, 80),
@@ -108,7 +108,7 @@ let skaters = [
     },
     {
         'id' : 7,
-        'name' : 'Christopher Dean'.toUpperCase(),
+        'name' : 'Christopher Dean',
         'edges' : randomRange(70, 80),
         'jumps' : randomRange(70, 80),
         'form' : randomRange(70, 80),
@@ -124,7 +124,7 @@ let skaters = [
     },
     {
         'id' : 8,
-        'name' : 'Jimmy MacElroy'.toUpperCase(),
+        'name' : 'Jimmy MacElroy',
         'edges' : randomRange(70, 80),
         'jumps' : randomRange(70, 80),
         'form' : randomRange(70, 80),
@@ -140,7 +140,7 @@ let skaters = [
     },
     {
         'id' : 9,
-        'name' : 'Nancy Kerrigan'.toUpperCase(),
+        'name' : 'Nancy Kerrigan',
         'edges' : randomRange(70, 80),
         'jumps' : randomRange(70, 80),
         'form' : randomRange(70, 80),

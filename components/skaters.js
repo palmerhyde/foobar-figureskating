@@ -25,8 +25,8 @@ class Skaters extends Component {
         this.cardTemplate = require('../assets/images/large-silver.png');
 
         // Load Skaters
-        if (this.props.loadSkaterDeck) {
-            this.props.loadSkaterDeck();
+        if (this.props.loadSkaterCards) {
+            this.props.loadSkaterCards();
         }
     }
 
@@ -55,6 +55,7 @@ class Skaters extends Component {
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')} style={{width: null, height: null, 'flex': 1}}>
             <View style={{flex:0.75, backgroundColor:'transparent'}}>
                 <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+                    { this.props.selectedSkater.name ?
                     <Animated.Image style={StyleSheet.flatten([styles.card,
                         {
                             width: 202,
@@ -78,7 +79,7 @@ class Skaters extends Component {
                                 resizeMode='stretch'
                             />
                             <View style={{flex:0.1, justifyContent: 'center', alignItems: 'center', borderColor:'red', borderWidth:0}}>
-                                <Text style={styles.title2}>{this.props.selectedSkater.name}</Text>
+                                <Text style={styles.title2}>{this.props.selectedSkater.name.toUpperCase()}</Text>
                             </View>
                             <View style={{flex:0.23, justifyContent: 'center', alignItems: 'center', borderColor:'yellow', borderWidth:0}}>
                                 <Text style={styles.cardtext}>EDGES - {this.props.selectedSkater.edges}</Text>
@@ -89,22 +90,32 @@ class Skaters extends Component {
                         <View style={{flex:0.15, justifyContent: 'center', alignItems: 'center', borderColor:'blue', borderWidth:0}}>
                         </View>
                     </Animated.Image>
+                        : null
+                    }
                 </View>
-                <Text style={{flex:0.25}} onPress={ () => {
+
+                { this.props.selectedSkater.name ?
+                    <Text style={{backgroundColor: 'pink'}} onPress={ () => {
+                        Actions.train();
+                    } }>Train</Text>
+                    : null
+                }
+
+                <Text style={{backgroundColor: 'red'}} onPress={ () => {
                     Actions.splash();
                 } }>Back</Text>
             </View>
             <View style={{flex:0.25, backgroundColor:'gray'}}>
-                <ScrollView horizontal={true} style={{flex:1, flexDirection: 'row'}}>
+            <ScrollView horizontal={true} style={{flex:1, flexDirection: 'row'}}>
                     {
-                        this.props.skaterDeck.map(function (skater) {
+                        this.props.skaters.map(function (skater) {
                             return <TouchableOpacity key={skater.id} onPress={
                                 () => {
                                     this.props.selectMyCardsSkater(skater);
                                 }
                             }>
                                 <View  style={styles.container2}>
-                                    <Text style={styles.title} numberOfLines={1}>{skater.name}</Text>
+                                    <Text style={styles.title} numberOfLines={1}>{skater.name.toUpperCase()}</Text>
                                     <Image
                                         source={{uri: skater.photo}}
                                         style={{width: 114, height: null, flex:1}}

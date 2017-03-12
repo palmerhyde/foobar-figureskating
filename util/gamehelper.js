@@ -13,9 +13,7 @@ import  {
 import _ from 'lodash';
 
 export function calculateWinner(yourCard, opponentCard, moveCard) {
-    console.log(yourCard);
-    console.log(opponentCard);
-    console.log(moveCard);
+
     if (yourCard[moveCard.attribute] > opponentCard[moveCard.attribute]) {
         return 1;
     }
@@ -72,4 +70,18 @@ export function generateMoves() {
     });
 
     return _.shuffle(moves);
+}
+
+export function oppenentMoveAi(move, deck) {
+    let gender = 'M';
+    switch (move.discipline) {
+        case MENS_SINGLES:
+            gender = 'M';
+            break;
+        case LADIES_SINGLES:
+            gender = 'F';
+            break;
+    }
+
+    return skater = deck.filter(element => element.gender == gender)[0];
 }

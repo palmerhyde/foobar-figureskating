@@ -18,7 +18,11 @@ import {
 } from './actionTypes';
 
 import skaters from '../assets/data/skaters';
-import {calculateWinner, generateMoves} from '../util/gamehelper';
+import {
+    calculateWinner,
+    generateMoves,
+    oppenentMoveAi
+} from '../util/gamehelper';
 
 import {MENS_SINGLES, LADIES_SINGLES} from '../util/disciplines';
 
@@ -118,25 +122,15 @@ export function waitForOpponentSkater() {
 
         let skater = skaters[Math.floor((Math.random() * skaters.length) + 1)];
         let move = state.moves[state.gameState.turn];
-        let gender = 'M';
-        switch (move.discipline) {
-            case MENS_SINGLES:
-                gender = 'M';
-                break;
-            case LADIES_SINGLES:
-                gender = 'F';
-                break;
-        }
-
-        // TODO: improve opponent AI and move to helpers so we can test!
-        skater = state.opponentDeck.filter(element => element.gender == gender)[0];
+        let deck = state.opponentDeck;
+        skater = oppenentMoveAi(move, deck);
         dispatch(loadOpponentSkaterCard(skater));
     };
 }
 
 export function waitForMoves() {
     return dispatch => {
-        var moves = generateMoves();
+        let moves = generateMoves();
         dispatch(loadMoveCards(moves));
     };
 }
@@ -157,6 +151,7 @@ export function loadSkaterDeck() {
             dispatch(loadSkaterDeck());
         }
         else {
+            // move logic to helper so it can be tested
             // skater deck
             let deck = [];
 
