@@ -16,18 +16,7 @@ jest.mock('Linking', () => {
 });
 
 jest.mock('react-native-sound', () => 'Sound');
-jest.mock('../components/jukebox', () => {
-    const RealComponent = require.requireActual('../components/jukebox');
-    const React = require('React');
-    class JukeBox extends React.Component {
-        render() {
-            return React.createElement('JukeBox', this.props, this.props.children);
-        }
-    }
-
-    JukeBox.propTypes = RealComponent.propTypes;
-    return JukeBox;
-});
+jest.mock('../components/jukebox', () => 'JukeBox');
 
 it('renders correctly', () => {
   const tree = renderer.create(
