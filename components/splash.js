@@ -7,7 +7,7 @@ import {
     View
 } from 'react-native';
 
-import {JukeBox} from '../components/jukebox';
+import JukeBox from '../components/jukebox';
 
 class SplashScreen extends Component {
 

@@ -78,6 +78,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export {
-    JukeBox
-}
+export default JukeBox
