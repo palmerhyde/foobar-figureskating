@@ -155,6 +155,22 @@ let skaters = [
         'gender' : 'F'
     },
     {
+        'id' : 10,
+        'name' : 'Ekaterina Gordeeva',
+        'edges' : randomRange(70, 80),
+        'jumps' : randomRange(70, 80),
+        'form' : randomRange(70, 80),
+        'presentation' : randomRange(70, 80),
+        'photo' : 'https://s-media-cache-ak0.pinimg.com/originals/14/0d/01/140d01bfc1cbcf21485b9ad5fb112e5d.jpg',
+        'skill' : {
+            'name' : 'Edge',
+            'value' : randomRange(70, 80)
+        },
+        'level' : 1,
+        'discipline' : PAIRS,
+        'gender' : 'F'
+    },
+    {
         'id' : 11,
         'name' : 'Brian Boitano',
         'edges' : randomRange(70, 80),
@@ -170,6 +186,7 @@ let skaters = [
         'discipline' : MENS_SINGLES,
         'gender' : 'M'
     }
+
 ];
 
 export default skaters;

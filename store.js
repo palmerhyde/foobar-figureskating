@@ -10,6 +10,7 @@ import skaterDeckReducer from './reducers/skaterDeckReducer';
 import opponentSkaterDeckReducer from './reducers/opponentSkaterDeckReducer';
 import selectedMyCardsSkaterCard from './reducers/selectedMyCardsSkaterCard';
 import potentialTrainerSkatersReducer from './reducers/potentialTrainerSkatersReducer';
+import skaterTrainingListReducer from './reducers/skaterTrainingListReducer';
 
 const logger = createLogger();
 
@@ -24,7 +25,8 @@ export default () => (
             opponentDeck: opponentSkaterDeckReducer,
             skaterDeck: skaterDeckReducer,
             selectedMyCardsSkaterCard: selectedMyCardsSkaterCard,
-            potentialTrainerSkaters: potentialTrainerSkatersReducer
+            potentialTrainerSkaters: potentialTrainerSkatersReducer,
+            skaterTrainingList: skaterTrainingListReducer
         }),
         applyMiddleware(thunk, logger)
     )

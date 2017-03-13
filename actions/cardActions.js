@@ -15,7 +15,9 @@ import {
     INCREMENT_TURN,
     REMOVE_OPPONENT_SKATER_FROM_DECK,
     SELECT_MYCARDS_SKATER,
-    SET_POTENTIAL_TRAINING_SKATERS
+    SET_POTENTIAL_TRAINING_SKATERS,
+    ADD_SKATER_TO_TRAINING_LIST,
+    REMOVE_SKATER_FROM_TRAINING_LIST
 } from './actionTypes';
 
 import skaters from '../assets/data/skaters';
@@ -187,11 +189,13 @@ export function loadSkaterDeck() {
     };
 }
 
-//MYCARDS SCREEN
+// Mycards screen
 export const selectMyCardsSkater = (skater) => ({
     type: SELECT_MYCARDS_SKATER,
     payload: skater
 });
+
+// Training screen
 
 export const setPotentialTrainingSkatersStore = (skaters) => ({
     type: SET_POTENTIAL_TRAINING_SKATERS,
@@ -210,3 +214,13 @@ export function setPotentialTrainingSkaters() {
         dispatch(setPotentialTrainingSkatersStore(trainingSkaters));
     };
 }
+
+export const addSkaterToTrainingList = (skater) => ({
+    type: ADD_SKATER_TO_TRAINING_LIST,
+    payload: skater
+});
+
+export const removeSkaterFromTrainingList = (skater) => ({
+    type: REMOVE_SKATER_FROM_TRAINING_LIST,
+    payload: skater
+});

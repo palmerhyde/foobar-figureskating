@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { Actions } from 'react-native-router-flux';
 
 import {
@@ -14,7 +14,18 @@ class Training extends Component {
 
     constructor(props) {
         super(props);
-        this.props.setPotentialTrainingSkaters()
+    }
+
+    static propTypes = {
+        setPotentialTrainingSkaters: PropTypes.func.isRequired,
+        selectedSkater: PropTypes.object.isRequired,
+        potentialTrainerSkaters: React.PropTypes.arrayOf(React.PropTypes.object),
+        addSkaterToTrainingList: PropTypes.func.isRequired,
+        removeSkaterFromTrainingList: PropTypes.func.isRequired
+    };
+
+    componentDidMount () {
+        this.props.setPotentialTrainingSkaters();
     }
 
     render() {
@@ -31,7 +42,7 @@ class Training extends Component {
                                 this.props.potentialTrainerSkaters.map(function (skater) {
                                     return <TouchableOpacity key={skater.id} onPress={
                                         () => {
-                                            //this.props.selectMyCardsSkater(skater);
+                                            this.props.addSkaterToTrainingList(skater);
                                         }
                                     }>
                                         <View  style={styles.container2}>
@@ -93,8 +104,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'silver',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        //flex: 1,
-        //width:80,
         borderWidth: 3,
         marginLeft: 3,
         marginRight: 3,
@@ -106,8 +115,6 @@ const styles = StyleSheet.create({
         width:200,
         height: 300,
         backgroundColor: 'transparent',
-        //justifyContent: 'flex-end',
-        //alignItems: 'flex-end',
         borderWidth: 0,
         marginLeft: 3,
         marginRight: 3,
