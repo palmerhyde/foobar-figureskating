@@ -85,3 +85,22 @@ export function oppenentMoveAi(move, deck) {
 
     return skater = deck.filter(element => element.gender == gender)[0];
 }
+
+export function potentialTrainingSkaters(selectedSkater, deckSkaters, skaters) {
+    let trainingSkaters = skaters;
+    deckSkaters.push(selectedSkater);
+
+    for (let i=0; i<deckSkaters.length; i++) {
+        _.remove(trainingSkaters, function(element) {
+            return element.id === deckSkaters[i].id;
+    });
+    }
+
+    console.log('trainingSkaters:' + JSON.stringify(trainingSkaters));
+
+    // remove deck skaters
+
+
+    // return what is left
+    return trainingSkaters;
+}

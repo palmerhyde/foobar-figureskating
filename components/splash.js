@@ -27,5 +27,3 @@ class SplashScreen extends Component {
 }
 
 export {SplashScreen}
-
-// TODO: completly reset games in-progress.

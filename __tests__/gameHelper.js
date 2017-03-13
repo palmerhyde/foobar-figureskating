@@ -1,7 +1,8 @@
 import {
     calculateWinner,
     generateMoves,
-    oppenentMoveAi
+    oppenentMoveAi,
+    potentialTrainingSkaters
 }
     from '../util/gamehelper';
 
@@ -148,4 +149,42 @@ describe('Game Helper', () => {
             });
         });
     });
+
+    describe('Potential Training Skaters', () => {
+
+        describe('default behavior', () => {
+            let skaters = [];
+            let deckSkaters = [];
+            let selectedSkater = {
+                'id' : 1
+            };
+
+            skaters.push({'id': 1});
+            skaters.push({'id': 2});
+            skaters.push({'id': 3});
+            skaters.push({'id': 4});
+            skaters.push({'id': 5});
+            skaters.push({'id': 6});
+            skaters.push({'id': 7});
+            skaters.push({'id': 8});
+            skaters.push({'id': 9});
+            skaters.push({'id': 10});
+
+            deckSkaters.push({'id': 1});
+            deckSkaters.push({'id': 2});
+            deckSkaters.push({'id': 3});
+            deckSkaters.push({'id': 4});
+            deckSkaters.push({'id': 5});
+            deckSkaters.push({'id': 6});
+
+            let trainingSkaters = potentialTrainingSkaters(selectedSkater, deckSkaters, skaters);
+            expect(trainingSkaters).not.toContainEqual(selectedSkater);
+            expect(trainingSkaters).not.toContainEqual(deckSkaters[0]);
+            expect(trainingSkaters).not.toContainEqual(deckSkaters[1]);
+            expect(trainingSkaters).not.toContainEqual(deckSkaters[2]);
+            expect(trainingSkaters).not.toContainEqual(deckSkaters[3]);
+            expect(trainingSkaters).not.toContainEqual(deckSkaters[4]);
+            expect(trainingSkaters).not.toContainEqual(deckSkaters[5]);
+        })
+    })
 });

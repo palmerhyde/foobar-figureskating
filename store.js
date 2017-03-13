@@ -12,24 +12,7 @@ import selectedMyCardsSkaterCard from './reducers/selectedMyCardsSkaterCard';
 
 const logger = createLogger();
 
-let initalState = {
-    skaters: [],
-    skaterDeck: [],
-    selectedSkaterCard: {},
-    selectedMyCardsSkaterCard: {},
-    opponentDeck: [],
-    opponentSkaterCard: {},
-    moves: [],
-    gameState: {
-        'turnInProgress': false,
-        'gameOver': false,
-        'y' : 0,
-        'o' : 0,
-        'turn' : 0
-    }
-};
-
-export default (initialState = initalState) => (
+export default () => (
     createStore(
         combineReducers({
             skaters: skaterCardReducer,
@@ -41,7 +24,6 @@ export default (initialState = initalState) => (
             skaterDeck: skaterDeckReducer,
             selectedMyCardsSkaterCard: selectedMyCardsSkaterCard
         }),
-        initialState,
         applyMiddleware(thunk, logger)
     )
 );
