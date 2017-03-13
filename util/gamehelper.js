@@ -88,19 +88,20 @@ export function oppenentMoveAi(move, deck) {
 
 export function potentialTrainingSkaters(selectedSkater, deckSkaters, skaters) {
     let trainingSkaters = skaters;
+
+    console.log('deckskaters:' + JSON.stringify(deckSkaters));
+
+
+
     deckSkaters.push(selectedSkater);
 
     for (let i=0; i<deckSkaters.length; i++) {
         _.remove(trainingSkaters, function(element) {
+            console.log(deckSkaters[i]);
+            console.log('ids:' + element.id + ' ' + deckSkaters[i].id);
             return element.id === deckSkaters[i].id;
-    });
+        });
     }
 
-    console.log('trainingSkaters:' + JSON.stringify(trainingSkaters));
-
-    // remove deck skaters
-
-
-    // return what is left
     return trainingSkaters;
 }

@@ -45,6 +45,8 @@ class GameScreen extends Component {
         }
 
         if (this.props.waitForMoves) {
+            // Is there a race condition here?
+            // skaters -> back -> game
             this.props.waitForMoves();
         }
 
@@ -109,6 +111,12 @@ class GameScreen extends Component {
     }
 
     render() {
+        // TODO: add null checks to ensure moves and skater decks are valid before rendering
+        if (!this.props.moves || this.props.moves.length == 0) {
+            // TODO - render spinner?
+            return null;
+        }
+
         return <Image resizeMode='cover' source={require('./assets/images/ice.jpg')}  style={{width: null, height: null, 'flex': 1, justifyContent: 'center', alignItems: 'center'}}>
                 <View style={{flex: 0.1}}>
                     <View style={{flex: 1, flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>

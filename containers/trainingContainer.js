@@ -12,7 +12,8 @@ import {
     loadSkaterDeck,
     incrementTurn,
     removeOpponentSkaterCardFromDeck,
-    selectMyCardsSkater
+    selectMyCardsSkater,
+    setPotentialTrainingSkaters
 } from '../actions/cardActions';
 
 import { Training } from '../components/training';
@@ -20,7 +21,8 @@ import { Training } from '../components/training';
 const mapStateToProps = state => ({
     skaters: state.skaters,
     skaterDeck: state.skaterDeck,
-    selectedSkater: state.selectedMyCardsSkaterCard
+    selectedSkater: state.selectedMyCardsSkaterCard,
+    potentialTrainerSkaters: state.potentialTrainerSkaters
 });
 
 const mapDispatchToProps = dispatch => (
@@ -36,7 +38,8 @@ const mapDispatchToProps = dispatch => (
         loadSkaterDeck,
         incrementTurn,
         removeOpponentSkaterCardFromDeck,
-        selectMyCardsSkater
+        selectMyCardsSkater,
+        setPotentialTrainingSkaters
     }, dispatch)
 );
 

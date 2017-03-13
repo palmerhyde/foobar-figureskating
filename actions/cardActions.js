@@ -14,14 +14,16 @@ import {
     LOAD_OPPONENT_SKATER_DECK,
     INCREMENT_TURN,
     REMOVE_OPPONENT_SKATER_FROM_DECK,
-    SELECT_MYCARDS_SKATER
+    SELECT_MYCARDS_SKATER,
+    SET_POTENTIAL_TRAINING_SKATERS
 } from './actionTypes';
 
 import skaters from '../assets/data/skaters';
 import {
     calculateWinner,
     generateMoves,
-    oppenentMoveAi
+    oppenentMoveAi,
+    potentialTrainingSkaters
 } from '../util/gamehelper';
 
 import {MENS_SINGLES, LADIES_SINGLES} from '../util/disciplines';
@@ -190,3 +192,21 @@ export const selectMyCardsSkater = (skater) => ({
     type: SELECT_MYCARDS_SKATER,
     payload: skater
 });
+
+export const setPotentialTrainingSkatersStore = (skaters) => ({
+    type: SET_POTENTIAL_TRAINING_SKATERS,
+    payload: skaters
+});
+
+export function setPotentialTrainingSkaters() {
+    return (dispatch, getState) => {
+        let state = getState();
+
+        // DO NOT MUTATE STATE!
+        let selectedSkater = Object.assign({}, state.selectedMyCardsSkaterCard);
+        let deck = Object.assign([], state.skaterDeck);
+        let skaters = Object.assign([], state.skaters);
+        let trainingSkaters = potentialTrainingSkaters(selectedSkater, deck, skaters);
+        dispatch(setPotentialTrainingSkatersStore(trainingSkaters));
+    };
+}

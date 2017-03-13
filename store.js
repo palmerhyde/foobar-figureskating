@@ -9,6 +9,7 @@ import gameStateReducer from './reducers/gameStateReducer';
 import skaterDeckReducer from './reducers/skaterDeckReducer';
 import opponentSkaterDeckReducer from './reducers/opponentSkaterDeckReducer';
 import selectedMyCardsSkaterCard from './reducers/selectedMyCardsSkaterCard';
+import potentialTrainerSkatersReducer from './reducers/potentialTrainerSkatersReducer';
 
 const logger = createLogger();
 
@@ -22,7 +23,8 @@ export default () => (
             gameState: gameStateReducer,
             opponentDeck: opponentSkaterDeckReducer,
             skaterDeck: skaterDeckReducer,
-            selectedMyCardsSkaterCard: selectedMyCardsSkaterCard
+            selectedMyCardsSkaterCard: selectedMyCardsSkaterCard,
+            potentialTrainerSkaters: potentialTrainerSkatersReducer
         }),
         applyMiddleware(thunk, logger)
     )

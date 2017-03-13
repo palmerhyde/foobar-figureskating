@@ -23,15 +23,19 @@ class Skaters extends Component {
         super(props);
         this.scaleValue = new Animated.Value(0);
         this.cardTemplate = require('../assets/images/large-silver.png');
+    }
+
+    componentDidMount () {
+        this.scale();
 
         // Load Skaters
         if (this.props.loadSkaterCards) {
             this.props.loadSkaterCards();
         }
-    }
 
-    componentDidMount () {
-        this.scale()
+        if (this.props.loadSkaterDeck) {
+            this.props.loadSkaterDeck();
+        }
     }
 
     scale () {

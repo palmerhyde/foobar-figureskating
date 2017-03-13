@@ -153,6 +153,22 @@ let skaters = [
         'level' : 1,
         'discipline' : LADIES_SINGLES,
         'gender' : 'F'
+    },
+    {
+        'id' : 11,
+        'name' : 'Brian Boitano',
+        'edges' : randomRange(70, 80),
+        'jumps' : randomRange(70, 80),
+        'form' : randomRange(70, 80),
+        'presentation' : randomRange(70, 80),
+        'photo' : 'https://www.lgbtqnation.com/assets/2014/01/boitano_brian.jpg',
+        'skill' : {
+            'name' : 'Edge',
+            'value' : randomRange(70, 80)
+        },
+        'level' : 1,
+        'discipline' : MENS_SINGLES,
+        'gender' : 'M'
     }
 ];
 

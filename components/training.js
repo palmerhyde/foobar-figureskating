@@ -14,6 +14,7 @@ class Training extends Component {
 
     constructor(props) {
         super(props);
+        this.props.setPotentialTrainingSkaters()
     }
 
     render() {
@@ -27,7 +28,7 @@ class Training extends Component {
                     <View style={{flex:0.8, backgroundColor: 'white'}}>
                         <ScrollView style={{flex:1}}>
                             {
-                                this.props.skaters.map(function (skater) {
+                                this.props.potentialTrainerSkaters.map(function (skater) {
                                     return <TouchableOpacity key={skater.id} onPress={
                                         () => {
                                             //this.props.selectMyCardsSkater(skater);
