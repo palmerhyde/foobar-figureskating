@@ -1,5 +1,3 @@
-// TODO: rename HomeScreen -> GameScreen
-
 import React, {Component} from 'react';
 
 import {
@@ -15,12 +13,7 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 
-import {
-    MENS_SINGLES,
-    LADIES_SINGLES,
-    PAIRS,
-    ICE_DANCING
-} from './util/disciplines';
+import {Disciplines} from './util/enums'
 
 import {SkaterCard} from './components/skatercard';
 import {MoveCard} from './components/movecard';
@@ -99,11 +92,11 @@ class GameScreen extends Component {
 
     // TODO: Move to util.
     isPlayable(skater, move) {
-        if (move.discipline == MENS_SINGLES && skater.gender == 'F') {
+        if (move.discipline == Disciplines.MENS_SINGLES && skater.gender == 'F') {
             return false;
         }
 
-        if (move.discipline == LADIES_SINGLES && skater.gender == 'M') {
+        if (move.discipline == Disciplines.LADIES_SINGLES && skater.gender == 'M') {
             return false;
         }
 

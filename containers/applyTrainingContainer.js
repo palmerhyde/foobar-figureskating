@@ -5,11 +5,10 @@ import {
     setSkaterTrainingList,
 } from '../actions/cardActions';
 
-import { Training } from '../components/training';
+import { ApplyTraining } from '../components/applytraining';
 
 const mapStateToProps = state => ({
     selectedSkater: state.selectedMyCardsSkaterCard,
-    potentialTrainerSkaters: state.potentialTrainerSkaters,
     skaterTrainingList: state.skaterTrainingList
 });
 
@@ -20,4 +19,4 @@ const mapDispatchToProps = dispatch => (
     }, dispatch)
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Training)
+export default connect(mapStateToProps, mapDispatchToProps)(ApplyTraining)

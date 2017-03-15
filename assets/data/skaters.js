@@ -1,9 +1,4 @@
-import {
-    MENS_SINGLES,
-    LADIES_SINGLES,
-    PAIRS,
-    ICE_DANCING
-} from '../../util/disciplines';
+import {Disciplines, Rarity} from '../../util/enums';
 
 // TODO: skaters need to come from a data store.
 
@@ -21,10 +16,10 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : PAIRS,
+        'discipline' : Disciplines.PAIRS,
         'gender' : 'M',
         'xp' : 0,
-        'overall' : calculateOverall(this.edges, this.jumps, this.form, this.presentation)
+        'rarity': Rarity.COMMON
     },
     {
         'id' : 2,
@@ -39,7 +34,7 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline': LADIES_SINGLES,
+        'discipline': Disciplines.LADIES_SINGLES,
         'gender' : 'F'
     },
     {
@@ -55,7 +50,7 @@ let skaters = [
             'value': randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : MENS_SINGLES,
+        'discipline' : Disciplines.MENS_SINGLES,
         'gender' : 'M'
     },
     {
@@ -71,7 +66,7 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : MENS_SINGLES,
+        'discipline' : Disciplines.MENS_SINGLES,
         'gender' : 'M'
     },
     {
@@ -87,7 +82,7 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : LADIES_SINGLES,
+        'discipline' : Disciplines.MENS_SINGLES,
         'gender' : 'F'
     },
     {
@@ -103,7 +98,7 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : ICE_DANCING,
+        'discipline' : Disciplines.ICE_DANCING,
         'gender' : 'F'
     },
     {
@@ -119,7 +114,7 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : ICE_DANCING,
+        'discipline' : Disciplines.ICE_DANCING,
         'gender' : 'M'
     },
     {
@@ -135,7 +130,7 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : PAIRS,
+        'discipline' : Disciplines.PAIRS,
         'gender' : 'M'
     },
     {
@@ -151,7 +146,7 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : LADIES_SINGLES,
+        'discipline' : Disciplines.LADIES_SINGLES,
         'gender' : 'F'
     },
     {
@@ -167,7 +162,7 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : PAIRS,
+        'discipline' : Disciplines.PAIRS,
         'gender' : 'F'
     },
     {
@@ -183,10 +178,9 @@ let skaters = [
             'value' : randomRange(70, 80)
         },
         'level' : 1,
-        'discipline' : MENS_SINGLES,
+        'discipline' : Disciplines.MENS_SINGLES,
         'gender' : 'M'
     }
-
 ];
 
 export default skaters;

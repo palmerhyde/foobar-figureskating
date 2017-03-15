@@ -16,8 +16,7 @@ import {
     REMOVE_OPPONENT_SKATER_FROM_DECK,
     SELECT_MYCARDS_SKATER,
     SET_POTENTIAL_TRAINING_SKATERS,
-    ADD_SKATER_TO_TRAINING_LIST,
-    REMOVE_SKATER_FROM_TRAINING_LIST
+    SET_TRAINING_SKATER_LIST
 } from './actionTypes';
 
 import skaters from '../assets/data/skaters';
@@ -25,10 +24,9 @@ import {
     calculateWinner,
     generateMoves,
     oppenentMoveAi,
-    potentialTrainingSkaters
+    potentialTrainingSkaters,
+    trainingSkaterList
 } from '../util/gamehelper';
-
-import {MENS_SINGLES, LADIES_SINGLES} from '../util/disciplines';
 
 export const loadSkaterCards = () => ({
     type: LOAD_SKATER_CARDS,
@@ -215,12 +213,17 @@ export function setPotentialTrainingSkaters() {
     };
 }
 
-export const addSkaterToTrainingList = (skater) => ({
-    type: ADD_SKATER_TO_TRAINING_LIST,
-    payload: skater
-});
+export function setSkaterTrainingList(skater) {
+    return (dispatch, getState) => {
+        let state = getState();
+        let trainingSkaters = Object.assign([], state.skaterTrainingList);
+        let updatedTrainingSkaters = trainingSkaterList(trainingSkaters, skater);
 
-export const removeSkaterFromTrainingList = (skater) => ({
-    type: REMOVE_SKATER_FROM_TRAINING_LIST,
-    payload: skater
+        dispatch(setSkaterTrainingListStore(updatedTrainingSkaters));
+    };
+}
+
+export const setSkaterTrainingListStore = (skaters) => ({
+    type: SET_TRAINING_SKATER_LIST,
+    payload: skaters
 });

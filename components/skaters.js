@@ -13,7 +13,7 @@ import {
     AppRegistry
 } from 'react-native';
 
-import {SkaterCard} from './skatercard';
+import {SkaterCard2} from './skatercard2';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -21,13 +21,9 @@ class Skaters extends Component {
 
     constructor(props) {
         super(props);
-        this.scaleValue = new Animated.Value(0);
-        this.cardTemplate = require('../assets/images/large-silver.png');
     }
 
     componentDidMount () {
-        this.scale();
-
         // Load Skaters
         if (this.props.loadSkaterCards) {
             this.props.loadSkaterCards();
@@ -38,64 +34,11 @@ class Skaters extends Component {
         }
     }
 
-    scale () {
-        this.scaleValue.setValue(0);
-        Animated.timing(
-            this.scaleValue,
-            {
-                toValue: 1,
-                duration: 2200,
-                easing: Easing.linear
-            }
-        ).start(() => this.scale())
-    }
-
     render() {
-        const scale = this.scaleValue.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [1, 1.1, 1]
-        });
-
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')} style={{width: null, height: null, 'flex': 1}}>
             <View style={{flex:0.75, backgroundColor:'transparent'}}>
                 <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-                    { this.props.selectedSkater.name ?
-                    <Animated.Image style={StyleSheet.flatten([styles.card,
-                        {
-                            width: 202,
-                            height: 300,
-                            transform: [{scale: scale}]}])}
-                            source={this.cardTemplate}
-                    >
-                        <View style={{flex:0.05, justifyContent: 'center', alignItems: 'center', borderColor:'pink', borderWidth:0}}>
-                        </View>
-                            <Image
-                                source={{uri: this.props.selectedSkater.photo}}
-                                style={
-                                    {
-                                        marginTop: 0,
-                                        marginBottom: 0,
-                                        flex:0.37,
-                                        borderWidth: 0,
-                                        borderColor: 'green',
-                                    }
-                                }
-                                resizeMode='stretch'
-                            />
-                            <View style={{flex:0.1, justifyContent: 'center', alignItems: 'center', borderColor:'red', borderWidth:0}}>
-                                <Text style={styles.title2}>{this.props.selectedSkater.name.toUpperCase()}</Text>
-                            </View>
-                            <View style={{flex:0.23, justifyContent: 'center', alignItems: 'center', borderColor:'yellow', borderWidth:0}}>
-                                <Text style={styles.cardtext}>EDGES - {this.props.selectedSkater.edges}</Text>
-                                <Text style={styles.cardtext}>JUMPS - {this.props.selectedSkater.jumps}</Text>
-                                <Text style={styles.cardtext}>FORM - {this.props.selectedSkater.form}</Text>
-                                <Text style={styles.cardtext}>PRESENTATION - {this.props.selectedSkater.presentation} </Text>
-                            </View>
-                        <View style={{flex:0.15, justifyContent: 'center', alignItems: 'center', borderColor:'blue', borderWidth:0}}>
-                        </View>
-                    </Animated.Image>
-                        : null
-                    }
+                    <SkaterCard2 skater={this.props.selectedSkater} animate={true} />
                 </View>
 
                 { this.props.selectedSkater.name ?

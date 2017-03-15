@@ -10,6 +10,8 @@ import {
     View,
 } from 'react-native';
 
+import _ from 'lodash';
+
 class Training extends Component {
 
     constructor(props) {
@@ -20,12 +22,28 @@ class Training extends Component {
         setPotentialTrainingSkaters: PropTypes.func.isRequired,
         selectedSkater: PropTypes.object.isRequired,
         potentialTrainerSkaters: React.PropTypes.arrayOf(React.PropTypes.object),
-        addSkaterToTrainingList: PropTypes.func.isRequired,
-        removeSkaterFromTrainingList: PropTypes.func.isRequired
+        setSkaterTrainingList: PropTypes.func.isRequired,
+        skaterTrainingList: React.PropTypes.arrayOf(React.PropTypes.object)
     };
 
     componentDidMount () {
         this.props.setPotentialTrainingSkaters();
+    }
+
+    isSelected(skater) {
+        let index = _.findIndex(this.props.skaterTrainingList, function (element) {
+            return element.id == skater.id;
+        });
+
+        if (index == -1) {
+            return {
+            };
+        }
+
+        return {
+            borderColor: 'red',
+            borderWidth: 6
+        };
     }
 
     render() {
@@ -42,10 +60,10 @@ class Training extends Component {
                                 this.props.potentialTrainerSkaters.map(function (skater) {
                                     return <TouchableOpacity key={skater.id} onPress={
                                         () => {
-                                            this.props.addSkaterToTrainingList(skater);
+                                            this.props.setSkaterTrainingList(skater);
                                         }
                                     }>
-                                        <View  style={styles.container2}>
+                                        <View style={StyleSheet.flatten([styles.container2, this.isSelected(skater)])}>
                                             <Text style={styles.title} numberOfLines={1}>{skater.name.toUpperCase()}</Text>
                                             <Image
                                                 source={{uri: skater.photo}}
@@ -57,8 +75,14 @@ class Training extends Component {
                             }
                         </ScrollView>
                     </View>
-                    <View style={{flex:0.1, backgroundColor: 'orange', justifyContent:'center', alignItems:'center'}}>
+                    <View style={{flex:0.1, backgroundColor: 'transparent', justifyContent:'center', alignItems:'center'}}>
                         <Text onPress={Actions.skaters} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Back</Text>
+                        { this.props.skaterTrainingList.length > 0 ?
+                            <Text onPress={Actions.applyTraining} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Train</Text>
+                            :
+                            null
+                        }
+
                     </View>
                 </View>
                     : <Text>Error: no selected skater!</Text>

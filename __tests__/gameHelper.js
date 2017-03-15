@@ -6,17 +6,7 @@ import {
 }
     from '../util/gamehelper';
 
-import {
-    EDGES,
-    JUMPS,
-    FORM,
-    PRESENTATION
-} from '../util/attributes';
-
-import  {
-    MENS_SINGLES,
-    LADIES_SINGLES
-} from '../util/disciplines'
+import {Attributes, Disciplines} from '../util/enums';
 
 
 describe('Game Helper', () => {
@@ -41,7 +31,7 @@ describe('Game Helper', () => {
                 'edges': 1
             };
             let moveCard = {
-                'attribute': EDGES
+                'attribute': Attributes.EDGES
             };
 
             it('should result in you winning', () => {
@@ -57,7 +47,7 @@ describe('Game Helper', () => {
                 'edges': 99
             };
             let moveCard = {
-                'attribute': EDGES
+                'attribute': Attributes.EDGES
             };
 
             it('should result in you losing', () => {
@@ -73,7 +63,7 @@ describe('Game Helper', () => {
                 'edges': 99
             };
             let moveCard = {
-                'attribute': EDGES
+                'attribute': Attributes.EDGES
             };
 
             it('should result in a draw', () => {
@@ -93,11 +83,11 @@ describe('Game Helper', () => {
                 expect(moves.length).toBe(6);
 
                 // 3 male
-                let maleMoves = moves.filter(element => element.discipline === MENS_SINGLES);
+                let maleMoves = moves.filter(element => element.discipline === Disciplines.MENS_SINGLES);
                 expect(maleMoves.length).toBe(3);
 
                 //3 female
-                let femaleMoves = moves.filter(element => element.discipline === LADIES_SINGLES);
+                let femaleMoves = moves.filter(element => element.discipline === Disciplines.LADIES_SINGLES);
                 expect(femaleMoves.length).toBe(3);
             });
         });
@@ -109,7 +99,7 @@ describe('Game Helper', () => {
 
             it('should return a male skater', () => {
                 let move = {
-                    'discipline' : MENS_SINGLES
+                    'discipline' : Disciplines.MENS_SINGLES
                 };
 
                 let deck = [
@@ -131,7 +121,7 @@ describe('Game Helper', () => {
 
             it('should return a female skater', () => {
                 let move = {
-                    'discipline' : LADIES_SINGLES
+                    'discipline' : Disciplines.LADIES_SINGLES
                 };
 
                 let deck = [
