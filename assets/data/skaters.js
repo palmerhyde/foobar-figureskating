@@ -10,7 +10,7 @@ let skaters = [
         'jumps' : randomRange(70, 80),
         'form' : randomRange(70, 80),
         'presentation' : randomRange(70, 80),
-        'photo' : 'https://s-media-cache-ak0.pinimg.com/originals/7b/46/1f/7b461f98ebea4a4e1b9a781b39e28b85.jpg',
+        'photo' : 'https://pbs.twimg.com/media/BgEQQgqCAAE9GJi.jpg',
         'skill' : {
             'name' : 'Iron Lotus',
             'value' : randomRange(70, 80)
@@ -19,7 +19,7 @@ let skaters = [
         'discipline' : Disciplines.PAIRS,
         'gender' : 'M',
         'xp' : 0,
-        'rarity': Rarity.COMMON
+        'rarity': Rarity.LOCAL
     },
     {
         'id' : 2,
@@ -35,7 +35,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline': Disciplines.LADIES_SINGLES,
-        'gender' : 'F'
+        'gender' : 'F',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     },
     {
         'id': 3,
@@ -51,7 +53,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline' : Disciplines.MENS_SINGLES,
-        'gender' : 'M'
+        'gender' : 'M',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     },
     {
         'id' : 4,
@@ -67,7 +71,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline' : Disciplines.MENS_SINGLES,
-        'gender' : 'M'
+        'gender' : 'M',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     },
     {
         'id' : 5,
@@ -83,7 +89,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline' : Disciplines.MENS_SINGLES,
-        'gender' : 'F'
+        'gender' : 'F',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     },
     {
         'id' : 6,
@@ -99,7 +107,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline' : Disciplines.ICE_DANCING,
-        'gender' : 'F'
+        'gender' : 'F',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     },
     {
         'id' : 7,
@@ -115,7 +125,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline' : Disciplines.ICE_DANCING,
-        'gender' : 'M'
+        'gender' : 'M',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     },
     {
         'id' : 8,
@@ -131,7 +143,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline' : Disciplines.PAIRS,
-        'gender' : 'M'
+        'gender' : 'M',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     },
     {
         'id' : 9,
@@ -147,7 +161,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline' : Disciplines.LADIES_SINGLES,
-        'gender' : 'F'
+        'gender' : 'F',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     },
     {
         'id' : 10,
@@ -163,7 +179,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline' : Disciplines.PAIRS,
-        'gender' : 'F'
+        'gender' : 'F',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     },
     {
         'id' : 11,
@@ -179,7 +197,9 @@ let skaters = [
         },
         'level' : 1,
         'discipline' : Disciplines.MENS_SINGLES,
-        'gender' : 'M'
+        'gender' : 'M',
+        'xp' : 0,
+        'rarity': Rarity.LOCAL
     }
 ];
 

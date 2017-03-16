@@ -1,4 +1,5 @@
-import {Attributes, Disciplines} from './enums';
+import {Attributes, Disciplines, Rarity} from './enums';
+import {BASE, LEVEL_MULTIPLER} from './levelchart'
 
 import _ from 'lodash';
 
@@ -104,4 +105,51 @@ export function trainingSkaterList(trainingSkaters, skater) {
     }
 
     return trainingSkaters;
+}
+
+export function applyXP (trainingSkaters, skater) {
+    let newSkater = Object.assign({}, skater);
+
+    for (let i=0; i<trainingSkaters.length; i++) {
+        switch (trainingSkaters[i].rarity) {
+            case Rarity.LOCAL:
+                newSkater.xp += BASE;
+                break;
+            case Rarity.REGIONAL:
+                newSkater.xp += BASE * 2;
+                break;
+            case Rarity.SECTIONAL:
+                newSkater.xp += BASE * 4;
+                break;
+            case Rarity.NATIONAL:
+                newSkater.xp += BASE * 8;
+                break;
+            case Rarity.WORLD:
+                newSkater.xp += BASE * 16;
+                break;
+            case Rarity.OLYMPIC:
+                newSkater.xp += BASE * 32;
+                break;
+        }
+    }
+
+    return newSkater;
+}
+
+export function level (skater) {
+    let level = 0;
+    while (1==1) {
+        let x = triangular(level);
+        console.log(x*LEVEL_MULTIPLER);
+        if (x*LEVEL_MULTIPLER >= skater.xp) {
+            return level;
+        }
+
+        level++;
+    }
+}
+
+// TODO: Move to math helper?
+function triangular(n) {
+    return n > 0 ? n * (n + 1) / 2 : 0;
 }

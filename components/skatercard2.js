@@ -11,6 +11,8 @@ import {
     View,
 } from 'react-native';
 
+import * as Progress from 'react-native-progress';
+
 
 class SkaterCard2 extends Component {
 
@@ -24,7 +26,8 @@ class SkaterCard2 extends Component {
 
     static propTypes = {
         skater: PropTypes.object.isRequired,
-        animate: PropTypes.bool
+        animate: PropTypes.bool,
+        progress: PropTypes.number
     };
 
     componentDidMount () {
@@ -84,6 +87,13 @@ class SkaterCard2 extends Component {
                         <Text style={styles.cardtext}>PRESENTATION - {this.props.skater.presentation} </Text>
                     </View>
                     <View style={{flex:0.15, justifyContent: 'center', alignItems: 'center', borderColor:'blue', borderWidth:0}}>
+                        <Progress.Circle progress={this.props.progress} thickness={3} size={25} color="white" showsText={true} textStyle={
+                            {
+                                fontSize:10,
+                                fontWeight: 'bold',
+                            }} formatText={ (progress) => {return this.props.skater.level}
+                            }/>
+                        <Text>{this.props.skater.xp}</Text>
                     </View>
                 </Animated.Image>
                 : null

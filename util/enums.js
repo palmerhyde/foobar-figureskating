@@ -13,7 +13,10 @@ export const Disciplines = {
 };
 
 export const Rarity = {
-    'COMMON' : 'common',
-    'UNCOMMON' : 'rare',
-    'RARE' : 'rare'
+    'LOCAL' : 'local',
+    'REGIONAL' : 'regional',
+    'SECTIONAL' : 'sectional',
+    'NATIONAL' : 'national',
+    'WORLD' : 'world',
+    'OLYMPIC' : 'olympic'
 };

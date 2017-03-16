@@ -38,6 +38,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9D1399D01E71FB5500B4D46C /* skaters.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D1399CF1E71FB5500B4D46C /* skaters.ttf */; };
 		9D1399EC1E7263AF00B4D46C /* roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D1399EB1E7263AF00B4D46C /* roboto.ttf */; };
+		9D3663B01E78E9B100B697B3 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3663951E78E91E00B697B3 /* libART.a */; };
 		9DB2FCF41E512EB800A7F5BA /* Warriors.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2FCF21E512EB800A7F5BA /* Warriors.mp3 */; };
 		9DB2FCF51E512EB800A7F5BA /* Bolero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2FCF31E512EB800A7F5BA /* Bolero.mp3 */; };
 		9DF990E21E5607AB00372D62 /* Glorious.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DF990E11E5607AB00372D62 /* Glorious.mp3 */; };
@@ -235,6 +236,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		9D3663941E78E91E00B697B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D3663901E78E91E00B697B3 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
 		9DB2FCF01E512E8900A7F5BA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E2146BA4ED1746D588342883 /* RNSound.xcodeproj */;
@@ -272,6 +280,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		9D1399CF1E71FB5500B4D46C /* skaters.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = skaters.ttf; path = ../assets/fonts/skaters.ttf; sourceTree = "<group>"; };
 		9D1399EB1E7263AF00B4D46C /* roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = roboto.ttf; path = ../assets/fonts/roboto.ttf; sourceTree = "<group>"; };
+		9D3663901E78E91E00B697B3 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		9DB2FCF21E512EB800A7F5BA /* Warriors.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Warriors.mp3; path = ../assets/sounds/Warriors.mp3; sourceTree = "<group>"; };
 		9DB2FCF31E512EB800A7F5BA /* Bolero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Bolero.mp3; path = ../assets/sounds/Bolero.mp3; sourceTree = "<group>"; };
 		9DF990E11E5607AB00372D62 /* Glorious.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Glorious.mp3; path = ../assets/sounds/Glorious.mp3; sourceTree = "<group>"; };
@@ -302,6 +311,7 @@
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
+				9D3663B01E78E9B100B697B3 /* libART.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				ADBC93D15CEF48CBB0EC670F /* libRNSound.a in Frameworks */,
 			);
@@ -459,6 +469,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				9D3663901E78E91E00B697B3 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -509,6 +520,14 @@
 				00E356EE1AD99517003FC87E /* foobarfigureskatingTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* foobarfigureskating-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* foobarfigureskating-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9D3663911E78E91E00B697B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D3663951E78E91E00B697B3 /* libART.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -637,6 +656,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 9D3663911E78E91E00B697B3 /* Products */;
+					ProjectRef = 9D3663901E78E91E00B697B3 /* ART.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -870,6 +893,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D3663951E78E91E00B697B3 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = 9D3663941E78E91E00B697B3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		9DB2FCF11E512E8900A7F5BA /* libRNSound.a */ = {

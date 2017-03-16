@@ -35,7 +35,8 @@ class ApplyTraining extends Component {
     componentDidMount () {
         this.state = {
             trainingCard: this.props.skaterTrainingList[0],
-            animationComplete: false
+            animationComplete: false,
+            progress: 0
         };
         this.scale();
     }
@@ -47,8 +48,8 @@ class ApplyTraining extends Component {
             this.scaleValue,
             {
                 toValue: 1,
-                duration: 1200,
-                easing: Easing.easeOutBack
+                duration: 1500,
+                easing: Easing.linear
             }
         ).start(() => {
             if (this.trainingIndex < this.props.skaterTrainingList.length-1) {
@@ -65,6 +66,7 @@ class ApplyTraining extends Component {
                 this.setState(
                     {
                         animationComplete: true,
+                        progress: 0.8
                     });
             }
         });
@@ -97,7 +99,7 @@ class ApplyTraining extends Component {
                     </View>
                     <View style={{flex:0.8, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>
                         <View style={{position: 'absolute', backgroundColor:'transparent', left:10, right: 10, justifyContent: 'center', alignItems: 'center'}}>
-                            <SkaterCard2 skater={this.props.selectedSkater} animate={true}/>
+                            <SkaterCard2 skater={this.props.selectedSkater} animate={true} progress={this.state.progress}/>
                         </View>
                             <Animated.View style={{transform: [
                                 {scale: scale},
