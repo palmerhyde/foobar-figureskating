@@ -25,7 +25,9 @@ import {
     generateMoves,
     oppenentMoveAi,
     potentialTrainingSkaters,
-    trainingSkaterList
+    trainingSkaterList,
+    applyXP,
+    level
 } from '../util/gamehelper';
 
 export const loadSkaterCards = () => ({
@@ -227,3 +229,33 @@ export const setSkaterTrainingListStore = (skaters) => ({
     type: SET_TRAINING_SKATER_LIST,
     payload: skaters
 });
+
+// TODO: move ths logic to gamehelper
+export function trainSkater(skater) {
+    return (dispatch, getState) => {
+        let state = getState();
+        let trainingSkaters = Object.assign([], state.skaterTrainingList);
+
+        let levelBefore = level(skater);
+        let skaterBefore = Object.assign({}, skater);
+
+        // Apply XP
+        let trainedSkater = applyXP(trainingSkaters, skater);
+        let levelAfter = level(trainedSkater);
+        trainedSkater.level = levelAfter;
+
+        // did the skater level?
+        if (levelAfter > levelBefore) {
+            console.log('levelled:' + levelBefore + ' => ' + levelAfter);
+            // Update trained skater in deck
+            let levelPercent = 2.5 * ((levelAfter - levelBefore) / 100) + 1;
+            trainedSkater.edges = Math.ceil(trainedSkater.edges * levelPercent);
+            trainedSkater.jumps = Math.ceil(trainedSkater.jumps * levelPercent);
+            trainedSkater.form = Math.ceil(trainedSkater.form * levelPercent);
+            trainedSkater.presentation = Math.ceil(trainedSkater.presentation * levelPercent);
+        }
+
+        // Remove training skaters from skaters list
+        dispatch(selectMyCardsSkater(trainedSkater));
+    };
+}

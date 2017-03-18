@@ -68,8 +68,15 @@ class ApplyTraining extends Component {
                         animationComplete: true,
                         progress: 0.8
                     });
+
+                this.props.setSkaterTrainingListStore([]);
+                Actions.refresh({hideBackImage:false, onBack:this.back});
             }
         });
+    }
+
+    back() {
+        Actions.skaters({direction:'leftToRight'})
     }
 
     even() {
@@ -82,7 +89,7 @@ class ApplyTraining extends Component {
     }
 
     render() {
-        console.log('index:' + this.trainingIndex);
+        console.log(this.props);
         const scale = this.scaleValue.interpolate({
             inputRange: [0, 1],
             outputRange: [3, 0]
@@ -94,8 +101,24 @@ class ApplyTraining extends Component {
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')}  style={{width: null, height: null, flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             { this.props.selectedSkater.name ?
                 <View style={{flex:1, alignSelf: 'stretch'}}>
-                    <View style={{flex:0.1, backgroundColor: 'green', justifyContent:'center', alignItems:'center'}}>
-                        <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Train {this.props.selectedSkater.name}</Text>
+                    <View style={{flex:0.1, backgroundColor: '#9198a5', justifyContent:'center',
+                        alignItems:'center',
+                        shadowOffset: {width:0, height:6},
+                        shadowRadius: 20,
+                        shadowColor: 'black',
+                        shadowOpacity: 0.6
+                    }
+                    }>
+                        <Text
+                            style={{fontFamily: 'SkaterGirlsRock',
+                                fontSize:24,
+                                fontWeight: 'bold',
+                                textShadowColor: 'white',
+                                color: 'black',
+                                textShadowRadius: 2,
+                                textShadowOffset: {width: 2, height: 2},
+                                textAlign:'center',
+                                padding:5}}>TRAIN {this.props.selectedSkater.name.toUpperCase()}</Text>
                     </View>
                     <View style={{flex:0.8, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>
                         <View style={{position: 'absolute', backgroundColor:'transparent', left:10, right: 10, justifyContent: 'center', alignItems: 'center'}}>
@@ -110,19 +133,6 @@ class ApplyTraining extends Component {
 
                     </View>
                     <View style={{flex:0.1, backgroundColor: 'transparent', justifyContent:'center', alignItems:'center'}}>
-                        { this.state.animationComplete ?
-                        <View>
-                            <Button
-                                onPress={Actions.skaters}
-                                title="Back"
-                                color="#841584"
-                                backgroundColor="gold"
-                                accessibilityLabel="Learn more about this purple button"
-                            />
-                        </View>
-                            :
-                            null
-                        }
                     </View>
                 </View>
                 : <Text>Error: no selected skater!</Text>

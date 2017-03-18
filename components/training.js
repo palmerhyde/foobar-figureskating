@@ -23,11 +23,13 @@ class Training extends Component {
         selectedSkater: PropTypes.object.isRequired,
         potentialTrainerSkaters: React.PropTypes.arrayOf(React.PropTypes.object),
         setSkaterTrainingList: PropTypes.func.isRequired,
-        skaterTrainingList: React.PropTypes.arrayOf(React.PropTypes.object)
+        skaterTrainingList: React.PropTypes.arrayOf(React.PropTypes.object),
+        trainSkater: PropTypes.func.isRequired
     };
 
     componentDidMount () {
         this.props.setPotentialTrainingSkaters();
+        Actions.refresh({title: 'TRAIN ' + this.props.selectedSkater.name.toUpperCase()});
     }
 
     isSelected(skater) {
@@ -42,8 +44,13 @@ class Training extends Component {
 
         return {
             borderColor: 'red',
-            borderWidth: 6
+            borderWidth: 3
         };
+    }
+
+    onTrain() {
+        Actions.applyTraining();
+        this.props.trainSkater(this.props.selectedSkater)
     }
 
     render() {
@@ -51,8 +58,7 @@ class Training extends Component {
         return <Image resizeMode='cover' source={require('../assets/images/ice.jpg')}  style={{width: null, height: null, flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             { this.props.selectedSkater.name ?
                 <View style={{flex:1, alignSelf: 'stretch'}}>
-                    <View style={{flex:0.1, backgroundColor: 'green', justifyContent:'center', alignItems:'center'}}>
-                        <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Train {this.props.selectedSkater.name}</Text>
+                    <View style={{flex:0.1, backgroundColor: '#9198a5', justifyContent:'center', alignItems:'center'}}>
                     </View>
                     <View style={{flex:0.8, backgroundColor: 'white'}}>
                         <ScrollView style={{flex:1}}>
@@ -76,9 +82,12 @@ class Training extends Component {
                         </ScrollView>
                     </View>
                     <View style={{flex:0.1, backgroundColor: 'transparent', justifyContent:'center', alignItems:'center'}}>
-                        <Text onPress={Actions.skaters} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Back</Text>
                         { this.props.skaterTrainingList.length > 0 ?
-                            <Text onPress={Actions.applyTraining} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Train</Text>
+                            <Text onPress={ () => {
+                                Actions.applyTraining();
+                                this.props.trainSkater(this.props.selectedSkater)
+                            }
+                            } style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Train</Text>
                             :
                             null
                         }
@@ -92,6 +101,7 @@ class Training extends Component {
     }
 }
 
+// TODO: clean up and merge styles
 const styles = StyleSheet.create({
     title: {
         fontSize: 10,

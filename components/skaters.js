@@ -36,24 +36,20 @@ class Skaters extends Component {
 
     render() {
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')} style={{width: null, height: null, 'flex': 1}}>
-            <View style={{flex:0.75, backgroundColor:'transparent'}}>
-                <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-                    <SkaterCard2 skater={this.props.selectedSkater} animate={true} />
-                </View>
-
-                { this.props.selectedSkater.name ?
-                    <Text style={{backgroundColor: 'pink'}} onPress={ () => {
-                        Actions.train();
-                    } }>Train</Text>
-                    : null
-                }
-
-                <Text style={{backgroundColor: 'red'}} onPress={ () => {
-                    Actions.splash();
-                } }>Back</Text>
+            <View style={{flex:0.1, backgroundColor: 'transparent'}}>
             </View>
-            <View style={{flex:0.25, backgroundColor:'gray'}}>
-            <ScrollView horizontal={true} style={{flex:1, flexDirection: 'row'}}>
+            <View style={{flex:0.70, backgroundColor:'transparent'}}>
+                <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity onPress={ () => {
+                            Actions.train();
+                        }
+                    }>
+                        <SkaterCard2 skater={this.props.selectedSkater} animate={true} />
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={{flex:0.20, backgroundColor:'gray'}}>
+                <ScrollView horizontal={true} style={{flex:1, flexDirection: 'row'}}>
                     {
                         this.props.skaters.map(function (skater) {
                             return <TouchableOpacity key={skater.id} onPress={
@@ -65,7 +61,7 @@ class Skaters extends Component {
                                     <Text style={styles.title} numberOfLines={1}>{skater.name.toUpperCase()}</Text>
                                     <Image
                                         source={{uri: skater.photo}}
-                                        style={{width: 114, height: null, flex:1}}
+                                        style={{width: 95, height: null, flex:1}}
                                     />
                                 </View>
                             </TouchableOpacity>
@@ -114,7 +110,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'silver',
         justifyContent: 'center',
         alignItems: 'center',
-        width:120,
+        width:100,
         flex: 1,
         borderWidth: 3,
         marginLeft: 3,

@@ -3,6 +3,7 @@ import { bindActionCreators} from 'redux';
 import {
     setPotentialTrainingSkaters,
     setSkaterTrainingList,
+    trainSkater
 } from '../actions/cardActions';
 
 import { Training } from '../components/training';
@@ -17,6 +18,7 @@ const mapDispatchToProps = dispatch => (
     bindActionCreators({
         setPotentialTrainingSkaters,
         setSkaterTrainingList,
+        trainSkater
     }, dispatch)
 );
 
