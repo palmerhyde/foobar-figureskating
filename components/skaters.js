@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import {
+    Alert,
     Animated,
     Button,
     Easing,
@@ -14,8 +15,9 @@ import {
 } from 'react-native';
 
 import {SkaterCard2} from './skatercard2';
+import {Header} from './header';
 
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 class Skaters extends Component {
 
@@ -34,14 +36,23 @@ class Skaters extends Component {
         }
     }
 
+    onBack () {
+        //console.log('test onback');
+        //Actions.skaters({direction:'leftToRight'})
+    }
+
     render() {
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')} style={{width: null, height: null, 'flex': 1}}>
             <View style={{flex:0.1, backgroundColor: 'transparent'}}>
+                <Header title="test title" onBack={ () => {
+                    Actions.splash({type:ActionConst.RESET});
+                } } showBack={true}/>
             </View>
             <View style={{flex:0.70, backgroundColor:'transparent'}}>
                 <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
                     <TouchableOpacity onPress={ () => {
-                            Actions.train();
+                            //Actions.train({type:ActionConst.POP_AND_REPLACE, duration:800, direction:'horizontal', onBack:this.onBack, hideBackImage:false});
+                            Actions.train({duration:800, direction:'horizontal'});
                         }
                     }>
                         <SkaterCard2 skater={this.props.selectedSkater} animate={true} />

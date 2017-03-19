@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, combineReducers} from 'redux';
+import {persistStore, autoRehydrate} from 'redux-persist'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger';
 import moveCardReducer from './reducers/moveCardReducer';
@@ -28,6 +29,7 @@ export default () => (
             potentialTrainerSkaters: potentialTrainerSkatersReducer,
             skaterTrainingList: skaterTrainingListReducer
         }),
-        applyMiddleware(thunk, logger)
+        applyMiddleware(thunk),
+        autoRehydrate()
     )
 );

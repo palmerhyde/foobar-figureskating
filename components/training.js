@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 import {
     Image,
@@ -9,6 +9,8 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+
+import {Header} from './header';
 
 import _ from 'lodash';
 
@@ -48,19 +50,17 @@ class Training extends Component {
         };
     }
 
-    onTrain() {
-        Actions.applyTraining();
-        this.props.trainSkater(this.props.selectedSkater)
-    }
-
     render() {
 
         return <Image resizeMode='cover' source={require('../assets/images/ice.jpg')}  style={{width: null, height: null, flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             { this.props.selectedSkater.name ?
                 <View style={{flex:1, alignSelf: 'stretch'}}>
-                    <View style={{flex:0.1, backgroundColor: '#9198a5', justifyContent:'center', alignItems:'center'}}>
+                    <View style={{flex:0.1, backgroundColor: 'transparent'}}>
+                        <Header title={'Train ' + this.props.selectedSkater.name} onBack={ () => {
+                            Actions.skaters({type:ActionConst.RESET});
+                        } } showBack={true}/>
                     </View>
-                    <View style={{flex:0.8, backgroundColor: 'white'}}>
+                    <View style={{flex:0.8, backgroundColor: 'transparent'}}>
                         <ScrollView style={{flex:1}}>
                             {
                                 this.props.potentialTrainerSkaters.map(function (skater) {

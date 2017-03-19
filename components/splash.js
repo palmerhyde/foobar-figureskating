@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 import {
     Animated,
@@ -35,6 +35,7 @@ class SplashScreen extends Component {
     }
 
     render() {
+        console.log(this.props);
         const rotate = this.rotateValue.interpolate({
             inputRange: [0, 1],
             outputRange: ['0deg', '360deg']
@@ -51,7 +52,6 @@ class SplashScreen extends Component {
 
             <Text onPress={Actions.game} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Play</Text>
             <Text onPress={Actions.skaters} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Skaters</Text>
-            <JukeBox/>
         </Animated.Image>
 
     }

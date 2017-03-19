@@ -1,5 +1,5 @@
 import React, {Component ,PropTypes} from 'react';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 import {
     Animated,
@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import {SkaterCard2} from './skatercard2';
+import {Header} from './header';
 
 
 class ApplyTraining extends Component {
@@ -70,13 +71,8 @@ class ApplyTraining extends Component {
                     });
 
                 this.props.setSkaterTrainingListStore([]);
-                Actions.refresh({hideBackImage:false, onBack:this.back});
             }
         });
-    }
-
-    back() {
-        Actions.skaters({direction:'leftToRight'})
     }
 
     even() {
@@ -88,8 +84,11 @@ class ApplyTraining extends Component {
         }
     }
 
+    onBack() {
+        Actions.skaters();
+    }
+
     render() {
-        console.log(this.props);
         const scale = this.scaleValue.interpolate({
             inputRange: [0, 1],
             outputRange: [3, 0]
@@ -101,30 +100,14 @@ class ApplyTraining extends Component {
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')}  style={{width: null, height: null, flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             { this.props.selectedSkater.name ?
                 <View style={{flex:1, alignSelf: 'stretch'}}>
-                    <View style={{flex:0.1, backgroundColor: '#9198a5', justifyContent:'center',
-                        alignItems:'center',
-                        shadowOffset: {width:0, height:6},
-                        shadowRadius: 20,
-                        shadowColor: 'black',
-                        shadowOpacity: 0.6
-                    }
-                    }>
-                        <Text
-                            style={{fontFamily: 'SkaterGirlsRock',
-                                fontSize:24,
-                                fontWeight: 'bold',
-                                textShadowColor: 'white',
-                                color: 'black',
-                                textShadowRadius: 2,
-                                textShadowOffset: {width: 2, height: 2},
-                                textAlign:'center',
-                                padding:5}}>TRAIN {this.props.selectedSkater.name.toUpperCase()}</Text>
+                    <View style={{flex:0.1, backgroundColor: 'transparent'}}>
+                        <Header title={'Train ' + this.props.selectedSkater.name} onBack={this.onBack} showBack={this.state.animationComplete}/>
                     </View>
                     <View style={{flex:0.8, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>
                         <View style={{position: 'absolute', backgroundColor:'transparent', left:10, right: 10, justifyContent: 'center', alignItems: 'center'}}>
                             <SkaterCard2 skater={this.props.selectedSkater} animate={true} progress={this.state.progress}/>
                         </View>
-                            <Animated.View style={{transform: [
+                            <Animated.View pointerEvents="none" style={{transform: [
                                 {scale: scale},
                                 {rotate: rotate}
                                 ]}}>
@@ -141,61 +124,5 @@ class ApplyTraining extends Component {
         </Image>
     }
 }
-
-const styles = StyleSheet.create({
-    title: {
-        fontSize: 10,
-        paddingBottom: 5,
-        fontWeight: 'bold',
-        fontFamily: 'SkaterGirlsRock',
-        textShadowColor: 'black',
-        color: 'white',
-        textShadowRadius: 2,
-        textShadowOffset: {width: 2, height: 2}
-    },
-    title2: {
-        fontSize: 17,
-        backgroundColor: 'transparent',
-        fontWeight: 'bold',
-        fontFamily: 'SkaterGirlsRock',
-        textShadowColor: 'black',
-        color: 'white',
-        textShadowRadius: 2,
-        textShadowOffset: {width: 2, height: 2},
-    },
-    cardtext: {
-        fontSize: 12,
-        fontWeight: 'bold',
-        backgroundColor: 'transparent',
-        fontFamily: 'SkaterGirlsRock',
-        textShadowColor: 'black',
-        color: 'white',
-        textShadowRadius: 1,
-        textShadowOffset: {width: 1, height: 1},
-        padding: 2
-    },
-    container2: {
-        backgroundColor: 'silver',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        borderWidth: 3,
-        marginLeft: 3,
-        marginRight: 3,
-        marginTop: 3,
-        marginBottom: 3,
-        borderRadius: 6
-    },
-    card: {
-        width:200,
-        height: 300,
-        backgroundColor: 'transparent',
-        borderWidth: 0,
-        marginLeft: 3,
-        marginRight: 3,
-        marginTop: 3,
-        marginBottom: 3,
-        borderRadius: 0,
-    }
-});
 
 export {ApplyTraining}

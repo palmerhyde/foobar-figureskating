@@ -13,7 +13,6 @@ class MoveCard extends Component {
     }
 
     render() {
-        console.log('race');
         return <View>
             {this.props.move ?
             <View  style={styles.card}>

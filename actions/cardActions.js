@@ -27,12 +27,28 @@ import {
     potentialTrainingSkaters,
     trainingSkaterList,
     applyXP,
-    level
+    level,
+    updateSkaterInList
 } from '../util/gamehelper';
 
-export const loadSkaterCards = () => ({
+export function setSkaterCards(skaters) {
+    return (dispatch) => {
+        dispatch(loadSkaterCardsStore(skaters));
+    };
+}
+
+export function loadSkaterCards() {
+    return (dispatch, getState) => {
+        let state = getState();
+        if (state.skaters.length === 0) {
+            dispatch(loadSkaterCardsStore(skaters));
+        }
+    };
+}
+
+export const loadSkaterCardsStore = (skaters2) => ({
     type: LOAD_SKATER_CARDS,
-    payload: skaters
+    payload: skaters2
 });
 
 export const loadMoveCards = (move) => ({
@@ -108,7 +124,7 @@ export function selectSkaterCard(skater) {
         dispatch(selectSkaterCard2(skater));
         dispatch(waitForOpponentSkater());
 
-        var local = getState();
+        let local = getState();
         if (local.gameState.turn == 5) {
             dispatch(setGameOver(true));
         }
@@ -149,6 +165,8 @@ export const setSkaterDeck = (deck) => ({
     payload: deck
 });
 
+// This will be replaced with set skater deck
+// Deck should already be loaded. If it isn't then return error
 export function loadSkaterDeck() {
     return (dispatch) => {
         if (!skaters || skaters.length == 0) {
@@ -246,13 +264,18 @@ export function trainSkater(skater) {
 
         // did the skater level?
         if (levelAfter > levelBefore) {
-            console.log('levelled:' + levelBefore + ' => ' + levelAfter);
             // Update trained skater in deck
+            // TODO: ensure max level hasn't been reached
             let levelPercent = 2.5 * ((levelAfter - levelBefore) / 100) + 1;
             trainedSkater.edges = Math.ceil(trainedSkater.edges * levelPercent);
             trainedSkater.jumps = Math.ceil(trainedSkater.jumps * levelPercent);
             trainedSkater.form = Math.ceil(trainedSkater.form * levelPercent);
             trainedSkater.presentation = Math.ceil(trainedSkater.presentation * levelPercent);
+
+            // TODO: Update trained  in skater list and decks
+            let updatedSkaters = updateSkaterInList(state.skaters, trainedSkater);
+            dispatch(setSkaterCards(updatedSkaters));
+            dispatch(setSkaterDeck(updatedSkaters));
         }
 
         // Remove training skaters from skaters list

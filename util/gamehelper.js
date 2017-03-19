@@ -140,13 +140,20 @@ export function level (skater) {
     let level = 0;
     while (1==1) {
         let x = triangular(level);
-        console.log(x*LEVEL_MULTIPLER);
+        //console.log(x*LEVEL_MULTIPLER);
         if (x*LEVEL_MULTIPLER >= skater.xp) {
             return level;
         }
 
         level++;
     }
+}
+
+export function updateSkaterInList(skaters, skater) {
+    let updatedSkaters = Object.assign([], skaters);
+    let index = _.indexOf(updatedSkaters, _.find(updatedSkaters, {id: skater.id}));
+    updatedSkaters.splice(index, 1, skater);
+    return updatedSkaters;
 }
 
 // TODO: Move to math helper?

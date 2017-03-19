@@ -41,15 +41,15 @@ class JukeBox extends Component {
 
         s = new Sound(music, Sound.MAIN_BUNDLE, (e) => {
             if (e) {
-                console.log('error', e);
+                //console.log('error', e);
             } else {
-                console.log('duration', s.getDuration());
+                //console.log('duration', s.getDuration());
             }
         });
     }
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         return <View style={{flexDirection: 'row'}}>
             <Button
                 title="p"
