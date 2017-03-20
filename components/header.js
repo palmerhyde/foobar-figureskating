@@ -65,17 +65,6 @@ const titleStyle = {
     textAlign:'center'
 };
 
-const titleStyle2 = {
-    fontFamily: 'SkaterGirlsRock',
-    fontSize:14,
-    fontWeight: 'bold',
-    textShadowColor: 'white',
-    color: 'black',
-    textShadowRadius: 2,
-    textShadowOffset: {width: 2, height: 2},
-    textAlign:'center'
-};
-
 const navigationBarStyle = {
     flex:1,
     flexDirection:'row',

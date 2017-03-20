@@ -278,7 +278,20 @@ export function trainSkater(skater) {
             dispatch(setSkaterDeck(updatedSkaters));
         }
 
-        // Remove training skaters from skaters list
+        // Calculate the difference
+        let difference = {};
+        difference.xp = trainedSkater.xp - skaterBefore.xp;
+        difference.edges = trainedSkater.edges - skaterBefore.edges;
+        difference.jumps = trainedSkater.jumps - skaterBefore.jumps;
+        difference.form = trainedSkater.form - skaterBefore.form;
+        difference.presentation = trainedSkater.presentation - skaterBefore.presentation;
+        difference.level = levelAfter - levelBefore;
+        difference.edgesBefore = skaterBefore.edges;
+        difference.jumpsBefore = skaterBefore.jumps;
+        difference.formBefore = skaterBefore.form;
+        difference.presentationBefore = skaterBefore.presentation;
+
+        trainedSkater.difference = difference;
         dispatch(selectMyCardsSkater(trainedSkater));
     };
 }
