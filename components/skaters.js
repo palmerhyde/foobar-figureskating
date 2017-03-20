@@ -17,6 +17,8 @@ import {
 import {SkaterCard2} from './skatercard2';
 import {Header} from './header';
 
+import {levelPercent} from '../util/gamehelper'
+
 import { Actions, ActionConst } from 'react-native-router-flux';
 
 class Skaters extends Component {
@@ -41,6 +43,16 @@ class Skaters extends Component {
         //Actions.skaters({direction:'leftToRight'})
     }
 
+    levelPercent () {
+    let percent = (levelPercent(this.props.selectedSkater)) / 100;
+    console.log(percent);
+    if (isNaN(percent)) {
+        percent = 0.0;
+    }
+
+    return percent
+}
+
     render() {
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')} style={{width: null, height: null, 'flex': 1}}>
             <View style={{flex:0.1, backgroundColor: 'transparent'}}>
@@ -55,7 +67,7 @@ class Skaters extends Component {
                             Actions.train({duration:800, direction:'horizontal'});
                         }
                     }>
-                        <SkaterCard2 skater={this.props.selectedSkater} animate={true} />
+                        <SkaterCard2 skater={this.props.selectedSkater} animate={true} progress={this.levelPercent()} />
                     </TouchableOpacity>
                 </View>
             </View>

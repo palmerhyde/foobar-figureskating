@@ -83,7 +83,7 @@ class ApplyTraining extends Component {
                 this.setState(
                     {
                         animationComplete: true,
-                        progress: 0.8
+                        progress: (this.props.selectedSkater.difference.levelPercentAfter) / 100
                     });
 
                 this.props.setSkaterTrainingListStore([]);
@@ -105,6 +105,7 @@ class ApplyTraining extends Component {
     }
 
     render() {
+        console.log(this.props.selectedSkater);
         const scale = this.scaleValue.interpolate({
             inputRange: [0, 1],
             outputRange: [3, 0]

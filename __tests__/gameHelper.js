@@ -5,7 +5,9 @@ import {
     potentialTrainingSkaters,
     trainingSkaterList,
     applyXP,
-    level
+    level,
+    levelPercent,
+    triangular
 }
     from '../util/gamehelper';
 
@@ -361,6 +363,42 @@ describe('Game Helper', () => {
 
             it('should be level 25', () => {
                 expect(level(skater)).toBe(25)
+            })
+        });
+    });
+
+    describe('levelPercent', () => {
+        // 1   15
+        // 2   45
+        // 3   90
+        // 4   150
+        // 5   225
+        // 6   315
+        // 7   420
+        // 8   540
+        // 9   675
+        // 10  825
+        // 11  990
+        // 12  1170
+        // 13  1365
+        // 14  1575
+        // 15  1800
+        // 16  2040
+        // 17  2295
+        // 18  2565
+        // 19  2850
+        // 20  3150
+        // 21  3465
+        // 22  3795
+        // 23  4140
+        // 24  4500
+        // 25  4875
+
+        describe('A skater with 175 XP', () => {
+            let skater = {'xp': 175};
+
+            it('should be level 34%', () => {
+                expect(levelPercent(skater)).toBe(34)
             })
         });
     });

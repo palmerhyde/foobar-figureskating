@@ -149,6 +149,17 @@ export function level (skater) {
     }
 }
 
+export function levelPercent(skater) {
+    let skaterLevel = level(skater);
+    let high = triangular(skaterLevel) * LEVEL_MULTIPLER;
+    let low = (triangular(skaterLevel -1)) * LEVEL_MULTIPLER;
+    let range = high - low;
+    let diff = high - skater.xp;
+    let xp = range - diff;
+    let percent = Math.ceil((xp/range) * 100);
+    return percent;
+}
+
 export function updateSkaterInList(skaters, skater) {
     let updatedSkaters = Object.assign([], skaters);
     let index = _.indexOf(updatedSkaters, _.find(updatedSkaters, {id: skater.id}));
@@ -156,7 +167,6 @@ export function updateSkaterInList(skaters, skater) {
     return updatedSkaters;
 }
 
-// TODO: Move to math helper?
-function triangular(n) {
+export function triangular(n) {
     return n > 0 ? n * (n + 1) / 2 : 0;
 }

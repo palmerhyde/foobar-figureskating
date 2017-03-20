@@ -28,6 +28,7 @@ import {
     trainingSkaterList,
     applyXP,
     level,
+    levelPercent,
     updateSkaterInList
 } from '../util/gamehelper';
 
@@ -290,6 +291,10 @@ export function trainSkater(skater) {
         difference.jumpsBefore = skaterBefore.jumps;
         difference.formBefore = skaterBefore.form;
         difference.presentationBefore = skaterBefore.presentation;
+        difference.xpBefore = skaterBefore.xp;
+        difference.xpAfter = trainedSkater.xp;
+        difference.levelPercentAfter = levelPercent(trainedSkater);
+        difference.levelPercentBefore = levelPercent(skaterBefore);
 
         trainedSkater.difference = difference;
         dispatch(selectMyCardsSkater(trainedSkater));
