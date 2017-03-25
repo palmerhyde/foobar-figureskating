@@ -92,6 +92,10 @@ class GameScreen extends Component {
 
     // TODO: Move to util.
     isPlayable(skater, move) {
+        if (skater.hasPlayed) {
+            return false;
+        }
+
         if (move.discipline == Disciplines.MENS_SINGLES && skater.gender == 'F') {
             return false;
         }

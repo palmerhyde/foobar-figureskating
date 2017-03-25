@@ -133,6 +133,15 @@ export function applyXP (trainingSkaters, skater) {
         }
     }
 
+    // Ensure max cap has not been reached.
+    let cap = xpCap(skater);
+
+    if (cap <= newSkater.xp) {
+        console.log('skater maxed XP: ' + newSkater.xp + ' => ' + cap  );
+        newSkater.xp = cap;
+        newSkater.maxLevel = true;
+    }
+
     return newSkater;
 }
 
@@ -147,6 +156,38 @@ export function level (skater) {
 
         level++;
     }
+}
+
+export function xpCap (skater) {
+    let xpCap = triangular(levelCap(skater)) * LEVEL_MULTIPLER;
+    return xpCap
+}
+
+export function levelCap(skater) {
+    let cap = 0;
+
+    switch (skater.rarity) {
+        case Rarity.LOCAL:
+            cap = 10;
+            break;
+        case Rarity.REGIONAL:
+            cap = 15;
+            break;
+        case Rarity.SECTIONAL:
+            cap = 20;
+            break;
+        case Rarity.NATIONAL:
+            cap = 25;
+            break;
+        case Rarity.WORLD:
+            cap = 30;
+            break;
+        case Rarity.OLYMPIC:
+            cap = 35;
+            break;
+    }
+
+    return cap
 }
 
 export function levelPercent(skater) {

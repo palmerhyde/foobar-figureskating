@@ -80,11 +80,23 @@ class SkaterCard2 extends Component {
                     <View style={{flex:0.1, justifyContent: 'center', alignItems: 'center', borderColor:'red', borderWidth:0}}>
                         <Text style={styles.title2}>{this.props.skater.name.toUpperCase()}</Text>
                     </View>
-                    <View style={{flex:0.23, justifyContent: 'center', alignItems: 'center', borderColor:'yellow', borderWidth:0}}>
-                        <Text style={styles.cardtext}>EDGES - {this.props.skater.edges}</Text>
-                        <Text style={styles.cardtext}>JUMPS - {this.props.skater.jumps}</Text>
-                        <Text style={styles.cardtext}>FORM - {this.props.skater.form}</Text>
-                        <Text style={styles.cardtext}>PRESENTATION - {this.props.skater.presentation} </Text>
+                    <View style={{flex:0.23, flexDirection:'row', justifyContent: 'center', alignItems: 'flex-start', borderColor:'yellow', borderWidth:0}}>
+                        <View style={{flex:0.2, justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={styles.cardtext}>EDGES</Text>
+                            <Text style={styles.textAttribute}>{this.props.skater.edges}</Text>
+                        </View>
+                        <View style={{flex:0.2, justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={styles.cardtext}>JUMPS</Text>
+                            <Text style={styles.textAttribute}>{this.props.skater.jumps}</Text>
+                        </View>
+                        <View style={{flex:0.2, justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={styles.cardtext}>FORM</Text>
+                            <Text style={styles.textAttribute}>{this.props.skater.form}</Text>
+                        </View>
+                        <View style={{flex:0.2, justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={styles.cardtext}>PRES</Text>
+                            <Text style={styles.textAttribute}>{this.props.skater.presentation}</Text>
+                        </View>
                     </View>
                     <View style={{flex:0.15, justifyContent: 'center', alignItems: 'center', borderColor:'blue', borderWidth:0}}>
                         <Progress.Circle progress={this.props.progress} thickness={3} size={25} color="white" showsText={true} textStyle={
@@ -133,6 +145,12 @@ const styles = StyleSheet.create({
         textShadowRadius: 1,
         textShadowOffset: {width: 1, height: 1},
         padding: 2
+    },
+    textAttribute: {
+        fontSize:12,
+        fontWeight: 'bold',
+        textShadowColor: 'white',
+        color: 'black',
     },
     container2: {
         backgroundColor: 'silver',

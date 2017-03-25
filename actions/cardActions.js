@@ -19,6 +19,8 @@ import {
     SET_TRAINING_SKATER_LIST
 } from './actionTypes';
 
+import _ from 'lodash';
+
 import skaters from '../assets/data/skaters';
 import {
     calculateWinner,
@@ -122,19 +124,49 @@ export const setGameOver = (isGameOver) => ({
 
 export function selectSkaterCard(skater) {
     return (dispatch, getState) => {
+        // set skater card in deck, do not remove from deck.
+        let state = getState();
+        let deck = Object.assign([], state.skaterDeck);
+        let index = _.findIndex(deck, function(element) { return element.id === skater.id; });
+        skater.hasPlayed = true;
+        deck[index] = skater;
         dispatch(selectSkaterCard2(skater));
         dispatch(waitForOpponentSkater());
 
-        let local = getState();
-        if (local.gameState.turn == 5) {
+        if (state.gameState.turn === 5) {
+            // reset skaters
+            // TODO: move to game helper
+            for (let i=0; i< deck.length; i++) {
+                deck[i].hasPlayed = false;
+            }
+
+            dispatch(setSkaterDeck(deck));
             dispatch(setGameOver(true));
         }
     };
 }
 
-export const resetGameScore = () => ({
+export const resetGameScoreStore = () => ({
     type: RESET_GAME_SCORE
 });
+
+export function resetGameScore() {
+    return (dispatch, getState) => {
+        // set skater card in deck, do not remove from deck.
+        let state = getState();
+        let deck = Object.assign([], state.skaterDeck);
+
+        // reset skaters
+        // TODO: move to game helper
+        for (let i=0; i< deck.length; i++) {
+            deck[i].hasPlayed = false;
+        }
+
+        dispatch(setSkaterDeck(deck));
+        dispatch(resetGameScoreStore());
+    };
+}
+
 
 // TODO: rename me / refactor me
 export function waitForOpponentSkater() {
@@ -169,27 +201,32 @@ export const setSkaterDeck = (deck) => ({
 // This will be replaced with set skater deck
 // Deck should already be loaded. If it isn't then return error
 export function loadSkaterDeck() {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         if (!skaters || skaters.length == 0) {
             dispatch(loadSkaterDeck());
         }
         else {
             // move logic to helper so it can be tested
             // skater deck
-            let deck = [];
+            let state = getState();
+            if (!state.skaterDeck || state.skaterDeck.length !== 6) {
 
-            // 3 male skaters
-            deck.push(skaters[0]);
-            deck.push(skaters[2]);
-            deck.push(skaters[3]);
+                let deck = [];
 
-            // 3 female skaters
-            deck.push(skaters[1]);
-            deck.push(skaters[4]);
-            deck.push(skaters[5]);
+                // 3 male skaters
+                deck.push(skaters[0]);
+                deck.push(skaters[2]);
+                deck.push(skaters[3]);
 
-            dispatch(setSkaterDeck(deck));
+                // 3 female skaters
+                deck.push(skaters[1]);
+                deck.push(skaters[4]);
+                deck.push(skaters[5]);
 
+                dispatch(setSkaterDeck(deck));
+            }
+
+            // TODO: move me to game
             // opponent skater deck
             let opponentDeck = [];
             let femaleSkaters = skaters.filter(element => element.gender == 'F');
@@ -264,19 +301,19 @@ export function trainSkater(skater) {
         trainedSkater.level = levelAfter;
 
         // did the skater level?
+        console.log('before: ' + levelBefore + ' after: ' + levelAfter);
+
         if (levelAfter > levelBefore) {
-            // Update trained skater in deck
-            // TODO: ensure max level hasn't been reached
             let levelPercent = 2.5 * ((levelAfter - levelBefore) / 100) + 1;
             trainedSkater.edges = Math.ceil(trainedSkater.edges * levelPercent);
             trainedSkater.jumps = Math.ceil(trainedSkater.jumps * levelPercent);
             trainedSkater.form = Math.ceil(trainedSkater.form * levelPercent);
             trainedSkater.presentation = Math.ceil(trainedSkater.presentation * levelPercent);
+        }
 
-            // TODO: Update trained  in skater list and decks
-            let updatedSkaters = updateSkaterInList(state.skaters, trainedSkater);
-            dispatch(setSkaterCards(updatedSkaters));
-            dispatch(setSkaterDeck(updatedSkaters));
+        if (levelAfter < levelBefore) {
+            // to do - reduce stats!
+            console.log('reduce stats')
         }
 
         // Calculate the difference
@@ -297,6 +334,21 @@ export function trainSkater(skater) {
         difference.levelPercentBefore = levelPercent(skaterBefore);
 
         trainedSkater.difference = difference;
+        let updatedSkaters = updateSkaterInList(state.skaters, trainedSkater);
+
+        dispatch(setSkaterCards(updatedSkaters));
+        dispatch(setSkaterDeck(updatedSkaters));
         dispatch(selectMyCardsSkater(trainedSkater));
+    };
+}
+
+export function swapSkater(skater, selectedSkater) {
+    return (dispatch, getState) => {
+        let state = getState();
+        let deck = Object.assign([], state.skaterDeck);
+        let index = _.findIndex(deck, function(element) { return element.id === skater.id; });
+        deck[index] = selectedSkater;
+        dispatch(setSkaterDeck(deck));
+        dispatch(setPotentialTrainingSkaters());
     };
 }

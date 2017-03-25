@@ -7,6 +7,7 @@ import TrainingContainer from './containers/trainingContainer';
 import ApplyTrainingContainer from './containers/applyTrainingContainer';
 import SkatersContainer from './containers/skatersContainer';
 import AppContainer from './containers/appContainer'
+import DeckContainer from './containers/deckContainer'
 import createStore from './store';
 import {Scene, Router, Animations, ActionConst} from 'react-native-router-flux';
 import { Actions } from 'react-native-router-flux';
@@ -27,6 +28,7 @@ export default () => (
                 <Scene key="splash" type={ActionConst.RESET} component={SplashScreen} initial />
                 <Scene key="game" type={ActionConst.RESET} component={AppContainer} />
                 <Scene key="skaters" type={ActionConst.RESET} component={SkatersContainer} />
+                <Scene key="deck" type={ActionConst.RESET} component={DeckContainer} />
                 <Scene key="train" type={ActionConst.RESET} component={TrainingContainer} />
                 <Scene key="applyTraining" type={ActionConst.RESET} component={ApplyTrainingContainer} />
             </Scene>

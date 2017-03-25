@@ -25,27 +25,24 @@ class Skaters extends Component {
 
     constructor(props) {
         super(props);
+        console.log('constructor');
     }
 
     componentDidMount () {
+        console.log('componentDidMount');
         // Load Skaters
         if (this.props.loadSkaterCards) {
             this.props.loadSkaterCards();
         }
 
+        // TODO: why are we loading the skater deck here?
         if (this.props.loadSkaterDeck) {
             this.props.loadSkaterDeck();
         }
     }
 
-    onBack () {
-        //console.log('test onback');
-        //Actions.skaters({direction:'leftToRight'})
-    }
-
     levelPercent () {
     let percent = (levelPercent(this.props.selectedSkater)) / 100;
-    console.log(percent);
     if (isNaN(percent)) {
         percent = 0.0;
     }
@@ -54,6 +51,7 @@ class Skaters extends Component {
 }
 
     render() {
+        console.log('render');
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')} style={{width: null, height: null, 'flex': 1}}>
             <View style={{flex:0.1, backgroundColor: 'transparent'}}>
                 <Header title="Your Skaters" onBack={ () => {
@@ -63,11 +61,23 @@ class Skaters extends Component {
             <View style={{flex:0.70, backgroundColor:'transparent'}}>
                 <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
                     <TouchableOpacity onPress={ () => {
-                            //Actions.train({type:ActionConst.POP_AND_REPLACE, duration:800, direction:'horizontal', onBack:this.onBack, hideBackImage:false});
-                            Actions.train({duration:800, direction:'horizontal'});
+                            if (!this.props.selectedSkater.maxLevel) {
+                                Actions.train({duration: 800, direction: 'horizontal'});
+                            }
+                            else {
+                                Alert.alert(
+                                    'Max Level ' + this.props.selectedSkater.level,
+                                    'Level cap for ' + this.props.selectedSkater.name + ' has been reached',
+                                );
+                            }
                         }
                     }>
-                        <SkaterCard2 skater={this.props.selectedSkater} animate={true} progress={this.levelPercent()} />
+                        { this.props.selectedSkater.name ?
+                            <SkaterCard2 skater={this.props.selectedSkater} animate={true}
+                                         progress={this.levelPercent()}/>
+                            :
+                            <Text>Select a skater</Text>
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -93,7 +103,6 @@ class Skaters extends Component {
                 </ScrollView>
             </View>
         </Image>
-
     }
 }
 

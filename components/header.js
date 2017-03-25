@@ -37,7 +37,7 @@ class Header extends Component {
             <View style={{flex:0.1}}>
                 { this.props.showBack ?
                     <TouchableOpacity onPress={this.props.onBack}>
-                        <Text style={titleStyle}>{'<'}</Text>
+                        <Text style={backStyle}>{'<'}</Text>
                     </TouchableOpacity>
                     : null
                 }
@@ -52,6 +52,17 @@ class Header extends Component {
 
 Header.defaultProps = {
     showBack: false
+};
+
+const backStyle = {
+    fontFamily: 'SkaterGirlsRock',
+    fontSize:30,
+    fontWeight: '900',
+    textShadowColor: 'white',
+    color: 'black',
+    textShadowRadius: 2,
+    textShadowOffset: {width: 2, height: 2},
+    textAlign:'center'
 };
 
 const titleStyle = {

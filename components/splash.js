@@ -10,49 +10,41 @@ import {
 } from 'react-native';
 
 import JukeBox from '../components/jukebox';
+import {Login} from '../components/login';
 
 class SplashScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.rotateValue = new Animated.Value(0);
+        this.state = {
+            loggedIn: false
+        };
     }
 
     componentDidMount () {
-        //this.rotate();
     }
 
-    rotate () {
-        this.rotateValue.setValue(0);
-        Animated.timing(
-            this.rotateValue,
-            {
-                toValue: 1,
-                duration: 1000,
-                easing: Easing.linear
-            }
-        ).start(() => this.rotate())
+    login () {
+        this.setState(
+                {loggedIn: true}
+            );
     }
 
     render() {
-        console.log(this.props);
-        const rotate = this.rotateValue.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['0deg', '360deg']
-        });
-
-        return <Animated.Image resizeMode='cover' source={require('../assets/images/ice.jpg')}  style={{width: null, height: null, flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Animated.Image style={{
+        return <Image resizeMode='cover' source={require('../assets/images/ice.jpg')}  style={{width: null, height: null, flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Image style={{
                 top: -200,
                 width: 216,
-                transform: [{rotate: rotate}],
                 height: 90,
             }} source={{uri: 'https://vignette4.wikia.nocookie.net/logopedia/images/d/da/BradMiclette-Logo.png/revision/latest?cb=20140713045541'}}/>
+                <View>
+                    <Login />
+                    <Text onPress={Actions.game} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Play</Text>
+                    <Text onPress={Actions.deck} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Deck</Text>
+                    <Text onPress={Actions.skaters} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Skaters</Text>
+                </View>
 
-
-            <Text onPress={Actions.game} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Play</Text>
-            <Text onPress={Actions.skaters} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Skaters</Text>
-        </Animated.Image>
+        </Image>
 
     }
 }

@@ -83,7 +83,7 @@ class Training extends Component {
                     </View>
                     <View style={{flex:0.1, backgroundColor: 'transparent', justifyContent:'center', alignItems:'center'}}>
                         { this.props.skaterTrainingList.length > 0 ?
-                            <Text onPress={ () => {
+                            <Text onPress={ () =>  {
                                 Actions.applyTraining();
                                 this.props.trainSkater(this.props.selectedSkater)
                             }

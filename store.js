@@ -29,7 +29,7 @@ export default () => (
             potentialTrainerSkaters: potentialTrainerSkatersReducer,
             skaterTrainingList: skaterTrainingListReducer
         }),
-        applyMiddleware(thunk),
+        applyMiddleware(thunk, logger),
         autoRehydrate()
     )
 );
