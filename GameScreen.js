@@ -28,7 +28,6 @@ class GameScreen extends Component {
     }
 
     componentWillMount() {
-        console.log('componentWillMount');
         this.refresh();
     }
 
@@ -64,6 +63,7 @@ class GameScreen extends Component {
         this.flip()
     }
 
+    // Style
     flip()  {
         // Chain 2 animations
         this.setState({isFlipped: !this.state.isFlipped});
@@ -74,6 +74,7 @@ class GameScreen extends Component {
         }, 800, foo);
     }
 
+    // Style
     pointer() {
         if (this.props.gameState.turnInProgress) {
             return 'none';
@@ -82,6 +83,7 @@ class GameScreen extends Component {
         return 'auto';
     }
 
+    // Style
     opacity() {
         if (this.props.gameState.turnInProgress) {
             return 0.1;
@@ -90,7 +92,7 @@ class GameScreen extends Component {
         return 1;
     }
 
-    // TODO: Move to util.
+    // TODO: Move to util. (Selector?)
     isPlayable(skater, move) {
         if (skater.hasPlayed) {
             return false;
@@ -146,7 +148,7 @@ class GameScreen extends Component {
 
             {
                 this.props.gameState.gameOver && <Button title='Game Over - Continue' onPress={ () => {
-                    Actions.splash();
+                    Actions.skaterpicks();
                 } }/>
             }
         </Image>;

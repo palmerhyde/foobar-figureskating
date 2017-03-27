@@ -22,6 +22,7 @@ class SplashScreen extends Component {
     }
 
     componentDidMount () {
+        this.props.loadAllSkaters();
     }
 
     login () {
@@ -42,6 +43,7 @@ class SplashScreen extends Component {
                     <Text onPress={Actions.game} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Play</Text>
                     <Text onPress={Actions.deck} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Deck</Text>
                     <Text onPress={Actions.skaters} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Skaters</Text>
+                    <Text onPress={Actions.skaterpicks} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Picks</Text>
                 </View>
 
         </Image>

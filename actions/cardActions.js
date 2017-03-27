@@ -1,7 +1,9 @@
+// TODO - can we import * instead and do an ActionTypes.xxx ?
 import {
     LOAD_SKATER_CARDS,
     LOAD_MOVE_CARDS,
     LOAD_OPPONENT_SKATER_CARD,
+    LOAD_ALL_SKATER_CARDS,
     SELECT_SKATER_CARD,
     INCREMENT_YOUR_SCORE,
     INCREMENT_OPPONENT_SCORE,
@@ -16,12 +18,12 @@ import {
     REMOVE_OPPONENT_SKATER_FROM_DECK,
     SELECT_MYCARDS_SKATER,
     SET_POTENTIAL_TRAINING_SKATERS,
-    SET_TRAINING_SKATER_LIST
+    SET_TRAINING_SKATER_LIST,
+    SET_PICKS
 } from './actionTypes';
 
 import _ from 'lodash';
 
-import skaters from '../assets/data/skaters';
 import {
     calculateWinner,
     generateMoves,
@@ -34,6 +36,10 @@ import {
     updateSkaterInList
 } from '../util/gamehelper';
 
+// TODO: this constant does not belong in level chart. Move.
+import {NUMBER_OF_GAME_TURNS, WINNER_PICKS, DRAW_PICKS, LOSER_PICKS} from '../util/levelchart';
+
+// TODO: we need to break actions into groups such as game, skater, training etc.
 export function setSkaterCards(skaters) {
     return (dispatch) => {
         dispatch(loadSkaterCardsStore(skaters));
@@ -133,7 +139,7 @@ export function selectSkaterCard(skater) {
         dispatch(selectSkaterCard2(skater));
         dispatch(waitForOpponentSkater());
 
-        if (state.gameState.turn === 5) {
+        if (state.gameState.turn === NUMBER_OF_GAME_TURNS -1) {
             // reset skaters
             // TODO: move to game helper
             for (let i=0; i< deck.length; i++) {
@@ -142,9 +148,29 @@ export function selectSkaterCard(skater) {
 
             dispatch(setSkaterDeck(deck));
             dispatch(setGameOver(true));
+
+            // Set winner / loser logic
+            // move to game helper
+            let picks = state.picks;
+            if (state.gameState.y > state.gameState.o) {
+                picks = picks + WINNER_PICKS;
+            }
+            else if (state.gameState.y < state.gameState.o) {
+                picks = picks + LOSER_PICKS;
+            }
+            else {
+                picks = picks + DRAW_PICKS
+            }
+
+            dispatch(setPicks(picks));
         }
     };
 }
+
+export const setPicks = (picks) => ({
+    type: SET_PICKS,
+    payload: picks
+});
 
 export const resetGameScoreStore = () => ({
     type: RESET_GAME_SCORE
@@ -172,11 +198,9 @@ export function resetGameScore() {
 export function waitForOpponentSkater() {
     return (dispatch, getState) => {
         let state = getState();
-
-        let skater = skaters[Math.floor((Math.random() * skaters.length) + 1)];
         let move = state.moves[state.gameState.turn];
         let deck = state.opponentDeck;
-        skater = oppenentMoveAi(move, deck);
+        let skater = oppenentMoveAi(move, deck);
         dispatch(loadOpponentSkaterCard(skater));
     };
 }
@@ -202,7 +226,12 @@ export const setSkaterDeck = (deck) => ({
 // Deck should already be loaded. If it isn't then return error
 export function loadSkaterDeck() {
     return (dispatch, getState) => {
+        // TODO - This is bad we want skaters from state.
+        // Skater deck should come from state. If it is empty go through FTUE.
+        let skaters = require('../assets/data/skaters').default;
+
         if (!skaters || skaters.length == 0) {
+            console.log('race');
             dispatch(loadSkaterDeck());
         }
         else {
@@ -213,6 +242,7 @@ export function loadSkaterDeck() {
 
                 let deck = [];
 
+                // TODO: needs to be part of FTUE.
                 // 3 male skaters
                 deck.push(skaters[0]);
                 deck.push(skaters[2]);
@@ -226,16 +256,20 @@ export function loadSkaterDeck() {
                 dispatch(setSkaterDeck(deck));
             }
 
-            // TODO: move me to game
+            // TODO: move me to game otherwise we play the same opponent!.
             // opponent skater deck
             let opponentDeck = [];
             let femaleSkaters = skaters.filter(element => element.gender == 'F');
             let maleSkaters = skaters.filter(element => element.gender == 'M');
 
-            // Improve oppenent deck logic - more skaters.
+            femaleSkaters = _.shuffle(femaleSkaters);
+            maleSkaters = _.shuffle(maleSkaters);
+
+            // Improve oppenent deck logic.
             opponentDeck.push(femaleSkaters[0]);
             opponentDeck.push(femaleSkaters[1]);
             opponentDeck.push(femaleSkaters[2]);
+
             opponentDeck.push(maleSkaters[0]);
             opponentDeck.push(maleSkaters[1]);
             opponentDeck.push(maleSkaters[2]);
@@ -244,6 +278,18 @@ export function loadSkaterDeck() {
         }
     };
 }
+
+export function loadAllSkaters() {
+    return (dispatch, getState) => {
+        let skaters = require('../assets/data/skaters').default;
+        dispatch(loadAllSkatersStore(skaters));
+    };
+}
+
+export const loadAllSkatersStore = (skaters) => ({
+    type: LOAD_ALL_SKATER_CARDS,
+    payload: skaters
+});
 
 // Mycards screen
 export const selectMyCardsSkater = (skater) => ({
@@ -261,8 +307,6 @@ export const setPotentialTrainingSkatersStore = (skaters) => ({
 export function setPotentialTrainingSkaters() {
     return (dispatch, getState) => {
         let state = getState();
-
-        // DO NOT MUTATE STATE!
         let selectedSkater = Object.assign({}, state.selectedMyCardsSkaterCard);
         let deck = Object.assign([], state.skaterDeck);
         let skaters = Object.assign([], state.skaters);
@@ -343,6 +387,8 @@ export function trainSkater(skater) {
 }
 
 export function swapSkater(skater, selectedSkater) {
+    // TODO: ensure you cannot swap genders
+
     return (dispatch, getState) => {
         let state = getState();
         let deck = Object.assign([], state.skaterDeck);

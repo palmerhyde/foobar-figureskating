@@ -5,12 +5,12 @@ import {
     swapSkater
 } from '../actions/cardActions';
 
-import { Deck } from '../components/deck';
+import { SkaterPicks } from '../components/skaterpicks';
 
 const mapStateToProps = state => ({
-    //skaters : state.skaters,
-    skaterDeck : state.skaterDeck,
-    potentialTrainerSkaters: state.potentialTrainerSkaters,
+    allSkaters: state.allSkaters,
+    skaters : state.skaters,
+    picks: state.picks
 });
 
 const mapDispatchToProps = dispatch => (
@@ -20,4 +20,4 @@ const mapDispatchToProps = dispatch => (
     }, dispatch)
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Deck)
+export default connect(mapStateToProps, mapDispatchToProps)(SkaterPicks)

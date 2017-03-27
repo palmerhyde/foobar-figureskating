@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, combineReducers} from 'redux';
-import {persistStore, autoRehydrate} from 'redux-persist'
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {autoRehydrate} from 'redux-persist'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger';
 import moveCardReducer from './reducers/moveCardReducer';
@@ -12,12 +12,15 @@ import opponentSkaterDeckReducer from './reducers/opponentSkaterDeckReducer';
 import selectedMyCardsSkaterCard from './reducers/selectedMyCardsSkaterCard';
 import potentialTrainerSkatersReducer from './reducers/potentialTrainerSkatersReducer';
 import skaterTrainingListReducer from './reducers/skaterTrainingListReducer';
+import allSkatersReducer from './reducers/allSkatersReducer';
+import picksReducer from './reducers/picksReducer';
 
 const logger = createLogger();
 
 export default () => (
     createStore(
         combineReducers({
+            allSkaters: allSkatersReducer,
             skaters: skaterCardReducer,
             moves: moveCardReducer,
             opponentSkaterCard: opponentSkaterCardReducer,
@@ -27,7 +30,8 @@ export default () => (
             skaterDeck: skaterDeckReducer,
             selectedMyCardsSkaterCard: selectedMyCardsSkaterCard,
             potentialTrainerSkaters: potentialTrainerSkatersReducer,
-            skaterTrainingList: skaterTrainingListReducer
+            skaterTrainingList: skaterTrainingListReducer,
+            picks: picksReducer
         }),
         applyMiddleware(thunk, logger),
         autoRehydrate()

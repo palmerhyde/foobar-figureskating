@@ -64,6 +64,8 @@ class SwapSkater extends Component {
                         <ScrollView style={{flex:1}}>
                             {
                                 this.props.skaters.map(function (skater) {
+                                    // Filter out opposite genders
+                                    // Make stat card a component
                                     return <TouchableOpacity key={skater.id} onPress={
                                         () => {
                                             this.props.swapSkater(this.props.selectedSkater, skater);
