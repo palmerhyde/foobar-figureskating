@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import * as Progress from 'react-native-progress';
+import {Rarity} from '../util/enums';
 
 
 class SkaterCard2 extends Component {
@@ -19,9 +20,6 @@ class SkaterCard2 extends Component {
     constructor(props) {
         super(props);
         this.scaleValue = new Animated.Value(0);
-
-        // TODO: Load template based on rarity
-        this.cardTemplate = require('../assets/images/large-silver.png');
     }
 
     static propTypes = {
@@ -34,6 +32,17 @@ class SkaterCard2 extends Component {
         if (this.props.animate) {
             this.scale();
         }
+    }
+
+    getCardTemplate (rarity) {
+        switch (rarity) {
+            case Rarity.REGIONAL:
+                return require('../assets/images/large-gold.png');
+            case Rarity.SECTIONAL:
+                return require('../assets/images/large-pink.png');
+        }
+
+        return require('../assets/images/large-silver.png');
     }
 
     scale () {
@@ -61,7 +70,7 @@ class SkaterCard2 extends Component {
                         width: 202,
                         height: 300,
                         transform: [{scale: scale}]}])}
-                                source={this.cardTemplate} >
+                                source={this.getCardTemplate(this.props.skater.rarity)} >
                     <View style={{flex:0.05, justifyContent: 'center', alignItems: 'center', borderColor:'pink', borderWidth:0}}>
                     </View>
                     <Image

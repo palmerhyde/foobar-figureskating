@@ -326,6 +326,24 @@ let skaters = [
         'gender' : 'M',
         'xp' : 0,
         'rarity': Rarity.REGIONAL
+    },
+    {
+        'id' : guid(),
+        'name' : 'Brian Boitano',
+        'edges' : randomRange(110, 120),
+        'jumps' : randomRange(110, 120),
+        'form' : randomRange(110, 120),
+        'presentation' : randomRange(110, 120),
+        'photo' : 'http://cdn.playbuzz.com/cdn/5cbc22f1-0df6-4761-8962-bbd474bb765f/b08d41f9-6b95-4a10-87fb-ce99e1d53e9f.jpg',
+        'skill' : {
+            'name' : 'Edge',
+            'value' : randomRange(110, 120)
+        },
+        'level' : 1,
+        'discipline' : Disciplines.MENS_SINGLES,
+        'gender' : 'M',
+        'xp' : 0,
+        'rarity': Rarity.SECTIONAL
     }
 ];
 
