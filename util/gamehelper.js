@@ -1,5 +1,6 @@
 import {Attributes, Disciplines, Rarity} from './enums';
-import {BASE, LEVEL_MULTIPLER} from './levelchart'
+import {BASE, LEVEL_MULTIPLER, WINNER_PICKS, DRAW_PICKS, LOSER_PICKS, MAXIMUM_CARDS} from './levelchart'
+import guid from 'uuid/v4';
 
 import _ from 'lodash';
 
@@ -206,6 +207,50 @@ export function updateSkaterInList(skaters, skater) {
     let index = _.indexOf(updatedSkaters, _.find(updatedSkaters, {id: skater.id}));
     updatedSkaters.splice(index, 1, skater);
     return updatedSkaters;
+}
+
+export function numberOfPicks(yourScore, opponentScore) {
+    let picks = 0;
+    if (yourScore > opponentScore) {
+        picks = picks + WINNER_PICKS;
+    }
+    else if (yourScore < opponentScore) {
+        picks = picks + LOSER_PICKS;
+    }
+    else {
+        picks = picks + DRAW_PICKS
+    }
+
+    return picks;
+}
+
+export function generatePicks(allSkaters, picks) {
+    let scopedAllSkaters = Object.assign([], allSkaters);
+    let shuffledPicks = _.shuffle(scopedAllSkaters);
+    let skaterPicks = [];
+
+    for (let i=0; i<picks; i++) {
+        shuffledPicks[i].id = guid();
+        skaterPicks.push(shuffledPicks[i]);
+    }
+
+    return skaterPicks;
+}
+
+export function removeSkaterFromPicks(picks, skater) {
+    let scopedPicks = Object.assign([], picks);
+    _.remove(scopedPicks, function(element) {
+        return element.id === skater.id;
+    });
+
+    return scopedPicks;
+}
+
+export function addSkaterFromPicks(skaters, skater) {
+    let scopedSkaters = Object.assign([], skaters);
+    let scopedSkater = Object.assign({}, skater);
+    scopedSkaters.push(scopedSkater);
+    return scopedSkaters;
 }
 
 export function triangular(n) {

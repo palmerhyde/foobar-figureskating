@@ -36,12 +36,6 @@ class SkaterPicks extends Component {
         Actions.splash();
     }
 
-    shuffleSkaters () {
-        console.log('$$$$$$$$$$');
-        let x =  _.shuffle(this.props.allSkaters)[0];
-        console.log(x);
-        return x;
-    }
 
     render() {
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')}  style={{width: null, height: null, flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -50,44 +44,16 @@ class SkaterPicks extends Component {
                         <Header title={'PICK SKATERS'} onBack={this.onBack} showBack={true}/>
                     </View>
                     <View style={{flex:0.75, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>
-                        <View style={{flex:1, flexDirection:'row'}}>
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                        </View>
-                        <View style={{flex:1, flexDirection:'row'}}>
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                        </View>
-                        <View style={{flex:1, flexDirection:'row'}}>
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                        </View>
-                        <View style={{flex:1, flexDirection:'row'}}>
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                        </View>
-                        <View style={{flex:1, flexDirection:'row'}}>
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
-                            <Pick skater={this.shuffleSkaters()} />
+                        <View style={{flex:1, flexDirection:'row', flexWrap:'wrap', alignItems:'flex-start'}}>
+                            {
+                                this.props.picks.map(function (skater) {
+                                    return <Pick key={'p_' + skater.id} skater={skater} pickSelected={this.props.pickSelected}/>
+                                }, this)
+                            }
                         </View>
                     </View>
                     <View style={{flex:0.15, backgroundColor: 'silver', justifyContent:'center', alignItems:'center'}}>
-                        <Text>{this.props.picks} picks</Text>
+                        <Text>{this.props.picks.length} picks</Text>
                     </View>
                 </View>
         </Image>
@@ -95,7 +61,7 @@ class SkaterPicks extends Component {
 }
 
 const cardBackStyle = {
-    backgroundColor:'pink',
+    backgroundColor:'hotpink',
     width:30,
     height:45,
     margin:15

@@ -86,7 +86,8 @@ class ApplyTraining extends Component {
                         progress: (this.props.selectedSkater.difference.levelPercentAfter) / 100
                     });
 
-                this.props.setSkaterTrainingListStore([]);
+                // remove skaters from skaters list.
+                this.props.removeSkaters();
             }
         });
     }

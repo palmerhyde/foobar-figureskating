@@ -55,6 +55,7 @@ class Skaters extends Component {
         return <Image resizeMode='cover' source={require('../assets/images/black.jpg')} style={{width: null, height: null, 'flex': 1}}>
             <View style={{flex:0.1, backgroundColor: 'transparent'}}>
                 <Header title="Your Skaters" onBack={ () => {
+                    this.props.selectMyCardsSkater({});
                     Actions.splash({type:ActionConst.RESET});
                 } } showBack={true}/>
             </View>

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
 import {
-    setSkaterTrainingListStore
+    removeSkaters
 } from '../actions/cardActions';
 
 import { ApplyTraining } from '../components/applytraining';
@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
-        setSkaterTrainingListStore
+        removeSkaters
     }, dispatch)
 );
 

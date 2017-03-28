@@ -33,7 +33,11 @@ import {
     applyXP,
     level,
     levelPercent,
-    updateSkaterInList
+    updateSkaterInList,
+    numberOfPicks,
+    generatePicks,
+    removeSkaterFromPicks,
+    addSkaterFromPicks
 } from '../util/gamehelper';
 
 // TODO: this constant does not belong in level chart. Move.
@@ -55,9 +59,9 @@ export function loadSkaterCards() {
     };
 }
 
-export const loadSkaterCardsStore = (skaters2) => ({
+export const loadSkaterCardsStore = (skaters) => ({
     type: LOAD_SKATER_CARDS,
-    payload: skaters2
+    payload: skaters
 });
 
 export const loadMoveCards = (move) => ({
@@ -149,20 +153,13 @@ export function selectSkaterCard(skater) {
             dispatch(setSkaterDeck(deck));
             dispatch(setGameOver(true));
 
+            // TODO: move to game helper
             // Set winner / loser logic
-            // move to game helper
-            let picks = state.picks;
-            if (state.gameState.y > state.gameState.o) {
-                picks = picks + WINNER_PICKS;
-            }
-            else if (state.gameState.y < state.gameState.o) {
-                picks = picks + LOSER_PICKS;
-            }
-            else {
-                picks = picks + DRAW_PICKS
-            }
-
-            dispatch(setPicks(picks));
+            let pickCount = numberOfPicks(state.gameState.y, state.gameState.o);
+            let skaterPicks = generatePicks(state.allSkaters, pickCount);
+            console.log(state.picks);
+            console.log(skaterPicks);
+            dispatch(setPicks(Object.assign([], state.picks.concat(skaterPicks))));
         }
     };
 }
@@ -171,6 +168,16 @@ export const setPicks = (picks) => ({
     type: SET_PICKS,
     payload: picks
 });
+
+export function pickSelected(skater) {
+    return (dispatch, getState) => {
+        let state = getState();
+
+        // remove from picks, skater
+        dispatch(setPicks(removeSkaterFromPicks(state.picks, skater)));
+        dispatch(loadSkaterCardsStore(addSkaterFromPicks(state.skaters, skater)));
+    };
+}
 
 export const resetGameScoreStore = () => ({
     type: RESET_GAME_SCORE
@@ -239,6 +246,7 @@ export function loadSkaterDeck() {
             // skater deck
             let state = getState();
             if (!state.skaterDeck || state.skaterDeck.length !== 6) {
+                console.log('something is wrong with the deck so we reloaded.');
 
                 let deck = [];
 
@@ -330,6 +338,28 @@ export const setSkaterTrainingListStore = (skaters) => ({
     payload: skaters
 });
 
+export function removeSkaters(skater) {
+    return (dispatch, getState) => {
+        let state = getState();
+
+        let scopedTrainingSkaters = Object.assign([], state.skaterTrainingList);
+        let scopedSkaters = Object.assign([], state.skaters);
+
+        for (let i=0; i<scopedTrainingSkaters.length; i++) {
+            _.remove(scopedSkaters, function(element) {
+                console.log(element.id);
+                console.log(scopedTrainingSkaters[i].id);
+
+                return element.id === scopedTrainingSkaters[i].id;
+            });
+        }
+
+        console.log(scopedSkaters);
+        dispatch(loadSkaterCardsStore(scopedSkaters));
+        dispatch(setSkaterTrainingListStore([]));
+    };
+}
+
 // TODO: move ths logic to gamehelper
 export function trainSkater(skater) {
     return (dispatch, getState) => {
@@ -379,9 +409,11 @@ export function trainSkater(skater) {
 
         trainedSkater.difference = difference;
         let updatedSkaters = updateSkaterInList(state.skaters, trainedSkater);
+        let updatedDeckSkaters = updateSkaterInList(state.skaterDeck, trainedSkater);
 
+        // remove skater
         dispatch(setSkaterCards(updatedSkaters));
-        dispatch(setSkaterDeck(updatedSkaters));
+        dispatch(setSkaterDeck(updatedDeckSkaters));
         dispatch(selectMyCardsSkater(trainedSkater));
     };
 }

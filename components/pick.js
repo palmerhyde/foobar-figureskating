@@ -29,8 +29,8 @@ class Pick extends Component {
     }
 
     static propTypes = {
-        //selectedSkater: PropTypes.object.isRequired,
-        //skaterTrainingList: React.PropTypes.arrayOf(React.PropTypes.object)
+        skater: PropTypes.object.isRequired,
+        pickSelected: PropTypes.func.isRequired
     };
 
     componentDidMount () {
@@ -52,10 +52,7 @@ class Pick extends Component {
                 easing: Easing.linear
             }
         ).start(() => {
-            //Alert.alert(
-            //    'Pick will go here',
-            //    'one awesome skater will render here when Liam is ready.',
-            //);
+
         })
     }
 
@@ -78,20 +75,19 @@ class Pick extends Component {
         });
         return <View>
             <Modal
-                animationType={"fade"}
+                animationType={"slide"}
                 transparent={true}
                 visible={this.state.modalVisible}
-                onRequestClose={() => {console.log('modal closed')}}
             >
-                <Image resizeMode='cover' source={require('../assets/images/black.jpg')}  style={{width: null, height: null, flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <View style={{flex:1, opacity:0.8, alignItems:'center', justifyContent:'center'}}>
+                <View style={{flex:1, opacity:1, alignItems:'center', justifyContent:'center'}}>
                     <TouchableOpacity onPress={ () => {
                         this.setModalVisible(false);
+                        this.props.pickSelected(this.props.skater);
                     }}>
-                        <SkaterCard2 skater={this.props.skater} animate={true}/>
+                        <SkaterCard2 skater={this.props.skater} animate={false}/>
                     </TouchableOpacity>
+                    <Text style={textStyle}>TOUCH CARD TO CONTINUE</Text>
                 </View>
-                </Image>
             </Modal>
         <TouchableOpacity disabled={this.state.disabled} onPress={ () => { this.scale();}}>
                 <Animated.View style={StyleSheet.flatten([cardBackStyle, {
@@ -104,26 +100,22 @@ class Pick extends Component {
     }
 }
 
-const s1 = {
-    'id' : '1234',
-    'name' : 'Palmer Molloy',
-    'edges' : 100,
-    'jumps' : 34,
-    'form' : 1,
-    'presentation' : 99,
-    'photo' : 'https://scontent.fsnc1-5.fna.fbcdn.net/v/t31.0-8/14481767_10207571721790755_6296817429078953337_o.jpg?oh=722ad2143b15fdbacc3cb53ed2c9c3a1&oe=595AF102',
-    'level' : 1,
-    'discipline' : 'MENS_SINGLES',
-    'gender' : 'M',
-    'xp' : 0,
-    'rarity': 'REGIONAL'
-};
-
 const cardBackStyle = {
     backgroundColor:'pink',
     width:30,
     height:45,
     margin:15
+};
+
+const textStyle = {
+    fontSize: 20,
+    paddingTop: 20,
+    fontWeight: 'bold',
+    fontFamily: 'SkaterGirlsRock',
+    textShadowColor: 'black',
+    color: 'white',
+    textShadowRadius: 2,
+    textShadowOffset: {width: 2, height: 2}
 };
 
 export {Pick}
