@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import FlipView from 'react-native-flip-view'
+import {SkaterCard2} from './skatercard2';
 
 class FlipSkaterCard extends Component {
 
@@ -30,22 +31,10 @@ class FlipSkaterCard extends Component {
     };
 
     _renderBack = () => {
-        return <View style={styles.container2}>
+        return <View style={styles.containerBack}>
             {this.props.skater.name ?
-                <View style={{justifyContent: 'center', alignItems: 'center', flex:1}}>
-                    <Text style={styles.title}>{this.props.skater.name}</Text>
-                    <Image
-                        source={{uri: this.props.skater.photo}}
-                        style={{width: 170, height: null, flex:1}}
-                    />
-
-                    <Text style={styles.cardtext}>Edges - {this.props.skater.edges}</Text>
-                    <Text style={styles.cardtext}>Jumps - {this.props.skater.jumps}</Text>
-                    <Text style={styles.cardtext}>Form - {this.props.skater.form}</Text>
-                    <Text style={styles.cardtext}>Presentation - {this.props.skater.presentation}</Text>
-                    <Text style={styles.cardtext}>{this.props.skater.skill.name}
-                        - {this.props.skater.skill.value}</Text>
-                    <Text style={styles.cardtext}>Level - {this.props.skater.level}</Text>
+                <View style={{transform: [{scale: 0.75}, {translateX:0}, {translateY:0}]}}>
+                    <SkaterCard2 skater={this.props.skater}/>
                 </View>
                 :
                 <Text>Loading...</Text>
@@ -84,6 +73,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         borderWidth: 3,
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 0,
+        marginBottom: 0,
+        borderRadius: 6
+    },
+    containerBack: {
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+        borderWidth: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 0,

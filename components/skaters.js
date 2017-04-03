@@ -17,7 +17,8 @@ import {
 import {SkaterCard2} from './skatercard2';
 import {Header} from './header';
 
-import {levelPercent} from '../util/gamehelper'
+import {levelPercent} from '../util/gamehelper';
+import {Rarity} from '../util/enums';
 
 import { Actions, ActionConst } from 'react-native-router-flux';
 
@@ -42,13 +43,24 @@ class Skaters extends Component {
     }
 
     levelPercent () {
-    let percent = (levelPercent(this.props.selectedSkater)) / 100;
-    if (isNaN(percent)) {
-        percent = 0.0;
+        let percent = (levelPercent(this.props.selectedSkater)) / 100;
+        if (isNaN(percent)) {
+            percent = 0.0;
+        }
+
+        return percent
     }
 
-    return percent
-}
+    getRarityCardStyle (rarity) {
+        switch (rarity) {
+            case Rarity.REGIONAL:
+                return {backgroundColor:'gold'};
+            case Rarity.SECTIONAL:
+                return {backgroundColor:'hotpink'};
+        }
+
+        return {};
+    }
 
     render() {
         console.log('render');
@@ -91,11 +103,11 @@ class Skaters extends Component {
                                     this.props.selectMyCardsSkater(skater);
                                 }
                             }>
-                                <View  style={styles.container2}>
+                                <View  style={StyleSheet.flatten([styles.container2, this.getRarityCardStyle(skater.rarity)])}>
                                     <Text style={styles.title} numberOfLines={1}>{skater.name.toUpperCase()}</Text>
                                     <Image
                                         source={{uri: skater.photo}}
-                                        style={{width: 95, height: null, flex:1}}
+                                        style={{width: 95, height: null, flex:1, opacity:0.4}}
                                     />
                                 </View>
                             </TouchableOpacity>

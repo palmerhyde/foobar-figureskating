@@ -353,8 +353,3 @@ function randomRange(min, max) {
     let range = max - min;
     return Math.floor((Math.random() * range +1) + min)
 }
-
-function calculateOverall(edges, jumps, form, presentation) {
-    return edges + jumps + form + presentation;
-
-}

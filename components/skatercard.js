@@ -47,10 +47,9 @@ class SkaterCard extends Component {
 
     render() {
         return <View  style={StyleSheet.flatten([styles.container2, this.isPlayable()])}>
-                <Text style={styles.title}>{this.props.skater.name}</Text>
                 <Image
                     source={{uri: this.props.skater.photo}}
-                    style={{width: 95, height: 75}}
+                    style={{width: 50, height: 50}}
                 />
                 <Text style={this.attributeStyle('edges')}>Edges - {this.props.skater.edges}</Text>
                 <Text style={this.attributeStyle('jumps')}>Jumps - {this.props.skater.jumps}</Text>
@@ -69,8 +68,8 @@ const styles = StyleSheet.create({
     },
     container2: {
         alignItems: 'center',
-        width: 100,
-        height: 150,
+        width: 50,
+        height: 50,
         borderWidth: 3,
         marginLeft: 5,
         marginTop: 5,

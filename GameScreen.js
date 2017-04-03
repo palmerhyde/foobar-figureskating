@@ -54,13 +54,13 @@ class GameScreen extends Component {
     }
 
     nextTurn() {
+        this.flip();
+        // TODO: hook into animation so we see the card when flipping back
         this.props.setTurnInProgress(false);
         this.props.resetSelectedSkaterCard();
-        // TODO: refactor opponent card to always come from the deck.
         this.props.removeOpponentSkaterCardFromDeck(this.props.opponentSkaterCard);
         this.props.resetOpponentSkaterCard();
         this.props.incrementTurn();
-        this.flip()
     }
 
     // Style

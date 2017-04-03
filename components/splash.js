@@ -40,15 +40,29 @@ class SplashScreen extends Component {
             }} source={{uri: 'https://vignette4.wikia.nocookie.net/logopedia/images/d/da/BradMiclette-Logo.png/revision/latest?cb=20140713045541'}}/>
                 <View>
                     <Login />
-                    <Text onPress={Actions.game} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Play</Text>
-                    <Text onPress={Actions.deck} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Deck</Text>
-                    <Text onPress={Actions.skaters} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Skaters</Text>
-                    <Text onPress={Actions.skaterpicks} style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Picks</Text>
+                    <Text onPress={Actions.game} style={textButtonStyle}>PLAY</Text>
+                    <Text onPress={Actions.deck} style={textButtonStyle}>DECK</Text>
+                    <Text onPress={Actions.skaters} style={textButtonStyle}>SKATERS</Text>
+                    <Text onPress={Actions.skaterpicks} style={textButtonStyle}>PICKS</Text>
+                    <Text onPress={Actions.icerink} style={textButtonStyle}>ICE RINK</Text>
                 </View>
 
         </Image>
 
     }
 }
+
+const textButtonStyle = {
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
+    fontFamily: 'SkaterGirlsRock',
+    textShadowColor: 'white',
+    textShadowRadius: 1,
+    textShadowOffset: {width: 1, height: 1},
+    padding: 2,
+    margin:2,
+    backgroundColor:'silver'
+};
 
 export {SplashScreen}

@@ -114,7 +114,6 @@ class SkaterCard2 extends Component {
                                 fontWeight: 'bold',
                             }} formatText={ (progress) => {return this.props.skater.level}
                             }/>
-                        <Text>{this.props.skater.xp}</Text>
                     </View>
                 </Animated.Image>
                 : null

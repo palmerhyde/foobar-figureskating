@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import {Header} from './header';
+import {StatSkater} from './statskater';
 
 import _ from 'lodash';
 
@@ -69,13 +70,7 @@ class Training extends Component {
                                             this.props.setSkaterTrainingList(skater);
                                         }
                                     }>
-                                        <View style={StyleSheet.flatten([styles.container2, this.isSelected(skater)])}>
-                                            <Text style={styles.title} numberOfLines={1}>{skater.name.toUpperCase()}</Text>
-                                            <Image
-                                                source={{uri: skater.photo}}
-                                                style={{width: 75, height: 75, flex:1}}
-                                            />
-                                        </View>
+                                        <StatSkater skater={skater} selectedSkater={this.props.selectedSkater} skaterTrainingList={this.props.skaterTrainingList}/>
                                     </TouchableOpacity>
                                 }, this)
                             }

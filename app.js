@@ -9,6 +9,7 @@ import SkatersContainer from './containers/skatersContainer';
 import AppContainer from './containers/appContainer'
 import DeckContainer from './containers/deckContainer'
 import SkaterPicksContainer from './containers/skaterPicks'
+import {IceRink} from './components/icerink';
 import createStore from './store';
 import {Scene, Router, Animations, ActionConst} from 'react-native-router-flux';
 import { Actions } from 'react-native-router-flux';
@@ -33,6 +34,7 @@ export default () => (
                 <Scene key="train" type={ActionConst.RESET} component={TrainingContainer} />
                 <Scene key="applyTraining" type={ActionConst.RESET} component={ApplyTrainingContainer} />
                 <Scene key="skaterpicks" type={ActionConst.RESET} component={SkaterPicksContainer} />
+                <Scene key="icerink" type={ActionConst.RESET} component={IceRink} />
             </Scene>
         </Router>
   </Provider>
