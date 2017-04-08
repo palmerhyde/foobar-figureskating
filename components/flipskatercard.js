@@ -22,7 +22,7 @@ class FlipSkaterCard extends Component {
     }
 
     _renderFront = (back) => {
-        return <View style={styles.container2}>
+        return <View style={styles.containerBack}>
             <Image
                 source={{uri: back}}
                 style={{width: 100, height: 130}}
