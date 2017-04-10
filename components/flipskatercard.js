@@ -21,20 +21,48 @@ class FlipSkaterCard extends Component {
         super(props);
     }
 
+    // TODO: proptypes
+
     _renderFront = (back) => {
         return <View style={styles.containerBack}>
-            <Image
-                source={{uri: back}}
-                style={{width: 100, height: 130}}
-            />
+        <View style={{transform: [{scale: 0.6}, {translateX:0}, {translateY:-100}]}}>
+                <Image style={StyleSheet.flatten([styles.card,
+                    {
+                        width: 202,
+                        height: 300
+                    }])}
+                                source={require('../assets/images/large-silver.png')} >
+                    <View style={{flex:0.05, justifyContent: 'center', alignItems: 'center', borderColor:'pink', borderWidth:0}}>
+                    </View>
+                    <Image
+                        source={{uri: 'https://vignette4.wikia.nocookie.net/logopedia/images/d/da/BradMiclette-Logo.png/revision/latest?cb=20140713045541'}}
+                        style={
+                            {
+                                marginTop: 0,
+                                marginBottom: 0,
+                                flex:0.37,
+                                borderWidth: 0,
+                                borderColor: 'green',
+                            }
+                        }
+                        resizeMode='stretch'
+                    />
+                    <View style={{flex:0.1, justifyContent: 'center', alignItems: 'center', borderColor:'red', borderWidth:0}}>
+                    </View>
+                    <View style={{flex:0.23, flexDirection:'column', justifyContent: 'center', alignItems: 'center', borderColor:'yellow', borderWidth:0}}>
+                    </View>
+                    <View style={{flex:0.15, justifyContent: 'center', alignItems: 'center', borderColor:'blue', borderWidth:0}}>
+                    </View>
+                </Image>
+        </View>
         </View>
     };
 
     _renderBack = () => {
         return <View style={styles.containerBack}>
             {this.props.skater.name ?
-                <View style={{transform: [{scale: 0.75}, {translateX:0}, {translateY:0}]}}>
-                    <SkaterCard2 skater={this.props.skater}/>
+                <View style={{transform: [{scale: 0.6}, {translateX:0}, {translateY:-100}]}}>
+                    <SkaterCard2 skater={this.props.skater} animate={this.props.scale}/>
                 </View>
                 :
                 <Text>Loading...</Text>

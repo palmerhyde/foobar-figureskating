@@ -11,7 +11,9 @@ export default (state = {
     'turnInProgress':false,
     'gameOver': false,
     'y' : 0,
-    'o' : 0
+    'o' : 0,
+    'turn' : 0,
+    'lastWinner' : ''
 
 }, action = {}) => {
     switch (action.type) {
@@ -20,14 +22,14 @@ export default (state = {
         case SET_GAME_OVER:
             return Object.assign({}, state, { 'gameOver': action.payload });
         case INCREMENT_YOUR_SCORE:
-            return Object.assign(state, { y: state.y +1 });
+            return Object.assign({}, state, { y: state.y +1, lastWinner: 'Y' });
         case INCREMENT_OPPONENT_SCORE:
-            return Object.assign(state, { o: state.o +1 });
+            return Object.assign({}, state, { o: state.o +1, lastWinner: 'O' });
         case INCREMENT_TURN:
-            return Object.assign(state, { turn: state.turn +1 });
+            return Object.assign({}, state, { turn: state.turn +1 });
         case RESET_GAME_SCORE:
             // TODO: rename reset game
-            return Object.assign(state, { y:0, o: 0, 'gameOver':false, turn: 0, turnInProgress: false });
+            return Object.assign({}, state, { y:0, o: 0, 'gameOver':false, turn: 0, turnInProgress: false, lastWinner: '' });
         default:
             return state;
     }

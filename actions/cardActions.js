@@ -52,7 +52,7 @@ export function setSkaterCards(skaters) {
 
 export function loadSkaterCards() {
     return (dispatch, getState) => {
-        let state = getState();
+        let state = Object.assign({}, getState());
         if (state.skaters.length === 0) {
             dispatch(loadSkaterCardsStore(skaters));
         }
@@ -97,7 +97,9 @@ export function loadOpponentSkaterCard(skater) {
 export function calculateScores() {
     return (dispatch, getState) => {
         dispatch({type: 'CALCULATE_SCORES'});
-        let local = getState();
+        let local =  Object.assign({}, getState());
+
+        // TODO: accept an array of cards in-case there are pairs
         let winner = calculateWinner(local.selectedSkaterCard, local.opponentSkaterCard, local.moves[local.gameState.turn]);
 
         switch (winner) {
@@ -135,7 +137,7 @@ export const setGameOver = (isGameOver) => ({
 export function selectSkaterCard(skater) {
     return (dispatch, getState) => {
         // set skater card in deck, do not remove from deck.
-        let state = getState();
+        let state =  Object.assign({}, getState());
         let deck = Object.assign([], state.skaterDeck);
         let index = _.findIndex(deck, function(element) { return element.id === skater.id; });
         skater.hasPlayed = true;
@@ -171,7 +173,7 @@ export const setPicks = (picks) => ({
 
 export function pickSelected(skater) {
     return (dispatch, getState) => {
-        let state = getState();
+        let state =  Object.assign({}, getState());
 
         // remove from picks, skater
         dispatch(setPicks(removeSkaterFromPicks(state.picks, skater)));
@@ -186,7 +188,7 @@ export const resetGameScoreStore = () => ({
 export function resetGameScore() {
     return (dispatch, getState) => {
         // set skater card in deck, do not remove from deck.
-        let state = getState();
+        let state =  Object.assign({}, getState());
         let deck = Object.assign([], state.skaterDeck);
 
         // reset skaters
@@ -204,7 +206,7 @@ export function resetGameScore() {
 // TODO: rename me / refactor me
 export function waitForOpponentSkater() {
     return (dispatch, getState) => {
-        let state = getState();
+        let state =  Object.assign({}, getState());
         let move = state.moves[state.gameState.turn];
         let deck = state.opponentDeck;
         let skater = oppenentMoveAi(move, deck);
@@ -244,7 +246,7 @@ export function loadSkaterDeck() {
         else {
             // move logic to helper so it can be tested
             // skater deck
-            let state = getState();
+            let state =  Object.assign({}, getState());
             if (!state.skaterDeck || state.skaterDeck.length !== 6) {
                 console.log('something is wrong with the deck so we reloaded.');
 
@@ -314,7 +316,7 @@ export const setPotentialTrainingSkatersStore = (skaters) => ({
 
 export function setPotentialTrainingSkaters() {
     return (dispatch, getState) => {
-        let state = getState();
+        let state =  Object.assign({}, getState());
         let selectedSkater = Object.assign({}, state.selectedMyCardsSkaterCard);
         let deck = Object.assign([], state.skaterDeck);
         let skaters = Object.assign([], state.skaters);
@@ -325,7 +327,7 @@ export function setPotentialTrainingSkaters() {
 
 export function setSkaterTrainingList(skater) {
     return (dispatch, getState) => {
-        let state = getState();
+        let state =  Object.assign({}, getState());
         let trainingSkaters = Object.assign([], state.skaterTrainingList);
         let updatedTrainingSkaters = trainingSkaterList(trainingSkaters, skater);
 
@@ -340,7 +342,7 @@ export const setSkaterTrainingListStore = (skaters) => ({
 
 export function removeSkaters(skater) {
     return (dispatch, getState) => {
-        let state = getState();
+        let state =  Object.assign({}, getState());
 
         let scopedTrainingSkaters = Object.assign([], state.skaterTrainingList);
         let scopedSkaters = Object.assign([], state.skaters);
@@ -363,7 +365,7 @@ export function removeSkaters(skater) {
 // TODO: move ths logic to gamehelper
 export function trainSkater(skater) {
     return (dispatch, getState) => {
-        let state = getState();
+        let state =  Object.assign({}, getState());
         let trainingSkaters = Object.assign([], state.skaterTrainingList);
 
         let levelBefore = level(skater);
@@ -422,7 +424,7 @@ export function swapSkater(skater, selectedSkater) {
     // TODO: ensure you cannot swap genders
 
     return (dispatch, getState) => {
-        let state = getState();
+        let state =  Object.assign({}, getState());
         let deck = Object.assign([], state.skaterDeck);
         let index = _.findIndex(deck, function(element) { return element.id === skater.id; });
         deck[index] = selectedSkater;

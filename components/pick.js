@@ -94,17 +94,25 @@ class Pick extends Component {
                     transform: [
                         {scale: scale},
                         {rotate: rotate}
-                        ]}])}></Animated.View>
+                        ]}])}>
+                    <View style={{flex:1, backgroundColor:'silver'}}>
+                        <Image source={{uri: 'https://vignette4.wikia.nocookie.net/logopedia/images/d/da/BradMiclette-Logo.png/revision/latest?cb=20140713045541'}}
+                               style={{flex: 1, width: null, height: null}}
+                               resizeMode='contain'
+                        ></Image>
+                    </View>
+                </Animated.View>
             </TouchableOpacity>
         </View>
     }
 }
 
 const cardBackStyle = {
-    backgroundColor:'pink',
-    width:30,
-    height:45,
-    margin:15
+    width: 55,
+    height: 70,
+    margin:8,
+    borderWidth:1,
+    borderRadius:3
 };
 
 const textStyle = {
