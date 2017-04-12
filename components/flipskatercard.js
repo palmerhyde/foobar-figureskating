@@ -25,7 +25,7 @@ class FlipSkaterCard extends Component {
 
     _renderFront = (back) => {
         return <View style={styles.containerBack}>
-        <View style={{transform: [{scale: 0.6}, {translateX:0}, {translateY:-100}]}}>
+        <View style={{transform: [{scale: 0.6}, {translateX:0}, {translateY:0}]}}>
                 <Image style={StyleSheet.flatten([styles.card,
                     {
                         width: 202,
@@ -61,7 +61,7 @@ class FlipSkaterCard extends Component {
     _renderBack = () => {
         return <View style={styles.containerBack}>
             {this.props.skater.name ?
-                <View style={{transform: [{scale: 0.6}, {translateX:0}, {translateY:-100}]}}>
+                <View style={{transform: [{scale: 0.6}, {translateX:0}, {translateY:0}]}}>
                     <SkaterCard2 skater={this.props.skater} animate={this.props.scale}/>
                 </View>
                 :
@@ -71,6 +71,7 @@ class FlipSkaterCard extends Component {
     };
 
     render() {
+        console.log(this.props.skater);
         return <FlipView style={{flex: 1}}
                          front={this._renderFront(this.props.back)}
                          back={this._renderBack()}

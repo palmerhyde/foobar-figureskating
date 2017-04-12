@@ -4,16 +4,37 @@ import guid from 'uuid/v4';
 
 import _ from 'lodash';
 
-export function calculateWinner(yourCard, opponentCard, moveCard) {
-
-    if (yourCard[moveCard.attribute] > opponentCard[moveCard.attribute]) {
-        return 1;
+export function calculateWinner(yourCards, opponentCards, moveCard) {
+    // HACK HACK HACK
+    if (yourCards.length === 0 || opponentCards.length === 0) {
+        return 3;
     }
-    else if (yourCard[moveCard.attribute] < opponentCard[moveCard.attribute]) {
-        return 2;
+
+    // singles or doubles?
+    let discipline = singleOrPairs(moveCard);
+    console.log('disc:' + discipline);
+
+    if (discipline === 'SINGLES') {
+        if (yourCards[0][moveCard.attribute] > opponentCards[0][moveCard.attribute]) {
+            return 1;
+        }
+        else if (yourCards[0][moveCard.attribute] < opponentCards[0][moveCard.attribute]) {
+            return 2;
+        }
+        else {
+            return 3; // draw
+        }
     }
     else {
-        return 3; // draw
+        if (yourCards[0][moveCard.attribute] + yourCards[1][moveCard.attribute] > opponentCards[0][moveCard.attribute] + opponentCards[1][moveCard.attribute]) {
+            return 1;
+        }
+        else if (yourCards[0][moveCard.attribute] + yourCards[1][moveCard.attribute] < opponentCards[0][moveCard.attribute] + opponentCards[1][moveCard.attribute]) {
+            return 2;
+        }
+        else {
+            return 3; // draw
+        }
     }
 }
 
@@ -21,23 +42,27 @@ export function generateMoves() {
     let moves = [];
     let attributes = [Attributes.EDGES, Attributes.JUMPS, Attributes.FORM, Attributes.PRESENTATION];
 
+    // TODO: generate pairs and ice dancing
+    // TODO: honor max turns setting;
+
+
     // 3 female moves
     moves.push({
         'id' : Math.floor((Math.random() * 100000) + 1),
         'attribute' : attributes[Math.floor((Math.random() * 4) + 0)],
-        'discipline' : Disciplines.LADIES_SINGLES
+        'discipline' : Disciplines.PAIRS
     });
 
     moves.push({
         'id' : Math.floor((Math.random() * 100000) + 1),
         'attribute' : attributes[Math.floor((Math.random() * 4) + 0)],
-        'discipline' : Disciplines.LADIES_SINGLES
+        'discipline' : Disciplines.PAIRS
     });
 
     moves.push({
         'id' : Math.floor((Math.random() * 100000) + 1),
         'attribute' : attributes[Math.floor((Math.random() * 4) + 0)],
-        'discipline' : Disciplines.LADIES_SINGLES
+        'discipline' : Disciplines.ICE_DANCING
     });
 
 
@@ -46,7 +71,7 @@ export function generateMoves() {
     moves.push({
         'id' : Math.floor((Math.random() * 100000) + 1),
         'attribute' : attributes[Math.floor((Math.random() * 4) + 0)],
-        'discipline' : Disciplines.MENS_SINGLES
+        'discipline' : Disciplines.PAIRS
     });
 
     moves.push({
@@ -65,6 +90,7 @@ export function generateMoves() {
 }
 
 export function oppenentMoveAi(move, deck) {
+    // TODO: pairs and ice dancing
     let gender = 'M';
     switch (move.discipline) {
         case Disciplines.MENS_SINGLES:
@@ -75,7 +101,23 @@ export function oppenentMoveAi(move, deck) {
             break;
     }
 
-    return skater = deck.filter(element => element.gender == gender)[0];
+    // return an array
+    let skaters = [];
+    let filteredSkaters = deck.filter(element => element.gender == gender)[0];
+    skaters.push(filteredSkaters);
+
+    let disipline = singleOrPairs(move);
+
+    if (disipline === 'PAIRS') {
+        if (gender === 'M') {
+            gender = 'F'
+        }
+
+        let filteredPairedSkaters = deck.filter(element => element.gender == gender)[0];
+        skaters.push(filteredPairedSkaters);
+    }
+
+    return skaters;
 }
 
 export function potentialTrainingSkaters(selectedSkater, deckSkaters, skaters) {
@@ -188,6 +230,7 @@ export function levelCap(skater) {
             break;
     }
 
+    console.log('cap:' + cap);
     return cap
 }
 
@@ -251,6 +294,17 @@ export function addSkaterFromPicks(skaters, skater) {
     let scopedSkater = Object.assign({}, skater);
     scopedSkaters.push(scopedSkater);
     return scopedSkaters;
+}
+
+export function singleOrPairs(move) {
+    switch (move.discipline) {
+        case Disciplines.MENS_SINGLES:
+        case Disciplines.LADIES_SINGLES:
+            return 'SINGLES';
+        case Disciplines.PAIRS:
+        case Disciplines.ICE_DANCING:
+            return 'PAIRS';
+    }
 }
 
 export function triangular(n) {

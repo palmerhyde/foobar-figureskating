@@ -11,15 +11,16 @@ import {
     resetGameScore,
     loadSkaterDeck,
     incrementTurn,
-    removeOpponentSkaterCardFromDeck} from '../actions/cardActions';
+    removeOpponentSkaterCardFromDeck
+} from '../actions/cardActions';
 
 import { GameScreen } from '../GameScreen';
 
 const mapStateToProps = state => ({
     skaters: state.skaters,
     moves: state.moves,
-    opponentSkaterCard: state.opponentSkaterCard,
-    selectedSkaterCard: state.selectedSkaterCard,
+    opponentSkaterCards: state.opponentSkaterCards,
+    selectedSkaterCards: state.selectedSkaterCards,
     score: state.score,
     gameState: state.gameState,
     skaterDeck: state.skaterDeck,

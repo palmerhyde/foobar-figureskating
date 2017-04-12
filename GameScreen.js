@@ -53,11 +53,29 @@ class GameScreen extends Component {
         if (this.props.resetGameScore) {
             this.props.resetGameScore();
         }
+
+        // TODO: refresh selected skaters!
+        this.props.resetSelectedSkaterCard();
     }
 
     selectSkaterCard(skater) {
-        this.props.setTurnInProgress(true);
+        switch (this.props.moves[this.props.gameState.turn].discipline) {
+            case Disciplines.MENS_SINGLES:
+            case Disciplines.LADIES_SINGLES:
+                console.log('singles');
+                break;
+            case Disciplines.ICE_DANCING:
+            case Disciplines.PAIRS:
+                console.log('pairs');
+                break;
+        }
+
+        // If singles
+        //this.props.setTurnInProgress(true);
         this.props.selectSkaterCard(skater);
+
+        // If pairs or ice-dance
+
         this.flip(false);
 
         //Push up your card - translateY -100
@@ -80,7 +98,7 @@ class GameScreen extends Component {
                 if (endFilp) {
                     foo.props.setTurnInProgress(false);
                     foo.props.resetSelectedSkaterCard();
-                    foo.props.removeOpponentSkaterCardFromDeck(foo.props.opponentSkaterCard);
+                    foo.props.removeOpponentSkaterCardFromDeck(foo.props.opponentSkaterCards);
                     foo.props.resetOpponentSkaterCard();
                     foo.props.incrementTurn();
                 }
@@ -138,9 +156,27 @@ class GameScreen extends Component {
                 visible={this.props.gameState.turnInProgress}
             >
                 <View style={{flex:1, opacity:1, alignItems:'center', justifyContent:'center'}}>
-                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'center'}}>
-                        <FlipSkaterCard isFlipped={this.state.isFlipped} skater={this.props.selectedSkaterCard} scale={this.props.gameState.lastWinner === 'Y'} />
-                        <FlipSkaterCard isFlipped={this.state.isFlipped2} skater={this.props.opponentSkaterCard} scale={this.props.gameState.lastWinner === 'O'} />
+                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'center', alignItems:'center'}}>
+                        <View style={{flex: 0.5, transform: [{scale: 0.7}, {translateX:0}, {translateY:0}]}}>
+                            { this.props.opponentSkaterCards[1] ?
+                                <SkaterCard2 skater={this.props.opponentSkaterCards[1]} animate={this.props.gameState.lastWinner === 'O'}/> :
+                                null
+                            }
+                        </View>
+                        <View style={{flex: 0.5, transform: [{scale: 0.7}, {translateX:0}, {translateY:0}], justifyContent: 'center', alignItems:'center'}}>
+                            <SkaterCard2 skater={this.props.opponentSkaterCards[0]} animate={this.props.gameState.lastWinner === 'O'}/>
+                        </View>
+                    </View>
+                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'center', alignItems:'center'}}>
+                        <View style={{flex: 0.5, transform: [{scale: 0.7}, {translateX:0}, {translateY:0}]}}>
+                            <SkaterCard2 skater={this.props.selectedSkaterCards[0]} animate={this.props.gameState.lastWinner === 'Y'}/>
+                        </View>
+                        <View style={{flex: 0.5, transform: [{scale: 0.7}, {translateX:0}, {translateY:0}]}}>
+                            { this.props.selectedSkaterCards[1] ?
+                                <SkaterCard2 skater={this.props.selectedSkaterCards[1]} animate={this.props.gameState.lastWinner === 'Y'}/> :
+                                null
+                            }
+                        </View>
                     </View>
                     <TouchableOpacity onPress={ () => {
                         this.nextTurn();

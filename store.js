@@ -4,8 +4,8 @@ import thunk from 'redux-thunk'
 import createLogger from 'redux-logger';
 import moveCardReducer from './reducers/moveCardReducer';
 import skaterCardReducer from './reducers/skaterCardReducer';
-import opponentSkaterCardReducer from './reducers/opponentSkaterCardReducer';
-import selectedSkaterCardReducer from './reducers/selectedSkaterCardReducer';
+import opponentSkaterCardsReducer from './reducers/opponentSkaterCardsReducer';
+import selectedSkaterCardsReducer from './reducers/selectedSkaterCardsReducer';
 import gameStateReducer from './reducers/gameStateReducer';
 import skaterDeckReducer from './reducers/skaterDeckReducer';
 import opponentSkaterDeckReducer from './reducers/opponentSkaterDeckReducer';
@@ -23,8 +23,8 @@ export default () => (
             allSkaters: allSkatersReducer,
             skaters: skaterCardReducer,
             moves: moveCardReducer,
-            opponentSkaterCard: opponentSkaterCardReducer,
-            selectedSkaterCard: selectedSkaterCardReducer,
+            opponentSkaterCards: opponentSkaterCardsReducer,
+            selectedSkaterCards: selectedSkaterCardsReducer,
             gameState: gameStateReducer,
             opponentDeck: opponentSkaterDeckReducer,
             skaterDeck: skaterDeckReducer,

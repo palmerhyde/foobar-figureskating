@@ -7,7 +7,8 @@ import {
     applyXP,
     level,
     levelPercent,
-    triangular
+    triangular,
+    singleOrPairs
 }
     from '../util/gamehelper';
 
@@ -19,8 +20,8 @@ describe('Game Helper', () => {
     describe('Calculate Winner', () => {
 
         describe('default behavior', () => {
-            let yourCard = {};
-            let opponentCard = {};
+            let yourCard = [];
+            let opponentCard = [];
             let moveCard = {};
 
             it('should return draw', () => {
@@ -29,14 +30,21 @@ describe('Game Helper', () => {
         });
 
         describe('greater you card attribute', () => {
-            let yourCard = {
-                'edges': 99
-            };
-            let opponentCard = {
-                'edges': 1
-            };
+            let yourCard = [{
+                'edges': 99,
+                'discipline': Disciplines.MENS_SINGLES
+            }];
+
+            console.warn(yourCard);
+
+            let opponentCard = [{
+                'edges': 1,
+                'discipline': Disciplines.MENS_SINGLES
+            }];
+
             let moveCard = {
-                'attribute': Attributes.EDGES
+                'attribute': Attributes.EDGES,
+                'discipline': Disciplines.MENS_SINGLES
             };
 
             it('should result in you winning', () => {
@@ -45,14 +53,17 @@ describe('Game Helper', () => {
         });
 
         describe('greater opponent card attribute', () => {
-            let yourCard = {
-                'edges': 1
-            };
-            let opponentCard = {
-                'edges': 99
-            };
+            let yourCard = [{
+                'edges': 1,
+                'discipline': Disciplines.MENS_SINGLES
+            }];
+            let opponentCard = [{
+                'edges': 99,
+                'discipline': Disciplines.MENS_SINGLES
+            }];
             let moveCard = {
-                'attribute': Attributes.EDGES
+                'attribute': Attributes.EDGES,
+                'discipline': Disciplines.MENS_SINGLES
             };
 
             it('should result in you losing', () => {
@@ -61,14 +72,17 @@ describe('Game Helper', () => {
         });
 
         describe('equal you and opponent card attribute', () => {
-            let yourCard = {
-                'edges': 1
-            };
-            let opponentCard = {
-                'edges': 99
-            };
+            let yourCard = [{
+                'edges': 1,
+                'discipline': Disciplines.MENS_SINGLES
+            }];
+            let opponentCard = [{
+                'edges': 99,
+                'discipline': Disciplines.MENS_SINGLES
+            }];
             let moveCard = {
-                'attribute': Attributes.EDGES
+                'attribute': Attributes.EDGES,
+                'discipline': Disciplines.MENS_SINGLES
             };
 
             it('should result in a draw', () => {
@@ -118,7 +132,7 @@ describe('Game Helper', () => {
                 ];
 
                 let skater = oppenentMoveAi(move, deck);
-                expect(skater.gender).toBe('M');
+                expect(skater[0].gender).toBe('M');
             });
         });
 
@@ -140,7 +154,7 @@ describe('Game Helper', () => {
                 ];
 
                 let skater = oppenentMoveAi(move, deck);
-                expect(skater.gender).toBe('F');
+                expect(skater[0].gender).toBe('F');
             });
         });
     });
@@ -186,7 +200,7 @@ describe('Game Helper', () => {
     describe('Apply XP', () => {
 
         describe('train 0 xp skater with 3 local skaters', () => {
-            let skater = {'xp': 0};
+            let skater = {'xp': 0, rarity: Rarity.LOCAL};
             let trainingSkaters = [];
 
             trainingSkaters.push({'rarity': Rarity.LOCAL});
@@ -201,7 +215,7 @@ describe('Game Helper', () => {
         });
 
         describe('train 0 xp skater with 2 local skaters and 1 regional skater', () => {
-            let skater = {'xp': 0};
+            let skater = {'xp': 0, rarity:Rarity.REGIONAL };
             let trainingSkaters = [];
 
             trainingSkaters.push({'rarity': Rarity.LOCAL});
@@ -216,7 +230,7 @@ describe('Game Helper', () => {
         });
 
         describe('train 0 xp skater with 1 regional skater and 1 sectional skater', () => {
-            let skater = {'xp': 0};
+            let skater = {'xp': 0, rarity: Rarity.SECTIONAL};
             let trainingSkaters = [];
 
             trainingSkaters.push({'rarity': Rarity.REGIONAL});
@@ -230,7 +244,7 @@ describe('Game Helper', () => {
         });
 
         describe('train 0 xp skater with 2 national skaters and 1 world skater', () => {
-            let skater = {'xp': 0};
+            let skater = {'xp': 0, rarity: Rarity.WORLD};
             let trainingSkaters = [];
 
             trainingSkaters.push({'rarity': Rarity.NATIONAL});
@@ -245,7 +259,7 @@ describe('Game Helper', () => {
         });
 
         describe('train 0 xp skater with 1 olympic skater and 1 world skater', () => {
-            let skater = {'xp': 0};
+            let skater = {'xp': 0, rarity: Rarity.OLYMPIC};
             let trainingSkaters = [];
 
             trainingSkaters.push({'rarity': Rarity.OLYMPIC});
@@ -253,7 +267,7 @@ describe('Game Helper', () => {
 
             let trainedSkater = applyXP(trainingSkaters, skater);
 
-            it('xp should be 80', () => {
+            it('xp should be 960', () => {
                 expect(trainedSkater.xp).toBe(960)
             })
         })
@@ -400,6 +414,57 @@ describe('Game Helper', () => {
             it('should be level 34%', () => {
                 expect(levelPercent(skater)).toBe(34)
             })
+        });
+    });
+
+    describe('Singles or pairs', () => {
+
+        describe('MENS_SINGLES', () => {
+
+            it('should return SINGLES', () => {
+                let move = {
+                    'discipline' : Disciplines.MENS_SINGLES
+                };
+
+                let style = singleOrPairs(move);
+                expect(style).toBe('SINGLES');
+            });
+        });
+
+        describe('LADIES_SINGLES', () => {
+
+            it('should return SINGLES', () => {
+                let move = {
+                    'discipline' : Disciplines.LADIES_SINGLES
+                };
+
+                let style = singleOrPairs(move);
+                expect(style).toBe('SINGLES');
+            });
+        });
+
+        describe('PAIRS', () => {
+
+            it('should return PAIRS', () => {
+                let move = {
+                    'discipline' : Disciplines.PAIRS
+                };
+
+                let style = singleOrPairs(move);
+                expect(style).toBe('PAIRS');
+            });
+        });
+
+        describe('ICE_DANCING', () => {
+
+            it('should return ICE_DANCING', () => {
+                let move = {
+                    'discipline' : Disciplines.ICE_DANCING
+                };
+
+                let style = singleOrPairs(move);
+                expect(style).toBe('PAIRS');
+            });
         });
     });
 });

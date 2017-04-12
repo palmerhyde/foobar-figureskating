@@ -5,6 +5,7 @@ import {
     LOAD_OPPONENT_SKATER_CARD,
     LOAD_ALL_SKATER_CARDS,
     SELECT_SKATER_CARD,
+    SELECT_SKATER_CARD2,
     INCREMENT_YOUR_SCORE,
     INCREMENT_OPPONENT_SCORE,
     SET_TURN_IN_PROGRESS,
@@ -37,7 +38,8 @@ import {
     numberOfPicks,
     generatePicks,
     removeSkaterFromPicks,
-    addSkaterFromPicks
+    addSkaterFromPicks,
+    singleOrPairs
 } from '../util/gamehelper';
 
 // TODO: this constant does not belong in level chart. Move.
@@ -82,14 +84,15 @@ export const resetOpponentSkaterCard = () => ({
     type: RESET_OPPONENT_SKATER_CARD
 });
 
-export const removeOpponentSkaterCardFromDeck = (skater) => ({
+// TODO: make this a THUNK so we can remove pairs of skaters if needed and send the reducer the new array.
+export const removeOpponentSkaterCardFromDeck = (skaters) => ({
     type: REMOVE_OPPONENT_SKATER_FROM_DECK,
-    payload: skater
+    payload: skaters
 });
 
-export function loadOpponentSkaterCard(skater) {
+export function loadOpponentSkaterCard(skaters) {
     return dispatch => {
-        dispatch({type: 'LOAD_OPPONENT_SKATER_CARD',  payload: skater});
+        dispatch({type: 'LOAD_OPPONENT_SKATER_CARD',  payload: skaters});
         dispatch(calculateScores());
     };
 }
@@ -98,9 +101,7 @@ export function calculateScores() {
     return (dispatch, getState) => {
         dispatch({type: 'CALCULATE_SCORES'});
         let local =  Object.assign({}, getState());
-
-        // TODO: accept an array of cards in-case there are pairs
-        let winner = calculateWinner(local.selectedSkaterCard, local.opponentSkaterCard, local.moves[local.gameState.turn]);
+        let winner = calculateWinner(local.selectedSkaterCards, local.opponentSkaterCards, local.moves[local.gameState.turn]);
 
         switch (winner) {
             case 1:
@@ -111,11 +112,6 @@ export function calculateScores() {
         }
     };
 }
-
-export const selectSkaterCard2 = (skater) => ({
-    type: SELECT_SKATER_CARD,
-    payload: skater
-});
 
 export const incrementTurn = () => ({
     type: INCREMENT_TURN,
@@ -134,37 +130,72 @@ export const setGameOver = (isGameOver) => ({
     payload: isGameOver
 });
 
+export const selectSkaterCardStore = (skater) => ({
+    type: SELECT_SKATER_CARD,
+    payload: skater
+});
+
 export function selectSkaterCard(skater) {
     return (dispatch, getState) => {
-        // set skater card in deck, do not remove from deck.
         let state =  Object.assign({}, getState());
+        let selectedSkaters = [];
+
+        if (state.selectedSkaterCards.length > 0) {
+            selectedSkaters = Object.assign([], state.selectedSkaterCards);
+        }
+
         let deck = Object.assign([], state.skaterDeck);
         let index = _.findIndex(deck, function(element) { return element.id === skater.id; });
         skater.hasPlayed = true;
         deck[index] = skater;
-        dispatch(selectSkaterCard2(skater));
-        dispatch(waitForOpponentSkater());
 
-        if (state.gameState.turn === NUMBER_OF_GAME_TURNS -1) {
-            // reset skaters
-            // TODO: move to game helper
-            for (let i=0; i< deck.length; i++) {
-                deck[i].hasPlayed = false;
+        // Single or pairs
+        let style = singleOrPairs(state.moves[state.gameState.turn]);
+
+        if (style === 'SINGLES') {
+            selectedSkaters.push(skater);
+            dispatch(selectSkaterCardStore(selectedSkaters));
+            dispatch(waitForOpponentSkater());
+            dispatch(setTurnInProgress(true));
+
+            if (state.gameState.turn === NUMBER_OF_GAME_TURNS -1) {
+                dispatch(endGame(deck, state));
             }
+        }
+        else {
+            selectedSkaters.push(skater);
+            dispatch(selectSkaterCardStore(selectedSkaters));
 
-            dispatch(setSkaterDeck(deck));
-            dispatch(setGameOver(true));
+            if (selectedSkaters.length === 2) {
+                dispatch(waitForOpponentSkater());
+                dispatch(setTurnInProgress(true));
 
-            // TODO: move to game helper
-            // Set winner / loser logic
-            let pickCount = numberOfPicks(state.gameState.y, state.gameState.o);
-            let skaterPicks = generatePicks(state.allSkaters, pickCount);
-            console.log(state.picks);
-            console.log(skaterPicks);
-            dispatch(setPicks(Object.assign([], state.picks.concat(skaterPicks))));
+                if (state.gameState.turn === NUMBER_OF_GAME_TURNS -1) {
+                    dispatch(endGame(deck, state));
+                }
+            }
         }
     };
 }
+
+// TODO: rename me / refactor me
+export function endGame(deck, state) {
+    return (dispatch) => {
+        for (let i=0; i< deck.length; i++) {
+            deck[i].hasPlayed = false;
+        }
+
+        dispatch(setSkaterDeck(deck));
+        dispatch(setGameOver(true));
+
+        // TODO: move to game helper
+        // Set winner / loser logic
+        let pickCount = numberOfPicks(state.gameState.y, state.gameState.o);
+        let skaterPicks = generatePicks(state.allSkaters, pickCount);
+        dispatch(setPicks(Object.assign([], state.picks.concat(skaterPicks))));
+    }
+}
+
 
 export const setPicks = (picks) => ({
     type: SET_PICKS,
@@ -209,8 +240,10 @@ export function waitForOpponentSkater() {
         let state =  Object.assign({}, getState());
         let move = state.moves[state.gameState.turn];
         let deck = state.opponentDeck;
-        let skater = oppenentMoveAi(move, deck);
-        dispatch(loadOpponentSkaterCard(skater));
+        let skaters = oppenentMoveAi(move, deck);
+        // TODO: pairs and ice dancing - dispatch 2 skaters
+
+        dispatch(loadOpponentSkaterCard(skaters));
     };
 }
 

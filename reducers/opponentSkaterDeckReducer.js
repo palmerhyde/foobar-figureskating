@@ -8,7 +8,10 @@ export default (state = [], action = {}) => {
         case LOAD_OPPONENT_SKATER_DECK:
             return action.payload || [];
         case REMOVE_OPPONENT_SKATER_FROM_DECK:
-            return state.filter(element => element !== action.payload);
+            // This is a stupid place to do this.
+            // What if we ned to remove a pair.
+            // TODO: move to game helper
+            return state.filter(element => element !== action.payload[0]);
         default:
             return state;
     }
