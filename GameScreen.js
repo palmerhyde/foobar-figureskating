@@ -155,6 +155,7 @@ class GameScreen extends Component {
                 transparent={false}
                 visible={this.props.gameState.turnInProgress}
             >
+                <Image resizeMode='cover' source={require('./assets/images/icerink2.jpg')} style={{width: null, height: null, 'flex': 1}}>
                 <View style={{flex:1, opacity:1, alignItems:'center', justifyContent:'center'}}>
                     <View style={{flex: 1, flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'center', alignItems:'center'}}>
                         <View style={{flex: 0.5, transform: [{scale: 0.7}, {translateX:0}, {translateY:0}]}}>
@@ -184,6 +185,7 @@ class GameScreen extends Component {
                         <Text>Next turn</Text>
                     </TouchableOpacity>
                 </View>
+                </Image>
             </Modal>
             <View style={{flex: 0.12, opacity:this.opacity(), backgroundColor: '#9198a5',  transform: [{rotate: '0deg'}]}}>
                 <View style={styles.container2}>

@@ -23,7 +23,7 @@ class SkaterCard2 extends Component {
     }
 
     static propTypes = {
-        skater: PropTypes.object.isRequired,
+        skater: PropTypes.object,
         animate: PropTypes.bool,
         progress: PropTypes.number
     };

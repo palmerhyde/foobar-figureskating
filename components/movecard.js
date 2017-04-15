@@ -31,9 +31,13 @@ class MoveCard extends Component {
     getCardPicture () {
         switch (this.props.move.discipline) {
             case Disciplines.LADIES_SINGLES:
-                return 'https://s-media-cache-ak0.pinimg.com/564x/b2/ba/56/b2ba560f346a0932b32f4db96495595a.jpg'
+                return 'https://s-media-cache-ak0.pinimg.com/564x/b2/ba/56/b2ba560f346a0932b32f4db96495595a.jpg';
             case Disciplines.MENS_SINGLES:
-                return 'https://img.clipartfest.com/7128e7aed8650d60bfed9f09e566a749_additional-family-member-male-figure-skating-clipart_421-480.jpeg'
+                return 'https://img.clipartfest.com/7128e7aed8650d60bfed9f09e566a749_additional-family-member-male-figure-skating-clipart_421-480.jpeg';
+            case Disciplines.ICE_DANCING:
+                return 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTJRm6S7tGWUTQfTvtdhzws92QHrvAw5WUyx4EbbU4ed_B36QUM';
+            case Disciplines.PAIRS:
+                return 'http://fakty.ictv.ua/wp-content/uploads/2016/08/23/1471964036_20130124164653n.jpg';
 
         }
 
