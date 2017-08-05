@@ -1,5 +1,7 @@
 # foobar-figureskating
 
+faras test
+
 Actions.LIST_POTENTIAL_OPPONENTS (randomly generate 3 opponents of varying difficulty)
 
 ## Game state
