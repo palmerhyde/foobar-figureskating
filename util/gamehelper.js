@@ -5,7 +5,7 @@ import guid from 'uuid/v4';
 import _ from 'lodash';
 
 export function calculateWinner(yourCards, opponentCards, moveCard) {
-    // HACK HACK HACK
+    // HACK HACK HACK - why is this a hack?
     if (yourCards.length === 0 || opponentCards.length === 0) {
         return 3;
     }
@@ -42,8 +42,8 @@ export function generateMoves() {
     let moves = [];
     let attributes = [Attributes.EDGES, Attributes.JUMPS, Attributes.FORM, Attributes.PRESENTATION];
 
-    // TODO: generate pairs and ice dancing
     // TODO: honor max turns setting;
+    // TODO: logic needs to change as we have introduced pairs and ice dance
 
 
     // 3 female moves

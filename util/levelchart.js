@@ -1,3 +1,4 @@
+// TODO: why is this called level chart? It has more than levels!
 export const BASE = 20;
 export const LEVEL_MULTIPLER = 15;
 export const NUMBER_OF_GAME_TURNS = 3;

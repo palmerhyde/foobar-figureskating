@@ -1,3 +1,4 @@
+// TODO: clean this up!
 export const LOAD_ALL_SKATER_CARDS = 'LOAD_ALL_SKATER_CARDS';
 export const LOAD_SKATER_CARDS = 'LOAD_SKATER_CARDS';
 export const LOAD_MOVE_CARDS = 'LOAD_MOVE_CARDS';

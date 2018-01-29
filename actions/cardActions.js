@@ -196,7 +196,6 @@ export function endGame(deck, state) {
     }
 }
 
-
 export const setPicks = (picks) => ({
     type: SET_PICKS,
     payload: picks

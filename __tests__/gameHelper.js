@@ -96,6 +96,7 @@ describe('Game Helper', () => {
         describe('default behavior', () => {
 
             it('should  return a valid move deck', () => {
+                // The rules have changed since we introduced pairs and ice dance
                 let moves = generateMoves();
 
                 // 6 moves

@@ -45,6 +45,10 @@ class SkaterCard2 extends Component {
         return require('../assets/images/large-silver.png');
     }
 
+    getCardPhoto (photo) {
+        // TODO: require player photo based on id
+    }
+
     scale () {
         this.scaleValue.setValue(0);
         Animated.timing(

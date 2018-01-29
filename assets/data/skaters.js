@@ -66,7 +66,7 @@ let skaters = [
         'presentation' : randomRange(70, 80),
         'photo' : 'http://www.scotthamilton1984.com/wp-content/uploads/2012/08/slider-top-skater.jpg',
         'skill' : {
-            'name' : 'Forward Scratch Spin',
+            'name' : 'Scottie Turns',
             'value' : randomRange(70, 80)
         },
         'level' : 1,
@@ -349,6 +349,7 @@ let skaters = [
 
 export default skaters;
 
+// TODO: Move to a utility / helper file
 function randomRange(min, max) {
     let range = max - min;
     return Math.floor((Math.random() * range +1) + min)
