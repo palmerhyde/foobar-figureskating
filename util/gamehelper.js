@@ -5,7 +5,7 @@ import guid from 'uuid/v4';
 import _ from 'lodash';
 
 export function calculateWinner(yourCards, opponentCards, moveCard) {
-    // HACK HACK HACK - why is this a hack?
+    // HACK HACK HACK - For empty array test? 
     if (yourCards.length === 0 || opponentCards.length === 0) {
         return 3;
     }
